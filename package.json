@@ -1,0 +1,64 @@
+{
+  "name": "blank",
+  "version": "0.0.0",
+  "description": "The Church theme",
+  "author": "Lam Nhan",
+  "homepage": "https://church-preview.lamnhan.com",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "ng build && ngxer generate",
+    "preview": "mola preview",
+    "deploy": "git add . && git commit -m 'deploy:app' && git push",
+    "test": "echo 'test'",
+    "lint": "echo 'lint'",
+    "e2e": "echo 'e2e'"
+  },
+  "keywords": [
+    "lamnhan",
+    "angular",
+    "firebase",
+    "nguix",
+    "webapp"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/themolacms/blank.git"
+  },
+  "bugs": {
+    "url": "https://github.com/themolacms/blank/issues"
+  },
+  "dependencies": {
+    "@angular/animations": "~12.0.3",
+    "@angular/common": "~12.0.3",
+    "@angular/compiler": "~12.0.3",
+    "@angular/core": "~12.0.3",
+    "@angular/forms": "~12.0.3",
+    "@angular/platform-browser": "~12.0.3",
+    "@angular/platform-browser-dynamic": "~12.0.3",
+    "@angular/router": "~12.0.3",
+    "@lamnhan/ngx-useful": "0.0.21",
+    "@lamnhan/schemata": "0.0.14",
+    "@lamnhan/ngx-schemata": "0.0.7",
+    "@lamnhan/nguix-starter": "0.0.11",
+    "@unistylus/core": "0.0.3",
+    "@unistylus/bootstrap": "0.0.6",
+    "rxjs": "~6.6.0",
+    "tslib": "^2.1.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~12.0.3",
+    "@angular/cli": "~12.0.3",
+    "@angular/compiler-cli": "~12.0.3",
+    "@types/jasmine": "~3.6.0",
+    "@types/node": "^12.11.1",
+    "jasmine-core": "~3.7.0",
+    "karma": "~6.3.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.0.3",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "^1.5.0",
+    "typescript": "~4.2.3"
+  }
+}

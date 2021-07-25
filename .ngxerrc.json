@@ -1,0 +1,12 @@
+{
+  "out": "docs",
+  "url": "https://church-preview.lamnhan.com",
+  "sitemap": true,
+  "i18nIndexes": true,
+  "includeSessionData": true,
+  "splashscreenTimeout": 15,
+  "contentTemplate": "ngxer/template.html",
+  "homePage": "ngxer/home.html",
+  "pathRender": [],
+  "databaseRender": []
+}

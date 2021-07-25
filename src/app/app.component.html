@@ -1,0 +1,11 @@
+<nguix-header
+  [i18n]="true"
+  [name]="'HELLO' | transloco"
+  [menuItems]="headerMenu"
+></nguix-header>
+
+<main id="page-container">
+  <router-outlet></router-outlet>
+</main>
+
+<nguix-footer [menuItems]="footerMenu"></nguix-footer>

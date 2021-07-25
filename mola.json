@@ -1,0 +1,14 @@
+{
+  "projectName": "church",
+  "domain": "church-preview.lamnhan.com",
+  "name": "Church Theme",
+  "description": "The Church theme",
+  "deployTarget": "github",
+  "locales": [
+    "en-US"
+  ],
+  "skins": [
+    "light"
+  ],
+  "soul": "bootstrap"
+}
