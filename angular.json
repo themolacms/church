@@ -114,6 +114,37 @@
           }
         }
       }
+    },
+    "mola-church": {
+      "projectType": "library",
+      "root": "projects/mola-church",
+      "sourceRoot": "projects/mola-church/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/mola-church/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/mola-church/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/mola-church/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mola-church/src/test.ts",
+            "tsConfig": "projects/mola-church/tsconfig.spec.json",
+            "karmaConfig": "projects/mola-church/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "church"
