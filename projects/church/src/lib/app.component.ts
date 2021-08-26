@@ -40,7 +40,6 @@ export class AppComponent {
     public navService: NavService,
     public settingService: SettingService,
   ) {
-    console.log(this.config);
     this.initialize();
   }
 
@@ -52,11 +51,7 @@ export class AppComponent {
       .setOptions({
         onReady: () => this.appService.hideSplashScreen(),
       })
-      .setDefaults({
-        theme: 'light',
-        locale: 'en-US',
-        persona: 'default',
-      })
+      .setDefaults(this.config.settingService.defaultSettings)
       .setIntegrations({
         localstorageService: this.localstorageService,
         translateService: this.translateService,
@@ -68,14 +63,8 @@ export class AppComponent {
     this.metaService
       .setIntegrations({ settingService: this.settingService })
       .init(
-        {
-          url: 'https://church-preview.lamnhan.com/',
-          title: 'Church Theme',
-          description: 'The Church theme',
-          image: 'https://church-preview.lamnhan.com/assets/images/featured.jpg',
-          locale: 'en-US',
-        },
-        /* MOLA:META_TRANSLATIONS */
+        this.config.metaService.defaultMetas,
+        this.config.metaService.metaTranslations
       );
   }
 

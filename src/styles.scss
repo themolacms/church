@@ -15,7 +15,7 @@
  */
 
 // register skins
-@import '@unistylus/core/scss/skins/light-default';
+@use '@unistylus/core/scss/skins/light-default';
 
 // modify "default" skin
 // :root,
@@ -24,10 +24,10 @@
 // {}
 
 // register soul
-@import '@unistylus/bootstrap/reset';
-@import '@unistylus/bootstrap/core';
-@import '@unistylus/bootstrap/content/typography';
-@import '@unistylus/bootstrap/components/icon';
+@use '@unistylus/bootstrap/reset';
+@use '@unistylus/bootstrap/core';
+@use '@unistylus/bootstrap/content/typography';
+@use '@unistylus/bootstrap/components/icon';
 
 /**
  * ====================================================
