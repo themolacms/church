@@ -3,7 +3,13 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^12.2.0",
-    "@angular/core": "^12.2.0"
+    "@angular/core": "^12.2.0",    
+    "@lamnhan/nguix-dashboard": "0.0.2",
+    "@lamnhan/nguix-starter": "0.0.12",
+    "@lamnhan/ngx-schemata": "0.0.11",
+    "@lamnhan/ngx-useful": "0.0.28",
+    "@lamnhan/schemata": "0.0.22",
+    "@ngxs/store": "^3.7.2"
   },
   "dependencies": {
     "tslib": "^2.3.0"

@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
-
 import {
   MenuItem,
-  // normal services
   LocalstorageService,
   CacheService,
   AppService,
@@ -11,6 +9,8 @@ import {
   NavService,
   SettingService,
 } from '@lamnhan/ngx-useful';
+
+import { APP_CONFIG, AppConfig } from './app.config';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +31,7 @@ export class AppComponent {
   ];
   
   constructor(
+    @Inject(APP_CONFIG) private config: AppConfig,
     private translateService: TranslocoService,
     public localstorageService: LocalstorageService,
     public cacheService: CacheService,
@@ -39,6 +40,7 @@ export class AppComponent {
     public navService: NavService,
     public settingService: SettingService,
   ) {
+    console.log(this.config);
     this.initialize();
   }
 
@@ -64,17 +66,17 @@ export class AppComponent {
       .setIntegrations({ settingService: this.settingService })
       .init();
     this.metaService
-    .setIntegrations({ settingService: this.settingService })
-    .init(
-      {
-        url: 'https://church-preview.lamnhan.com/',
-        title: 'Church Theme',
-        description: 'The Church theme',
-        image: 'https://church-preview.lamnhan.com/assets/images/featured.jpg',
-        locale: 'en-US',
-      },
-      /* MOLA:META_TRANSLATIONS */
-    );
+      .setIntegrations({ settingService: this.settingService })
+      .init(
+        {
+          url: 'https://church-preview.lamnhan.com/',
+          title: 'Church Theme',
+          description: 'The Church theme',
+          image: 'https://church-preview.lamnhan.com/assets/images/featured.jpg',
+          locale: 'en-US',
+        },
+        /* MOLA:META_TRANSLATIONS */
+      );
   }
 
 }

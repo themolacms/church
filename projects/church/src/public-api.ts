@@ -2,8 +2,8 @@
  * Public API Surface
  */
 
+export * from './lib/app.config';
 export * from './lib/app.module';
-
 export * from './lib/app.component';
 
 export * from './lib/pages/home/home.component';
