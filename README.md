@@ -11,13 +11,13 @@ To use this theme, clone this repo, or using [the Mola all-in-one CLI](https://m
 npm i -g @molacms/cli
 
 # Create a new project
-mola new blank <projectName>
+mola new church <projectName>
 
 # CLI params & options:
-# mola new blank <projectName> [appDomain] [appName] [appDescription] --themes [list] --locales [list] --deploy [service]
+# mola new church <projectName> [appDomain] [appName] [appDescription] --themes [list] --locales [list] --deploy [service]
 
 # Example:
-# mola new blank foo "foo.com" "Foo App" "The Awesome Foo Web App" --deploy github
+# mola new church foo "foo.com" "Foo App" "The Awesome Foo Web App" --deploy github
 ```
 
 Project scripts:

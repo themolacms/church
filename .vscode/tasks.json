@@ -3,27 +3,35 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "build",
+			"script": "build:lib",
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			},
 			"problemMatcher": [],
-			"label": "npm: build",
-			"detail": "ng build"
+			"label": "npm: build:lib",
+			"detail": "ng build church && cpy README.md LICENSE dist/church"
 		},
 		{
 			"type": "npm",
-			"script": "preview",
+			"script": "build:app",
+			"group": "build",
 			"problemMatcher": [],
-			"label": "npm: preview",
-			"detail": "mola preview"
+			"label": "npm: build:app",
+			"detail": "ng build && ngxer generate && ngsw-config ./docs ./ngsw-config.json"
 		},
 		{
 			"type": "npm",
-			"script": "deploy",
+			"script": "deploy:lib",
 			"problemMatcher": [],
-			"label": "npm: deploy",
+			"label": "npm: deploy:lib",
+			"detail": "cd ./dist/church && npm publish && cd ../../"
+		},
+		{
+			"type": "npm",
+			"script": "deploy:app",
+			"problemMatcher": [],
+			"label": "npm: deploy:app",
 			"detail": "git add . && git commit -m 'deploy:app' && git push"
 		}
 	]
