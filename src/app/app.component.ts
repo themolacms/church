@@ -27,7 +27,7 @@ export class AppComponent {
   footerMenu: MenuItem[] = [
     { text: 'Lam Nhan', href: 'https://lamnhan.com', target: '_blank' },
     { text: 'Mola CMS', href: 'https://mola.lamnhan.com', target: '_blank' },
-    { text: 'Source code', href: 'https://github.com/themolacms/blank', target: '_blank' }
+    { text: 'Source code', href: 'https://github.com/themolacms/church', target: '_blank' }
   ];
   
   constructor(

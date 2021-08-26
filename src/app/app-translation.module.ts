@@ -1,3 +1,4 @@
+import { Injectable, NgModule } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {
   TRANSLOCO_LOADER,
@@ -9,11 +10,10 @@ import {
   TranslocoMissingHandler,
   TranslocoModule
 } from '@ngneat/transloco';
-import { Injectable, NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
 
 @Injectable({ providedIn: 'root' })
-export class TranslocoHttpLoader implements TranslocoLoader {
+class TranslocoHttpLoader implements TranslocoLoader {
   constructor(private http: HttpClient) {}
   getTranslation(locale: string) {
     return this.http.get<Translation>(`./assets/i18n/${locale}.json`);
@@ -27,7 +27,7 @@ class CustomHandler implements TranslocoMissingHandler {
 
 @NgModule({
   exports: [ TranslocoModule ],
-  imports: [HttpClientModule],
+  imports: [ HttpClientModule ],
   providers: [
     {
       provide: TRANSLOCO_CONFIG,

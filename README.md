@@ -49,4 +49,4 @@ npx ng g m pages/[name] --route [name] --module app.module
 
 ## License
 
-This theme is released under the [MIT](https://github.com/themolacms/blank/blob/master/LICENSE) license.
+This theme is released under the [MIT](https://github.com/themolacms/church/blob/master/LICENSE) license.
