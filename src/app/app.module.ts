@@ -1,39 +1,24 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import {
-  LocalstorageService,
-  CacheService,
-  AppService,
-  MetaService,
-  NavService,
-  SettingService,
-} from '@lamnhan/ngx-useful';
-import { NguixHeaderComponentModule, NguixFooterComponentModule } from '@lamnhan/nguix-starter';
+import { translocoConfig, TRANSLOCO_CONFIG } from '@ngneat/transloco';
+import { environment } from '../environments/environment';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppTranslationModule } from './app-translation.module';
-import { AppComponent } from './app.component';
+import { MolaAppModule, AppComponent } from '@molacms/church';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AppTranslationModule,
-    NguixHeaderComponentModule,
-    NguixFooterComponentModule,
-  ],
+  imports: [MolaAppModule],
   providers: [
-    {provide: LOCALE_ID, useValue: 'en-US'},
-    LocalstorageService,
-    CacheService,
-    AppService,
-    MetaService,
-    NavService,
-    SettingService,
+    { provide: LOCALE_ID, useValue: 'en-US' },
+    {
+      provide: TRANSLOCO_CONFIG,
+      useValue: translocoConfig({
+        availableLangs: ['en-US'],
+        defaultLang: 'en-US',
+        fallbackLang: 'en-US',
+        reRenderOnLangChange: true,
+        prodMode: environment.production,
+      })
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

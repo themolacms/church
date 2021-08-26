@@ -4,13 +4,10 @@ import {
   TRANSLOCO_LOADER,
   Translation,
   TranslocoLoader,
-  TRANSLOCO_CONFIG,
-  translocoConfig,
   TRANSLOCO_MISSING_HANDLER,
   TranslocoMissingHandler,
   TranslocoModule
 } from '@ngneat/transloco';
-import { environment } from '../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 class TranslocoHttpLoader implements TranslocoLoader {
@@ -29,16 +26,6 @@ class CustomHandler implements TranslocoMissingHandler {
   exports: [ TranslocoModule ],
   imports: [ HttpClientModule ],
   providers: [
-    {
-      provide: TRANSLOCO_CONFIG,
-      useValue: translocoConfig({
-        availableLangs: ['en-US'],
-        defaultLang: 'en-US',
-        fallbackLang: 'en-US',
-        reRenderOnLangChange: true,
-        prodMode: environment.production,
-      })
-    },
     { provide: TRANSLOCO_LOADER, useClass: TranslocoHttpLoader },
     { provide: TRANSLOCO_MISSING_HANDLER, useClass: CustomHandler },
   ]
