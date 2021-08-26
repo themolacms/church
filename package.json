@@ -7,8 +7,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "ng build && ngxer generate && ngsw-config ./docs ./ngsw-config.json",
-    "deploy": "git add . && git commit -m 'deploy:app' && git push",
+    "build:lib": "ng build church && cpy README.md LICENSE dist/church",
+    "deploy:lib": "cd ./dist/church && npm publish && cd ../../",
+    "build:app": "ng build && ngxer generate && ngsw-config ./docs ./ngsw-config.json",
+    "deploy:app": "git add . && git commit -m 'deploy:app' && git push",
     "test": "echo 'test'",
     "lint": "echo 'lint'",
     "e2e": "echo 'e2e'"
@@ -28,14 +30,14 @@
     "url": "https://github.com/themolacms/church/issues"
   },
   "dependencies": {
-    "@angular/animations": "~12.0.3",
-    "@angular/common": "~12.0.3",
-    "@angular/compiler": "~12.0.3",
-    "@angular/core": "~12.0.3",
-    "@angular/forms": "~12.0.3",
-    "@angular/platform-browser": "~12.0.3",
-    "@angular/platform-browser-dynamic": "~12.0.3",
-    "@angular/router": "~12.0.3",
+    "@angular/animations": "~12.2.0",
+    "@angular/common": "~12.2.0",
+    "@angular/compiler": "~12.2.0",
+    "@angular/core": "~12.2.0",
+    "@angular/forms": "~12.2.0",
+    "@angular/platform-browser": "~12.2.0",
+    "@angular/platform-browser-dynamic": "~12.2.0",
+    "@angular/router": "~12.2.0",
     "@lamnhan/ngx-useful": "0.0.28",
     "@lamnhan/schemata": "0.0.22",
     "@lamnhan/ngx-schemata": "0.0.11",
@@ -44,22 +46,22 @@
     "@unistylus/core": "0.0.3",
     "@unistylus/bootstrap": "0.0.7",
     "rxjs": "~6.6.0",
-    "tslib": "^2.1.0",
+    "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.0.3",
-    "@angular/cli": "~12.0.3",
-    "@angular/compiler-cli": "~12.0.3",
-    "@types/jasmine": "~3.6.0",
+    "@angular-devkit/build-angular": "~12.2.2",
+    "@angular/cli": "~12.2.2",
+    "@angular/compiler-cli": "~12.2.0",
+    "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
-    "jasmine-core": "~3.7.0",
+    "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "^1.5.0",
-    "ng-packagr": "^12.0.0",
-    "typescript": "~4.2.3"
+    "karma-jasmine-html-reporter": "~1.7.0",
+    "ng-packagr": "^12.1.1",
+    "typescript": "~4.3.5"
   }
 }
