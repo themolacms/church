@@ -34,8 +34,9 @@
               "src/assets",
               "src/404.html",
               "src/CNAME",
-              "src/robots.txt",
-              "src/manifest.webmanifest"
+              "src/icons",
+              "src/manifests",
+              "src/robots.txt"
             ],
             "styles": [
               "src/styles.scss",
