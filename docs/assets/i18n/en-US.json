@@ -1,0 +1,8 @@
+{
+  "HELLO": "Hello",
+  "WORLD": "world",
+  "APP": {
+    "HOME": "Home",
+    "ABOUT": "About"
+  }
+}
