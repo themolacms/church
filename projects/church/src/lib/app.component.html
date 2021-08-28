@@ -1,6 +1,7 @@
 <app-header
   *ngIf="personaService.name!=='dashboard'; else dashBoardHeader"
-  [menuItems]="personaService.menu"></app-header>
+  [menuItems]="personaService.menu"
+></app-header>
 <ng-template #dashBoardHeader>
   <nguix-dashboard-header></nguix-dashboard-header>
 </ng-template>
@@ -10,8 +11,11 @@
 </main>
 
 <nguix-tabs
+  [i18n]="true"
+  [fixed]="true"
   *ngIf="personaService.name!=='dashboard'"
-  [menuItems]="personaService.tabs"></nguix-tabs>
+  [menuItems]="personaService.tabs"
+></nguix-tabs>
 
 <nguix-nav-indicator [i18n]="true"></nguix-nav-indicator>
 <nguix-pwa-reminder [i18n]="true"></nguix-pwa-reminder>

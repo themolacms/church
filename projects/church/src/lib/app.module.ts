@@ -33,7 +33,7 @@ import { AppDashboardModule } from './app-dashboard.module';
 
 import { HeaderComponentModule } from './components/header/header.module';
 import {
-  NguixTabsComponentModule,
+  NguixTabsI18nComponentModule,
   NguixNavIndicatorI18nComponentModule,
   NguixPwaReminderI18nComponentModule,
 } from '@lamnhan/nguix-starter';
@@ -55,7 +55,7 @@ export class AppErrorHandler implements ErrorHandler {
     AppTranslationModule,
     AppDashboardModule,
     HeaderComponentModule,
-    NguixTabsComponentModule,
+    NguixTabsI18nComponentModule,
     NguixNavIndicatorI18nComponentModule,
     NguixPwaReminderI18nComponentModule,
   ],

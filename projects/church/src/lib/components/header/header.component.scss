@@ -15,10 +15,14 @@
   .toggler {
     display: flex;
     align-items: center;
-    margin-right: 1rem;
+    margin-right: .5rem;
 
     button {
       display: block;
+      background: none;
+      border: none;
+      outline: none;
+      margin-left: -.5rem;
 
       &:focus, &:active {
         border: var(--app-size-border) solid var(--app-color-foreground);
@@ -132,13 +136,6 @@
         animation-iteration-count: infinite;
       }
     }
-  }
-
-  .themer {
-    display: flex;
-    align-items: center;
-    padding-right: 1rem;
-    padding-top: 2px;
   }
 
   .user {

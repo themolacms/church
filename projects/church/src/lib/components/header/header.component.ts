@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AppService, MetaService, UserService, NavService, SettingService, PwaService } from '@lamnhan/ngx-useful';
+import { AppService, UserService, NavService } from '@lamnhan/ngx-useful';
 import { MenuItem } from '@lamnhan/ngx-useful';
 
 @Component({
@@ -11,17 +11,10 @@ export class HeaderComponent implements OnInit {
   @Input() menuItems: MenuItem[] = [];
 
   constructor(
-    public readonly app: AppService,
-    public readonly meta: MetaService,
-    public readonly user: UserService,
-    public readonly nav: NavService,
-    public readonly setting: SettingService,
-    public readonly pwaService: PwaService,
+    public readonly appService: AppService,
+    public readonly userService: UserService,
+    public readonly navService: NavService,
   ) {}
 
   ngOnInit(): void {}
-
-  toggleTheme(e: any) {
-    return this.setting.changeTheme(e.target.checked ? 'dark' : 'light');
-  }
 }
