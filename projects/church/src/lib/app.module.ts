@@ -1,31 +1,63 @@
-import { NgModule, ModuleWithProviders, LOCALE_ID } from '@angular/core';
+import { NgModule, ModuleWithProviders, Injectable, ErrorHandler, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { translocoConfig, TRANSLOCO_CONFIG } from '@ngneat/transloco';
+import { TRANSLOCO_CONFIG } from '@ngneat/transloco';
 import {
+  AngularFireAnalyticsModule,
+  ScreenTrackingService,
+  UserTrackingService,
+  DEBUG_MODE,
+  APP_NAME,
+  APP_VERSION,
+} from '@angular/fire/analytics';
+import {
+  ErrorService,
   LocalstorageService,
   CacheService,
   AppService,
   MetaService,
   NavService,
   SettingService,
+  PersonaService,
+  PwaService,
+  AuthService,
+  UserService,
+  DatabaseService,
+  StorageService,
 } from '@lamnhan/ngx-useful';
-import { NguixHeaderComponentModule, NguixFooterComponentModule } from '@lamnhan/nguix-starter';
 
+import { AppConfig, APP_CONFIG } from './app.config';
+import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppTranslationModule } from './app-translation.module';
 import { AppDashboardModule } from './app-dashboard.module';
-import { AppComponent } from './app.component';
-import { AppConfig, APP_CONFIG } from './app.config';
+
+import { HeaderComponentModule } from './components/header/header.module';
+import {
+  NguixTabsComponentModule,
+  NguixNavIndicatorI18nComponentModule,
+  NguixPwaReminderI18nComponentModule,
+} from '@lamnhan/nguix-starter';
+
+@Injectable({providedIn: 'root'})
+export class AppErrorHandler implements ErrorHandler {
+  constructor(private readonly errorService: ErrorService) {}
+  handleError(error: any) {
+    this.errorService.report(error);
+  }
+}
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    AngularFireAnalyticsModule,
     AppRoutingModule,
     AppTranslationModule,
     AppDashboardModule,
-    NguixHeaderComponentModule,
-    NguixFooterComponentModule,
+    HeaderComponentModule,
+    NguixTabsComponentModule,
+    NguixNavIndicatorI18nComponentModule,
+    NguixPwaReminderI18nComponentModule,
   ],
 })
 export class MolaAppModule {
@@ -33,12 +65,12 @@ export class MolaAppModule {
     return {
       ngModule: MolaAppModule,
       providers: [
-        LocalstorageService,
-        CacheService,
-        AppService,
-        MetaService,
-        NavService,
-        SettingService,
+        // app config
+        {
+          provide: APP_CONFIG,
+          useValue: config,
+        },
+        // i18n
         {
           provide: LOCALE_ID,
           useValue: config.translocoConfig.defaultLang,
@@ -47,10 +79,39 @@ export class MolaAppModule {
           provide: TRANSLOCO_CONFIG,
           useValue: config.translocoConfig,
         },
+        // error reporting
         {
-          provide: APP_CONFIG,
-          useValue: config,
+          provide: ErrorHandler,
+          useClass: AppErrorHandler,
         },
+        // analytics
+        {
+          provide: APP_NAME,
+          useValue: config.name,
+        },
+        {
+          provide: APP_VERSION,
+          useValue: config.version,
+        },
+        {
+          provide: DEBUG_MODE,
+          useValue: !config.production,
+        },
+        ScreenTrackingService,
+        UserTrackingService,
+        // ngx-useful
+        LocalstorageService,
+        CacheService,
+        AppService,
+        MetaService,
+        NavService,
+        SettingService,
+        PersonaService,
+        PwaService,
+        AuthService,
+        UserService,
+        DatabaseService,
+        StorageService,
       ],
     };
   }

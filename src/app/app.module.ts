@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
-import { environment } from '../environments/environment';
-import { MolaAppModule, AppComponent } from '@molacms/church';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireModule } from '@angular/fire';
+import { MolaAppModule, AppComponent } from '@molacms/church';
+
+import { environment } from '../environments/environment';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -15,6 +16,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     MolaAppModule.forRoot({
+      name: 'Church Theme',
+      version: '0.0.0',
+      production: environment.production,
+      // firebase
+      firebase: environment.firebase,
       // i18n
       translocoConfig: {
         availableLangs: ['en-US'],
@@ -29,6 +35,18 @@ import { ServiceWorkerModule } from '@angular/service-worker';
           theme: 'light',
           locale: 'en-US',
           persona: 'default',
+        },
+        listing: {
+          themes: [
+            { text: 'THEME.LIGHT', value: 'light' },
+          ],
+          personas: [
+            { text: 'PERSONA.DEFAULT', value: 'default' },
+            { text: 'PERSONA.DASHBOARD', value: 'dashboard' }
+          ],
+          locales: [
+            { text: 'English', value: 'en-US' },
+          ],
         },
       },
       // MetaService

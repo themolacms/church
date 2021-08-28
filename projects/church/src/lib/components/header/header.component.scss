@@ -1,0 +1,248 @@
+.app-header {
+  width: 100%;
+  height: 64px;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  background: var(--app-color-background);
+  border-bottom: var(--app-size-border) solid var(--app-color-background-shade);
+
+  .toggler {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+
+    button {
+      display: block;
+
+      &:focus, &:active {
+        border: var(--app-size-border) solid var(--app-color-foreground);
+        border-radius: var(--app-size-radius);
+      }
+    }
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    em {
+
+      img {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+
+    strong {
+      display: none;
+      margin-left: 1rem;
+      font-size: 1.25rem;
+    }
+  }
+
+  .nav {
+    flex: 1;
+
+    .primary {
+      margin-right: 1rem;
+      display: flex;
+      justify-content: flex-end;
+
+      ul.menu {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: none;
+        flex: 1;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: .9rem;
+    
+        li {
+          display: none;
+    
+          &:last-child a {
+            padding-right: 0;
+          }
+
+          a {
+            display: flex;
+            align-items: center;
+            width: auto;
+            height: 32px;
+            color: var(--app-color-foreground);
+            padding: 0 .75rem;
+            border-radius: var(--app-size-radius);
+            
+            &:hover, &:focus, &:active, &.active {
+              text-decoration: none;
+              background: var(--app-color-background-shade);
+              color: var(--app-color-foreground-shade);
+              opacity: 1;
+            }
+
+            &:active, &.active {
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .notification {
+
+    button {
+      position: relative;
+      background-size: 1.5rem 1.5rem;
+      margin-right: .5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+
+      @keyframes notification_animation {
+        0%   { transform: scale(1) }
+        50%  { transform: scale(.8) }
+        100% { transform: scale(1) }
+      }
+      
+      &.has-message {
+        margin-right: 1rem;
+      }
+
+      .counter {
+        position: absolute;
+        top: -.25rem;
+        right: -.5rem;
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 100%;
+        padding: 0 .25rem;
+        background: var(--app-color-danger);
+        color: var(--app-color-danger-contrast);
+        font-size: .9rem;
+        animation-name: notification_animation;
+        animation-duration: .5s;
+        animation-iteration-count: infinite;
+      }
+    }
+  }
+
+  .themer {
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+    padding-top: 2px;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    padding-top: 2px;
+
+    a.avatar {
+      display: inline-block;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 100%;
+      overflow: hidden;
+
+      &:focus, &:active {
+        outline: none;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+}
+
+@media only screen and (min-width: 480px) {
+
+  .app-header {
+
+    .nav {
+
+      .primary {
+        padding-right: 1rem;
+        border-right: 1px solid var(--app-color-background-shade);
+        
+        ul.menu {
+        display: flex;
+
+          .about {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 512px) {
+
+  .app-header .nav .primary ul.menu {
+  
+    .works {
+      display: inline-block;
+    }
+  }
+}
+
+@media only screen and (min-width: 576px) {
+
+  .app-header .nav .primary ul.menu {
+
+    .blog {
+      display: inline-block;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+
+  .app-header {
+
+    .brand strong {
+      display: block;
+    }
+
+    .nav .primary {
+    
+      ul.menu {
+        font-size: 1rem;
+        margin-right: 1rem;
+
+        .donate {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+
+  .app-header .nav {
+
+    .primary ul.menu {
+  
+      .store {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {}
+
+@media only screen and (min-width: 1400px) {}

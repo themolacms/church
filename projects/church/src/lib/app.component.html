@@ -1,11 +1,17 @@
-<nguix-header
-  [i18n]="true"
-  [menuItems]="headerMenu"
-  NAME="Church"
-></nguix-header>
+<app-header
+  *ngIf="personaService.name!=='dashboard'; else dashBoardHeader"
+  [menuItems]="personaService.menu"></app-header>
+<ng-template #dashBoardHeader>
+  <nguix-dashboard-header></nguix-dashboard-header>
+</ng-template>
 
 <main id="page-container">
   <router-outlet></router-outlet>
 </main>
 
-<nguix-footer [menuItems]="footerMenu"></nguix-footer>
+<nguix-tabs
+  *ngIf="personaService.name!=='dashboard'"
+  [menuItems]="personaService.tabs"></nguix-tabs>
+
+<nguix-nav-indicator [i18n]="true"></nguix-nav-indicator>
+<nguix-pwa-reminder [i18n]="true"></nguix-pwa-reminder>

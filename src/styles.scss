@@ -27,6 +27,9 @@
 @use '@unistylus/bootstrap/reset';
 @use '@unistylus/bootstrap/core';
 @use '@unistylus/bootstrap/content/typography';
+@use '@unistylus/bootstrap/form/form-label';
+@use '@unistylus/bootstrap/form/form-control';
+@use '@unistylus/bootstrap/form/form-switch';
 @use '@unistylus/bootstrap/components/icon';
 
 /**

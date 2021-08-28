@@ -1,0 +1,51 @@
+<ng-container *transloco="let t">
+<header class="app-header">
+
+  <div class="toggler">
+    <button class="icon" [class]="nav.getMenuIcon()" (click)="nav.menuAction()"></button>
+  </div>
+
+  <div class="brand">
+    <em><img src="/assets/images/logo.svg" [alt]="t('NAME')"></em>
+    <strong class="font-head">{{ t('NAME') }}</strong>
+  </div>
+
+  <nav class="nav">
+
+    <div class="primary">
+      <ul class="menu">
+        <li *ngFor="let menuItem of menuItems" [class]="menuItem.name">
+          <a
+            [usefulRouterLink]="menuItem.routerLink"
+            usefulRouterLinkActive="active"
+            [usefulRouterLinkActiveOptions]="{exact: true}"
+            [usefulRouterBackwardable]="false"
+          >{{ t(menuItem.text || '') }}</a>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+  <div class="themer">
+    <label class="form-switch">
+      <input
+        type="checkbox"
+        [checked]="setting.theme==='dark'"
+        (change)="toggleTheme($event)">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="user">
+    <a
+      class="avatar"
+      [usefulRouterLink]="!user.currentUser ? ['login'] : !user.username ? ['account'] : [user.username]"
+      [usefulRouterBackwardable]="!user.currentUser"
+    >
+      <img [src]="user.data?.photoURL || 'https://www.gravatar.com/avatar/none?d=mp'"/>
+    </a>
+  </div>
+
+</header>
+</ng-container>

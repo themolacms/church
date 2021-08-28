@@ -1,8 +1,11 @@
 {
-  "HELLO": "Hello",
-  "WORLD": "world",
   "APP": {
     "HOME": "Home",
-    "ABOUT": "About"
+    "USER": "Me",
+    "SETTING": "Setting",
+    "ABOUT": "About",
+    "HELP": "Help",
+    "TERMS": "Terms",
+    "PRIVACY": "Privacy"
   }
 }
