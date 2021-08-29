@@ -7,7 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build:lib": "ng build church && cpy README.md LICENSE dist/church",
+    "copies": "cpy styles.scss ../../../dist/church --cwd=projects/church/src --parents",
+    "build:lib": "ng build church && npm run copies && cpy README.md LICENSE dist/church",
     "deploy:lib": "cd ./dist/church && npm publish && cd ../../",
     "build:app": "ng build && ngxer generate && ngsw-config ./docs ./ngsw-config.json",
     "deploy:app": "git add . && git commit -m 'deploy:app' && git push",

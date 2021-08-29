@@ -1,0 +1,117 @@
+.host {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  height: 64px;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  background: var(--app-color-background);
+  border-top: var(--app-size-border) solid var(--app-color-background-shade);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 9999999;
+
+  li {
+    flex: 1;
+
+    a {
+      display: block;
+      width: 100%;
+      padding: .5rem 0;
+      color: var(--app-color-foreground);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      border-top: 3px solid rgba(0, 0, 0, 0);
+  
+      &:hover, &:focus, &:active, &.active {
+        background: var(--app-color-background-shade);
+        text-decoration: none;
+      }
+  
+      &.active {
+        border-top-color: var(--app-color-foreground);
+      }
+  
+      .icon {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+  
+      span {
+        display: block;
+        text-align: center;
+        width: 100%;
+        font-size: .8rem;
+        margin-top: .25rem;
+      }
+    }
+  }
+
+  li.home a {
+
+    &:hover, &:focus, &:active, &.active {
+      background: rgba(var(--app-color-primary-rgb), .2);
+    }
+
+    &.active {
+      border-top-color: var(--app-color-primary);
+    }
+  }
+
+  li.news a {
+
+    &:hover, &:focus, &:active, &.active {
+      background: rgba(var(--app-color-secondary-rgb), .2);
+    }
+
+    &.active {
+      border-top-color: var(--app-color-secondary);
+    }
+  }
+
+  li.videos a {
+
+    &:hover, &:focus, &:active, &.active {
+      background: rgba(var(--app-color-danger-rgb), .2);
+    }
+
+    &.active {
+      border-top-color: var(--app-color-danger);
+    }
+  }
+
+  li.articles a {
+
+    &:hover, &:focus, &:active, &.active {
+      background: rgba(var(--app-color-tertiary-rgb), .2);
+    }
+
+    &.active {
+      border-top-color: var(--app-color-tertiary);
+    }
+  }
+
+}
+
+@media only screen and (min-width: 480px) {}
+
+@media only screen and (min-width: 576px) {}
+
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (min-width: 992px) {
+
+  .tabs {
+    width: calc(100% - 250px);
+    left: 250px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {}
+
+@media only screen and (min-width: 1400px) {}

@@ -32,8 +32,8 @@ import { AppTranslationModule } from './app-translation.module';
 import { AppDashboardModule } from './app-dashboard.module';
 
 import { HeaderComponentModule } from './components/header/header.module';
+import { TabsComponentModule } from './components/tabs/tabs.module';
 import {
-  NguixTabsI18nComponentModule,
   NguixNavIndicatorI18nComponentModule,
   NguixPwaReminderI18nComponentModule,
 } from '@lamnhan/nguix-starter';
@@ -55,7 +55,7 @@ export class AppErrorHandler implements ErrorHandler {
     AppTranslationModule,
     AppDashboardModule,
     HeaderComponentModule,
-    NguixTabsI18nComponentModule,
+    TabsComponentModule,
     NguixNavIndicatorI18nComponentModule,
     NguixPwaReminderI18nComponentModule,
   ],

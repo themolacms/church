@@ -1,0 +1,17 @@
+<div class="host" *ngIf="page$ | async as page; else loading">
+
+  <div *ngIf="userService.currentUser">
+  
+    <section class="main">
+      <nguix-account [i18n]="true"></nguix-account>
+    </section>
+  
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <app-spinner></app-spinner>
+  </div>
+</ng-template>

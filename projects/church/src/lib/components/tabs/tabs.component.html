@@ -1,0 +1,22 @@
+<ng-container *transloco="let t">
+<ul class="host">
+
+  <li
+    *ngFor="let menuItem of menuItems"
+    [class]="menuItem.name"
+  >
+    <a
+      [usefulRouterLink]="menuItem.routerLink"
+      usefulRouterLinkActive="active"
+      [usefulRouterLinkActiveOptions]="{exact: menuItem.name === 'home', also: menuItem.activeAlso}"
+      [usefulRouterBackwardable]="false"
+    >
+      <i class="icon" [class]="menuItem.icon"></i>
+      <span class="truncate">
+        {{ t(menuItem.shortText || menuItem.text || '') || (menuItem.shortText || menuItem.text) }}
+      </span>
+    </a>
+  </li>
+
+</ul>
+</ng-container>

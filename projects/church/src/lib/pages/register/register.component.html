@@ -1,0 +1,21 @@
+<div class="host" *ngIf="page$ | async as page; else loading">
+
+  <section class="title">
+    <h3>{{ 'APP.REGISTER' | transloco }}</h3>
+  </section>
+
+  <section class="main" *ngIf="authChecked">
+    <nguix-register
+      [i18n]="true"
+      (signedUp)="nav.navigate([''])"
+      (goLogin)="nav.navigate(['login'])"
+    ></nguix-register>
+  </section>
+
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <app-spinner></app-spinner>
+  </div>
+</ng-template>

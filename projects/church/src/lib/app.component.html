@@ -10,12 +10,10 @@
   <router-outlet></router-outlet>
 </main>
 
-<nguix-tabs
-  [i18n]="true"
-  [fixed]="true"
+<app-tabs
   *ngIf="personaService.name!=='dashboard'"
   [menuItems]="personaService.tabs"
-></nguix-tabs>
+></app-tabs>
 
 <nguix-nav-indicator [i18n]="true"></nguix-nav-indicator>
 <nguix-pwa-reminder [i18n]="true"></nguix-pwa-reminder>

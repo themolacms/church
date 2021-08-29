@@ -130,8 +130,8 @@ export class AppComponent {
       })
       .init({
         default: {
-          menu: ['news', 'about'],
-          tabs: ['home', 'videos', 'news', 'articles', 'more'],
+          menu: ['news', 'news', 'videos', 'articles', 'about'],
+          tabs: ['home', 'news', 'videos', 'articles', 'more'],
         },
       });
     this.metaService

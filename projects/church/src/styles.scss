@@ -1,0 +1,15 @@
+@import '@unistylus/core/scss/mixins';
+
+$icons: (
+  'home': ('material', 'home-outline'),
+  'news': ('material', 'newspaper-variant-outline'),
+  'articles': ('material', 'post-outline'),
+  'videos': ('material', 'video-outline'),
+  'user': ('material', 'account-outline'),
+  'setting': ('material', 'tune'),
+  'about': ('material', 'information-outline'),
+  'help': ('material', 'help-circle-outline'),
+  'more': ('material', 'dots-horizontal'),
+);
+
+@include register_icons($icons);

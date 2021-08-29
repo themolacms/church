@@ -1,7 +1,7 @@
 <ng-container *transloco="let t">
 <header class="app-header">
 
-  <div class="toggler" [class.visible]="navService.isBackwardable()">
+  <div class="toggler" [class.visible]="navService.isBackable">
     <button (click)="navService.back()">
       <nguix-icon name="arrow-left"></nguix-icon>
     </button>
