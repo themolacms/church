@@ -1,6 +1,5 @@
 import { InjectionToken } from '@angular/core';
 import { TranslocoConfig } from '@ngneat/transloco';
-import { FirebaseAppConfig } from '@angular/fire';
 import {
   AppMetas,
   MetaTranslations,
@@ -9,6 +8,16 @@ import {
 } from '@lamnhan/ngx-useful';
 
 export const APP_CONFIG = new InjectionToken<AppConfig>('AppConfig');
+
+export interface FirebaseAppConfig {
+  apiKey:            string;
+  authDomain:        string;
+  projectId:         string;
+  storageBucket:     string;
+  messagingSenderId: string;
+  appId:             string;
+  measurementId:     string;
+}
 
 export interface AppConfig {
   name: string;

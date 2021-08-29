@@ -8,7 +8,7 @@ import {
   DEBUG_MODE,
   APP_NAME,
   APP_VERSION,
-} from '@angular/fire/analytics';
+} from '@angular/fire/compat/analytics';
 import {
   ErrorService,
   LocalstorageService,

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 import {
   ErrorService,
@@ -112,13 +112,9 @@ export class AppComponent {
       })
       .setMenuRegistry({
         home: { name: 'home', text: 'APP.HOME', routerLink: [''], icon: 'icon-home' },
-        blog: {
-          name: 'blog',
-          text: 'APP.BLOG',
-          routerLink: ['blog'],
-          icon: 'icon-blog',
-          activeAlso: ['post']
-        },
+        news: { name: 'news', text: 'APP.NEWS', routerLink: ['news'], icon: 'icon-news' },
+        articles: { name: 'articles', text: 'APP.ARTICLES', routerLink: ['articles'], icon: 'icon-articles' },
+        videos: { name: 'videos', text: 'APP.VIDEOS', routerLink: ['videos'], icon: 'icon-videos' },
         user: {
           name: 'user',
           text: 'APP.USER',
@@ -128,23 +124,15 @@ export class AppComponent {
           ),
         },
         setting: { name: 'setting', text: 'APP.SETTING', routerLink: ['setting'], icon: 'icon-setting' },
-        about: {
-          name: 'about',
-          text: 'APP.ABOUT',
-          routerLink: ['lamnhan', 'about'],
-          icon: 'icon-about',
-          activeAlso: ['lamnhan/home']
-        },
+        about: { name: 'about', text: 'APP.ABOUT', routerLink: ['about'], icon: 'icon-about' },
         help: { name: 'help', text: 'APP.HELP', routerLink: ['help'], icon: 'icon-help' },
+        more: { name: 'more', text: 'APP.MORE', routerLink: ['more'], icon: 'icon-more' },
       })
       .init({
         default: {
-          menu: ['home', 'setting', 'about', 'help'],
-          tabs: ['home', 'about'],
+          menu: ['news', 'about'],
+          tabs: ['home', 'videos', 'news', 'articles', 'more'],
         },
-        dashboard: {
-          tabs: ['home', 'about'],
-        }
       });
     this.metaService
       .setIntegrations({ settingService: this.settingService })

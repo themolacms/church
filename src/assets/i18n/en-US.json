@@ -1,6 +1,10 @@
 {
   "APP": {
     "HOME": "Home",
+    "VIDEOS": "Videos",
+    "NEWS": "News",
+    "ARTICLES": "Articles",
+    "MORE": "More",
     "USER": "Me",
     "SETTING": "Setting",
     "ABOUT": "About",

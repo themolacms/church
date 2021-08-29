@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule } from '@angular/fire/compat';
 import { MolaAppModule, AppComponent } from '@molacms/church';
 
 import { environment } from '../environments/environment';
