@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1630054185776,
+  "timestamp": 1630331031414,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -11,6 +11,7 @@
         "ignoreVary": true
       },
       "urls": [
+        "/399.f000095816afac5cee97.js",
         "/favicon.ico",
         "/icons/icon-128x128.png",
         "/icons/icon-144x144.png",
@@ -23,14 +24,14 @@
         "/icons/icon-72x72.png",
         "/icons/icon-96x96.png",
         "/index.html",
-        "/main.f834a894e241d2e0e45e.js",
+        "/main.4304f819515b1ba8d514.js",
         "/manifests/en-US.webmanifest",
         "/ngsw-worker.js",
         "/polyfills.8b6bcb527d74ffa7b143.js",
-        "/runtime.fb6a83f844ce76fe8fcb.js",
+        "/runtime.ae2e9b1003e47aef8b9e.js",
         "/safety-worker.js",
         "/scripts.ec416e3af19e2d96565e.js",
-        "/styles.b4007cf08af4bef6fb57.css",
+        "/styles.f6d3be4dd0fe98ab8ba1.css",
         "/worker-basic.min.js"
       ],
       "patterns": []
@@ -44,6 +45,11 @@
       },
       "urls": [
         "/assets/i18n/en-US.json",
+        "/assets/i18n/nguix-account/en-US.json",
+        "/assets/i18n/nguix-login/en-US.json",
+        "/assets/i18n/nguix-nav-indicator/en-US.json",
+        "/assets/i18n/nguix-pwa-reminder/en-US.json",
+        "/assets/i18n/nguix-register/en-US.json",
         "/assets/images/404.png",
         "/assets/images/featured.jpg",
         "/assets/images/logo.svg"
@@ -53,7 +59,13 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/assets/i18n/en-US.json": "b7d4fef4a24c2f7fbd3fe9f5e609c9d95a5457c0",
+    "/399.f000095816afac5cee97.js": "26da638a1b72a99bc1d05204555f49bc99111817",
+    "/assets/i18n/en-US.json": "6ea4f7d94b160fc3f7accfc1352284a95b7adad1",
+    "/assets/i18n/nguix-account/en-US.json": "bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f",
+    "/assets/i18n/nguix-login/en-US.json": "bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f",
+    "/assets/i18n/nguix-nav-indicator/en-US.json": "bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f",
+    "/assets/i18n/nguix-pwa-reminder/en-US.json": "bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f",
+    "/assets/i18n/nguix-register/en-US.json": "bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f",
     "/assets/images/404.png": "763aa748976ff113236883c857bd7423d091000a",
     "/assets/images/featured.jpg": "d9e86ed1a4eff69cdfbaaa272dcd393e48eade4d",
     "/assets/images/logo.svg": "b3e652dc42c3e2766e8c90d8120aa44af1212a19",
@@ -68,15 +80,15 @@
     "/icons/icon-512x512.png": "de9f797be2a6a2d5a9adc72c62bfb5f849c8b057",
     "/icons/icon-72x72.png": "4253a44eb4712a06858b4374fa51d98a37e96e68",
     "/icons/icon-96x96.png": "067609b320de1c03f496022bf9e993fd8d2e254d",
-    "/index.html": "382c069b626b6af3e6dfd15f774c1e9a43d3b672",
-    "/main.f834a894e241d2e0e45e.js": "9b64a022487112b31d86ac90af0b2e8d457f4d47",
+    "/index.html": "7c98b7497de39e3776cb1cb3adc7ce3a1d420459",
+    "/main.4304f819515b1ba8d514.js": "d3bb1852ba685697d1492669faf489f7b49b80fd",
     "/manifests/en-US.webmanifest": "b2b769e4a29205aea81d34347bf139c33c6a943c",
     "/ngsw-worker.js": "48524aa7e74f4b4908355f47172444097d7f6cf3",
     "/polyfills.8b6bcb527d74ffa7b143.js": "2a1bbb07e92e72683afd7f48c0b0b3f64c6bbbdd",
-    "/runtime.fb6a83f844ce76fe8fcb.js": "8ef776a0d3d698e6df7b18b38d38a4c7f7c50d4d",
+    "/runtime.ae2e9b1003e47aef8b9e.js": "5e97b22a0d54db22e3e924ed1e59f50cd41c842f",
     "/safety-worker.js": "f532926317210be6e2679d21748dc44a35389807",
     "/scripts.ec416e3af19e2d96565e.js": "7d8a47443d00391009351384abbf4c140e795351",
-    "/styles.b4007cf08af4bef6fb57.css": "87ab2c1fe1ed54267a0bb6a9d023f1b964b63d79",
+    "/styles.f6d3be4dd0fe98ab8ba1.css": "95f691ed789f13382eac4b8e494985cf3017606a",
     "/worker-basic.min.js": "f532926317210be6e2679d21748dc44a35389807"
   },
   "navigationUrls": [
