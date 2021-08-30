@@ -33,7 +33,7 @@
     <a
       class="avatar"
       [usefulRouterLink]="userService.currentUser ? ['account'] : ['login']"
-      [usefulRouterBackwardable]="true"
+      [usefulRouterBackwardable]="!userService.currentUser"
     >
       <img [src]="userService.data?.photoURL || 'https://www.gravatar.com/avatar/none?d=mp'"/>
     </a>

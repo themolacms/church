@@ -4,10 +4,12 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { MolaAppModule, AppComponent } from '@molacms/church';
 
 import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   bootstrap: [AppComponent],
   imports: [
+    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

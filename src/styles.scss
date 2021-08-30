@@ -31,9 +31,12 @@
 @use '@unistylus/bootstrap/form/form-control';
 @use '@unistylus/bootstrap/form/form-switch';
 @use '@unistylus/bootstrap/components/icon';
+@use '@unistylus/bootstrap/components/modal-alert';
+@use '@unistylus/bootstrap/components/button-default';
 @use '@unistylus/bootstrap/components/button-clear';
 @use '@unistylus/bootstrap/components/button-outline';
 @use '@unistylus/bootstrap/components/button-primary';
+@use '@unistylus/bootstrap/components/button-light-sm';
 @use '@unistylus/bootstrap/utilities/truncate';
 
 /**

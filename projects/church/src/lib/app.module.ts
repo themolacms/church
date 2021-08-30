@@ -1,4 +1,5 @@
 import { NgModule, ModuleWithProviders, Injectable, ErrorHandler, LOCALE_ID } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { TRANSLOCO_CONFIG } from '@ngneat/transloco';
 import {
@@ -28,7 +29,6 @@ import {
 
 import { AppConfig, APP_CONFIG } from './app.config';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
 import { AppTranslationModule } from './app-translation.module';
 import { AppDashboardModule } from './app-dashboard.module';
 
@@ -51,8 +51,8 @@ export class AppErrorHandler implements ErrorHandler {
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    RouterModule,
     AngularFireAnalyticsModule,
-    AppRoutingModule,
     AppTranslationModule,
     AppDashboardModule,
     HeaderComponentModule,
