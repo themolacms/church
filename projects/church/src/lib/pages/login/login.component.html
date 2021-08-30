@@ -1,14 +1,11 @@
 <div class="host" *ngIf="page$ | async as page; else loading">
 
-  <section class="title">
-    <h3>{{ 'APP.LOGIN' | transloco }}</h3>
-  </section>
-
   <section class="main" *ngIf="authChecked">
     <nguix-login
       [i18n]="true"
       (signedIn)="onSignedIn()"
-      (goRegister)="nav.navigate(['register'])"
+      [registerRouterLink]="['register']"
+      [withSocials]="['google', 'facebook']"
     ></nguix-login>
   </section>
 
@@ -16,6 +13,6 @@
 
 <ng-template #loading>
   <div class="loading">
-    <app-spinner></app-spinner>
+    <nguix-spinner></nguix-spinner>
   </div>
 </ng-template>

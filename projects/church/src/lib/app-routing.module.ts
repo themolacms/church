@@ -24,8 +24,8 @@ const routes: Routes = [
     }
   },
   // auth
-  { path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule) },
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule) },
+  { path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule) },
   // user
   {
     path: 'account',
@@ -33,6 +33,8 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },
+  // more
+  { path: 'more', loadChildren: () => import('./pages/more/more.module').then(m => m.MorePageModule) },
   // 404
   { path: '**', loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixOopsPageModule) },
 ];

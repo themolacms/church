@@ -126,7 +126,7 @@
       "projectType": "library",
       "root": "projects/church",
       "sourceRoot": "projects/church/src",
-      "prefix": "mola",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

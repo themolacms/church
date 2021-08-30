@@ -15,7 +15,6 @@
   .toggler {
     display: flex;
     align-items: center;
-    margin-right: .5rem;
 
     button {
       display: block;
@@ -23,10 +22,22 @@
       border: none;
       outline: none;
       margin-left: -.5rem;
+      width: 0;
+      padding: 0;
+      overflow: hidden;
+      transition: all .3s ease;
 
       &:focus, &:active {
-        border: var(--app-size-border) solid var(--app-color-foreground);
         border-radius: var(--app-size-radius);
+      }
+    }
+
+    &.visible {
+      margin-right: .5rem;
+
+      button {
+        width: 42px;
+        padding: 0 5px;
       }
     }
   }

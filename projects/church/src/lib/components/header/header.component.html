@@ -1,7 +1,7 @@
 <ng-container *transloco="let t">
 <header class="app-header">
 
-  <div class="toggler" [class.visible]="navService.isBackable">
+  <div class="toggler" [class.visible]="navService.isBackwardable()">
     <button (click)="navService.back()">
       <nguix-icon name="arrow-left"></nguix-icon>
     </button>
@@ -33,7 +33,7 @@
     <a
       class="avatar"
       [usefulRouterLink]="userService.currentUser ? ['account'] : ['login']"
-      [usefulRouterBackwardable]="!userService.currentUser"
+      [usefulRouterBackwardable]="true"
     >
       <img [src]="userService.data?.photoURL || 'https://www.gravatar.com/avatar/none?d=mp'"/>
     </a>

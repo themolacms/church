@@ -27,8 +27,6 @@ export class AccountComponent implements OnInit {
   constructor(
     private metaService: MetaService,
     private settingService: SettingService,
-    public readonly nav: NavService,
-    public readonly auth: AuthService,
     public readonly userService: UserService,
   ) {}
 

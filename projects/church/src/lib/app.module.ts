@@ -11,6 +11,7 @@ import {
 } from '@angular/fire/compat/analytics';
 import {
   ErrorService,
+  AlertService,
   LocalstorageService,
   CacheService,
   AppService,
@@ -100,6 +101,7 @@ export class MolaAppModule {
         ScreenTrackingService,
         UserTrackingService,
         // ngx-useful
+        AlertService,
         LocalstorageService,
         CacheService,
         AppService,

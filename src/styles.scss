@@ -31,6 +31,9 @@
 @use '@unistylus/bootstrap/form/form-control';
 @use '@unistylus/bootstrap/form/form-switch';
 @use '@unistylus/bootstrap/components/icon';
+@use '@unistylus/bootstrap/components/button-clear';
+@use '@unistylus/bootstrap/components/button-outline';
+@use '@unistylus/bootstrap/components/button-primary';
 @use '@unistylus/bootstrap/utilities/truncate';
 
 /**
@@ -39,4 +42,11 @@
  * ====================================================
  */
 
-// ...
+
+ nguix-nav-indicator .show {
+  bottom: calc(64px + 1rem) !important;
+}
+
+nguix-pwa-reminder .show {
+  bottom: 64px !important;
+}

@@ -1,4 +1,5 @@
 #page-container {
   min-height: calc(100vh - 65px - 65px);
-  margin-top: 65px;
+  margin-top: 65px; // header
+  margin-bottom: 65px; // tabs
 }
