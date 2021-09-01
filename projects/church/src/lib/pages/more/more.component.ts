@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonaService } from '@lamnhan/ngx-useful';
+import { PersonaService, SettingService, NavService } from '@lamnhan/ngx-useful';
 
 @Component({
   selector: 'app-more-page',
@@ -8,9 +8,18 @@ import { PersonaService } from '@lamnhan/ngx-useful';
 })
 export class MoreComponent implements OnInit {
 
-  constructor(public personaService: PersonaService) {}
+  constructor(
+    public navService: NavService,
+    public settingService: SettingService,
+    public personaService: PersonaService,
+  ) {}
 
   ngOnInit(): void {
+  }
+
+  goDashboard() {
+    this.settingService.changePersona('dashboard');
+    this.navService.navigate(['app-admin']);
   }
 
 }

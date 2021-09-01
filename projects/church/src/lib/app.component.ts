@@ -130,13 +130,12 @@ export class AppComponent {
         about: { name: 'about', text: 'APP.ABOUT', routerLink: ['about'], icon: 'icon-about' },
         help: { name: 'help', text: 'APP.HELP', routerLink: ['help'], icon: 'icon-help' },
         more: { name: 'more', text: 'APP.MORE', routerLink: ['more'], icon: 'icon-more' },
-        dashboard: { name: 'dashboard', text: 'APP.DASHBOARD', routerLink: ['app-admin'], icon: 'icon-dashboard' },
       })
       .init({
         default: {
           menu: ['news', 'news', 'videos', 'articles', 'about'],
           tabs: ['home', 'news', 'videos', 'articles', 'more'],
-          more: ['dashboard', 'user', 'setting', 'about', 'help'],
+          more: ['user', 'setting', 'about', 'help'],
         },
       });
     this.metaService

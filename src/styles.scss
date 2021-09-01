@@ -17,12 +17,6 @@
 // register skins
 @use '@unistylus/core/scss/skins/light-default';
 
-// modify "default" skin
-// :root,
-// [data-theme=default],
-// [data-theme=light]
-// {}
-
 // register soul
 @use '@unistylus/bootstrap/reset';
 @use '@unistylus/bootstrap/core';
@@ -39,6 +33,15 @@
 @use '@unistylus/bootstrap/components/button-light-sm';
 @use '@unistylus/bootstrap/utilities/truncate';
 
+// modify "default" skin
+:root,
+[data-theme=default],
+[data-theme=light]
+{
+  --app-font-head: 'Open Sans', sans-serif;
+  --app-font-body: 'Open Sans', sans-serif;
+}
+
 /**
  * ====================================================
  * App styles 
@@ -46,7 +49,7 @@
  */
 
 
- nguix-nav-indicator .show {
+nguix-nav-indicator .show {
   bottom: calc(64px + 1rem) !important;
 }
 
