@@ -1,0 +1,405 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	
+    /* =============================================================== */
+    /* ====================== HELPER FUNCTIONS ======================= */
+    /* =============================================================== */
+	
+  	function isAuth() {
+      return request.auth != null;
+    }
+    
+    function isMine(uid) {
+      return (isAuth() && request.auth.uid == uid);
+    }
+    
+    function isRole(role) {
+      return (
+      	// auth user
+      	isAuth()
+        // token.role !== undefined
+        && role in request.auth.token
+        // token.role === role
+        && request.auth.token.role == role
+      );
+    }
+    
+    function allowedLevel(atLeast) {
+      let level =
+        (request.auth.token.role == 'sadmin')
+        ? 6
+        : (request.auth.token.role == 'admin')
+        ? 5
+        : (request.auth.token.role == 'editor')
+        ? 4
+        : (request.auth.token.role == 'author')
+        ? 3
+        : (request.auth.token.role == 'contributor')
+        ? 2
+        : 1;
+      return level >= atLeast;
+    }
+    
+    function isDocExists(collection, doc) {
+      return exists(/databases/$(database)/documents/$(collection)/$(doc));
+    }
+    
+    function isRequestContains(field) {
+      return (
+      	field in request.resource.data
+        && request.resource.data[field] != null
+        && (
+          !(field in resource.data)
+          || request.resource.data[field] != resource.data[field]
+        )
+      );
+    }
+    
+    function isRequestContainsAny(fields) {
+      return (
+      	resource != null
+        && request.resource.data.diff(resource.data).affectedKeys().hasAny(fields)
+      );
+    }
+    
+    function isRequestContainsOnly(fields) {
+      return (
+      	resource == null
+        || request.resource.data.diff(resource.data).affectedKeys().hasOnly(fields)
+      );
+    }
+    
+    /* =============================================================== */
+    /* ================== CONTENT HELPER FUNCTIONS =================== */
+    /* =============================================================== */
+    
+    function creationMandatory(docId) {
+    	return (
+      	// the doc id must equal .id field
+      	request.resource.data.id == docId
+        // only allow these statuses
+        && request.resource.data.status in ['draft', 'publish', 'archive', 'trash']
+        // must include these fields (and .id, .status)
+        && ('uid' in request.resource.data && request.resource.data['uid'] != null)
+        && ('title' in request.resource.data && request.resource.data['title'] != null)
+        && ('type' in request.resource.data && request.resource.data['type'] != null)
+        && ('createdAt' in request.resource.data && request.resource.data['createdAt'] != null)
+        && ('updatedAt' in request.resource.data && request.resource.data['updatedAt'] != null)
+      );
+    }
+    
+    function localizedMandatory() {
+    	return (
+      	('locale' in request.resource.data && request.resource.data['locale'] != null)
+        && ('origin' in request.resource.data && request.resource.data['origin'] != null)
+      );
+    }
+    
+    function unchangableFields() {
+    	return !isRequestContainsAny([
+      	'uid',
+        'id',
+        'type',
+        'createdAt',
+        'locale',
+        'ogirin'
+      ]);
+    }
+    
+    function changableStatistics() {
+      return isRequestContainsOnly([
+      	'viewCount',
+        'likeCount',
+        'commentCount',
+        'rateCount',
+        'shareCount',
+      ]);
+    }
+    
+    /* =============================================================== */
+    /* ==================== POST ALIKE FUNCTIONS ===================== */
+    /* =============================================================== */
+    
+    function postAlikeCreate(docId) {
+    	return (
+      	// basic fields
+      	creationMandatory(docId)
+        // localized
+        && localizedMandatory()
+        // only allow these type
+        // NOTE: add your custom to the list
+        && request.resource.data.type in ['default', /* ... */]
+      	// match user uid
+      	&& isMine(request.resource.data.uid)
+        // AND, author
+        && (
+        	// role 'author' or higher
+          allowedLevel(3)
+          // OR, contributor then only create a draft
+          || (
+          	isRole('contributor')
+          	&& request.resource.data.status == 'draft'
+          )
+        )
+      );
+    }
+    
+    function postAlikeUpdate() {
+      return (
+      	// can not change lock-in fields
+      	unchangableFields()
+        // AND
+        && (
+        	// role 'editor' or higher
+          allowedLevel(4)
+        	// OR, only changing stastistics
+          || changableStatistics()
+          // OR, role 'author' and the doc is theirs
+          || (isRole('author') && isMine(resource.data.uid))
+          // OR, role 'contributor' and their doc and no status changing
+          || (
+            isRole('contributor')
+            && isMine(resource.data.uid)
+            && !isRequestContains('status')
+          )
+        )
+      );
+    }
+    
+    function postAlikeDelete() {
+    	return (
+      	// role 'editor' or higher
+      	allowedLevel(4)
+        // OR, my doc
+        || isMine(resource.data.uid)
+      );
+    }
+    
+    /* =============================================================== */
+    /* ==================== RULES BY COLLECTION ====================== */
+    /* =============================================================== */
+
+    match /options/{docId} {
+      allow read: if true;
+      allow create: if (
+      	allowedLevel(5) &&
+        creationMandatory(docId) &&
+        // only allow these types
+        // NOTE: add your custom to the list
+        request.resource.data.type in ['default', /* ... */]
+      );
+      allow update: if allowedLevel(5) && unchangableFields();
+      allow delete: if allowedLevel(5);
+    }
+
+    match /categories/{docId} {
+      allow read: if true;
+      allow create: if (
+      	allowedLevel(5) &&
+        creationMandatory(docId) &&
+        localizedMandatory() &&
+        // only allow these types
+        // NOTE: add your custom to the list
+        request.resource.data.type in ['default', /* ... */]
+      );
+      allow update: if (allowedLevel(5) && unchangableFields());
+      allow delete: if allowedLevel(5);
+    }
+    
+    match /tags/{docId} {
+      allow read: if true;
+      allow create: if (
+      	allowedLevel(5) &&
+        creationMandatory(docId) &&
+        // only allow these types
+        // NOTE: add your custom to the list
+        request.resource.data.type in ['default', /* ... */]
+      );
+      allow update: if (allowedLevel(5) && unchangableFields()); 
+      allow delete: if allowedLevel(5);
+    }
+
+		match /pages/{docId} {
+      allow read: if true;
+      allow create: if (
+      	allowedLevel(5) &&
+        creationMandatory(docId) &&
+        localizedMandatory() &&
+        // only allow these types
+        // NOTE: add your custom to the list
+        request.resource.data.type in ['default', /* ... */]
+      );
+      allow update: if (allowedLevel(5) && unchangableFields());
+      allow delete: if allowedLevel(5);
+    }
+    
+    match /posts/{docId} {
+      allow read: if true;
+      allow create: if postAlikeCreate(docId);
+      allow update: if postAlikeUpdate();
+      allow delete: if postAlikeDelete();
+    }
+    
+    match /audios/{docId} {
+      allow read: if true;
+      allow create: if postAlikeCreate(docId);
+      allow update: if postAlikeUpdate();
+      allow delete: if postAlikeDelete();
+    }
+    
+    match /videos/{docId} {
+      allow read: if true;
+      allow create: if postAlikeCreate(docId);
+      allow update: if postAlikeUpdate();
+      allow delete: if postAlikeDelete();
+    }
+    
+    match /bundles/{docId} {
+      allow read: if true;
+      allow create: if postAlikeCreate(docId);
+      allow update: if postAlikeUpdate();
+      allow delete: if postAlikeDelete();
+    }
+    
+    match /products/{docId} {
+      allow read: if true;
+      allow create: if postAlikeCreate(docId);
+      allow update: if postAlikeUpdate();
+      allow delete: if postAlikeDelete();
+    }
+    
+    match /profiles/{username} {
+      allow read: if true;
+      allow create: if (
+        // new user only
+        !isDocExists("profiles", username)
+        // basic fields
+      	&& creationMandatory(username)
+        // only allow these types
+        // NOTE: add your custom to the list
+        && request.resource.data.type in ['default', /* ... */]
+        // uid must match auth user uid
+        && isMine(request.resource.data.uid)
+        // only 'subscriber' role on creation
+        && request.resource.data.role == 'subscriber'
+        // can not contains
+        && !isRequestContainsAny(["rank", "legit", "badges"])
+        // 1 user => 1 profile doc
+        // 1 user => multiple author-alike doc
+        && (
+        	// not a profile doc
+        	request.resource.data.type != 'default' ||
+          // if it is a profile doc, then for new user only
+          !isDocExists("users", request.resource.data.uid)
+        )
+      );
+      allow update: if (
+      	// unchangable fields
+      	unchangableFields()
+        // AND, author
+      	&& (
+        	// 'admin' role or higher
+          allowedLevel(5)
+          // OR, user change their profile
+          || (
+            // .uid must match auth user uid
+            isMine(resource.data.uid)
+            // can not contains
+            && !isRequestContainsAny(["role", "rank", "legit", "badges"])
+          )
+        )
+      );
+      allow delete: if false;
+    }
+
+    match /users/{uid} {
+    	allow list: if false;
+      allow get: if isMine(uid);
+      allow create: if (
+        // for new user only
+        !isDocExists("users", uid)
+        // basic fields
+      	&& creationMandatory(uid)
+        // only allow 'default' type
+        && request.resource.data.type == 'default'        
+        // uid must match auth user uid
+        && isMine(uid)
+        // uid sync
+        && request.resource.data.uid == uid
+        // only allow 'publish' status
+        && request.resource.data.status == 'publish'
+        // must include these fields
+        && ('createdAt' in request.resource.data && request.resource.data['createdAt'] != null)
+        && ('updatedAt' in request.resource.data && request.resource.data['updatedAt'] != null)
+      );
+      allow update: if (
+      	isMine(uid)
+        // unchangable fields
+        && unchangableFields()
+        // can not change username
+        && !isRequestContains("username")
+      );
+      allow delete: if false;
+    }
+
+    match /metas/{docId} {
+    	allow read: if (
+        // 1. default
+        (
+          resource.data.type == 'default'
+          &&
+          (
+            (resource.data.group != 'user_search_index') ||
+            (resource.data.group == 'user_search_index' && isMine(resource.data.uid))
+          )
+        )
+        ||
+        // 2. system
+        (resource.data.type == 'system' && allowedLevel(5))
+      );
+      allow create: if (
+      	creationMandatory(docId)
+        // only allow these type
+        // NOTE: add your custom to the list
+        && request.resource.data.type in ['default', 'system', /* ... */]
+        && (
+          // 1. default
+          (
+            request.resource.data.type == 'default'
+            &&
+            (
+              (request.resource.data.group == 'public_meta') ||
+              (request.resource.data.group == 'user_search_index' && isMine(request.resource.data.uid))
+            )
+          )
+          ||
+          // 2. system
+          (request.resource.data.type == 'system' && allowedLevel(5))
+        )
+      );
+      allow update: if (
+      	unchangableFields()
+        &&
+        (
+          // 1. default
+          (
+            resource.data.type == 'default'
+            &&
+            (
+              (resource.data.group == 'public_meta') ||
+              (resource.data.group == 'collection_meta' && allowedLevel(5)) ||
+              (resource.data.group == 'search_index' && allowedLevel(5)) ||
+              (resource.data.group == 'user_search_index' && isMine(resource.data.uid))
+            )
+          )
+          ||
+          // 2. system
+          (resource.data.type == 'system' && allowedLevel(5))
+        )
+      );
+      allow delete: if allowedLevel(5);
+    }
+
+  }
+}
