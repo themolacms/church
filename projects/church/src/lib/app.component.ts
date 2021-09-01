@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { map } from 'rxjs/operators';
 import {
   ErrorService,
@@ -38,6 +39,7 @@ export class AppComponent {
     private translateService: TranslocoService,
     public firebaseAuth: AngularFireAuth,
     public firebaseFirestore: AngularFirestore,
+    private firebaseStorage: AngularFireStorage,
     // normal services
     public errorService: ErrorService,
     public networkService: NetworkService,
@@ -81,6 +83,14 @@ export class AppComponent {
       })
       .setIntegrations({ cacheService: this.cacheService })
       .init(this.firebaseFirestore);
+    this.storageService
+      .setIntegrations({ cacheService: this.cacheService })
+      .setOptions({
+        dateGrouping: true,
+        listingCacheTime: 1440,
+        listingIgnoreEmptyFolder: true,
+      })
+      .init(this.firebaseStorage);
     this.appService.setOptions({ splashScreen: true }).init();
     this.authService.setOptions({driver: 'firestore'}).init(this.firebaseAuth);
     this.userService

@@ -8,6 +8,8 @@ import { NavService, SettingService, PersonaService, UserService } from '@lamnha
 })
 export class MoreComponent implements OnInit {
 
+  isDashboardAvailable = false;
+
   constructor(
     public navService: NavService,
     public settingService: SettingService,
@@ -16,6 +18,7 @@ export class MoreComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isDashboardAvailable = this.userService.allowedLevel(5);
   }
 
   goDashboard() {

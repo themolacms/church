@@ -7,11 +7,11 @@
   >
     <ng-container *ngIf="userService.publicData as profileData; else noAccount;">
       <div class="left">
-        <img src="(profileData.thumbnails?.md || profileData.thumbnails?.default).src" [alt]="profileData.title">
+        <img [src]="(profileData.thumbnails?.md || profileData.thumbnails?.default)?.src" [alt]="profileData.title">
       </div>
       <div class="right">
         <h3>{{ profileData.title }}</h3>
-        <p>{{ profileData.description }}</p>
+        <p>{{ profileData.description || 'Welcome, you are the best!' }}</p>
       </div>
     </ng-container>
     <ng-template #noAccount>
@@ -42,10 +42,10 @@
     </ul>
   </section>
 
-  <section class="dashboard">
-    <div class="title">Dashboard</div>
+  <section class="dashboard" *ngIf="isDashboardAvailable">
+    <div class="title">Manage</div>
     <div class="body">
-      <a href="#" (click)="goDashboard(); false;">Go Dashboard</a>
+      <button class="button-outline" (click)="goDashboard(); false;">Go Dashboard</button>
     </div>
   </section>
 

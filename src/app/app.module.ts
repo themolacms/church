@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   bootstrap: [AppComponent],
   imports: [
-    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
@@ -63,6 +62,7 @@ import { AppRoutingModule } from './app-routing.module';
         /* MOLA:META_TRANSLATIONS */
       }
     }),
+    AppRoutingModule,
   ],
 })
 export class AppModule {}
