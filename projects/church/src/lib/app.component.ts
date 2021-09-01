@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 import {
   ErrorService,
+  NetworkService,
   LocalstorageService,
   CacheService,
   AppService,
@@ -39,10 +40,11 @@ export class AppComponent {
     public firebaseFirestore: AngularFirestore,
     // normal services
     public errorService: ErrorService,
+    public networkService: NetworkService,
     public localstorageService: LocalstorageService,
     public cacheService: CacheService,
-    public metaService: MetaService,
     public appService: AppService,
+    public metaService: MetaService,
     public navService: NavService,
     public settingService: SettingService,
     public personaService: PersonaService,
@@ -68,6 +70,7 @@ export class AppComponent {
         service: this.config.name,
         version: this.config.version
       });
+    this.networkService.init();
     this.localstorageService.init();
     this.cacheService.init();
     this.databaseService
@@ -91,7 +94,7 @@ export class AppComponent {
         usePrioritized: true,
         onReady: () => this.appService.hideSplashScreen(),
         personaValidator: (persona, userService) =>
-          persona !== 'admin' || !!userService?.allowedLevel(5)
+          persona !== 'dashboard' || !!userService?.allowedLevel(5)
       })
       .setIntegrations({
         localstorageService: this.localstorageService,
@@ -127,11 +130,13 @@ export class AppComponent {
         about: { name: 'about', text: 'APP.ABOUT', routerLink: ['about'], icon: 'icon-about' },
         help: { name: 'help', text: 'APP.HELP', routerLink: ['help'], icon: 'icon-help' },
         more: { name: 'more', text: 'APP.MORE', routerLink: ['more'], icon: 'icon-more' },
+        dashboard: { name: 'dashboard', text: 'APP.DASHBOARD', routerLink: ['app-admin'], icon: 'icon-dashboard' },
       })
       .init({
         default: {
           menu: ['news', 'news', 'videos', 'articles', 'about'],
           tabs: ['home', 'news', 'videos', 'articles', 'more'],
+          more: ['dashboard', 'user', 'setting', 'about', 'help'],
         },
       });
     this.metaService

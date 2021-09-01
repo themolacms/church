@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonaService } from '@lamnhan/ngx-useful';
 
 @Component({
   selector: 'app-more-page',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoreComponent implements OnInit {
 
-  constructor() { }
+  constructor(public personaService: PersonaService) {}
 
   ngOnInit(): void {
   }

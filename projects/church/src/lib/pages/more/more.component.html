@@ -1,1 +1,25 @@
-<p>more works!</p>
+<ng-container *transloco="let t">
+<div class="host">
+  
+  <section class="links" *ngIf="personaService.more; let menuItems;">
+    <div class="title">More</div>
+    <ul>
+      <li
+        *ngFor="let menuItem of menuItems"
+        [class]="menuItem.name"
+      >
+        <a
+          [usefulRouterLink]="menuItem.routerLink"
+          [usefulRouterBackwardable]="true"
+        >
+          <i class="color-icon"></i>
+          <span class="truncate">
+            {{ t(menuItem.shortText || menuItem.text || '') || (menuItem.shortText || menuItem.text) }}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+</div>
+</ng-container>

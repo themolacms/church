@@ -10,6 +10,7 @@ $icons: (
   'about': ('material', 'information-outline'),
   'help': ('material', 'help-circle-outline'),
   'more': ('material', 'dots-horizontal'),
+  'dashboard': ('material', 'view-dashboard-outline'),
 );
 
 @include register_icons($icons);

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '@lamnhan/ngx-useful';
+import { AuthGuard, OnlineGuard } from '@lamnhan/ngx-useful';
 
 const routes: Routes = [
   {
@@ -8,33 +8,54 @@ const routes: Routes = [
     pathMatch: 'full',
     loadChildren: () => import('@molacms/church').then(m => m.HomePageModule),
   },
-  // terms, privacy
+  // terms & privacy
   {
     path: 'terms',
-    loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixTermsPageModule),
     data: {
       i18n: true,
-    }
+    },
+    loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixTermsPageModule),
   },
   {
     path: 'privacy',
-    loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixPrivacyPageModule),
     data: {
       i18n: true,
-    }
+    },
+    loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixPrivacyPageModule),
   },
   // auth
-  { path: 'login', loadChildren: () => import('@molacms/church').then(m => m.LoginPageModule) },
-  { path: 'register', loadChildren: () => import('@molacms/church').then(m => m.RegisterPageModule) },
+  {
+    path: 'login',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.LoginPageModule),
+  },
+  {
+    path: 'login/guard/:guardName',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.LoginPageModule),
+  },
+  {
+    path: 'register',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.RegisterPageModule),
+  },
   // user
   {
     path: 'account',
+    canLoad: [OnlineGuard, AuthGuard],
+    canActivate: [OnlineGuard, AuthGuard],
     loadChildren: () => import('@molacms/church').then(m => m.AccountPageModule),
-    canLoad: [AuthGuard],
-    canActivate: [AuthGuard],
   },
   // more
-  { path: 'more', loadChildren: () => import('@molacms/church').then(m => m.MorePageModule) },
+  {
+    path: 'more',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.MorePageModule),
+  },
   // 404
   { path: '**', loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixOopsPageModule) },
 ];
