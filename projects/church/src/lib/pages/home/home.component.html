@@ -1,9 +1,15 @@
 <ng-container *transloco="let t">
 
-  <section style="padding:3rem;">
-    <h1><nguix-icon name="emoji-smile"></nguix-icon></h1>
-    <h2>{{ t('APP.HOME') }}, {{ t('APP.ABOUT') }}!</h2>
-    <p>This is your app home page.</p>
-  </section>
+  <div class="main" *ngIf="networkService.isOnline; else offlineView;">
+    <section style="padding:3rem;">
+      <h1><nguix-icon name="emoji-smile"></nguix-icon></h1>
+      <h2>{{ t('APP.HOME') }}, {{ t('APP.ABOUT') }}!</h2>
+      <p>This is your app home page.</p>
+    </section>
+  </div>
+
+  <ng-template #offlineView>
+    <p>No network!</p>
+  </ng-template>
 
 </ng-container>

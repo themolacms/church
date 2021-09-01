@@ -23,6 +23,14 @@ const routes: Routes = [
     },
     loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixPrivacyPageModule),
   },
+  // settings
+  {
+    path: 'setting',
+    data: {
+      i18n: true,
+    },
+    loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixSettingPageModule),
+  },
   // auth
   {
     path: 'login',

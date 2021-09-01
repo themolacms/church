@@ -135,7 +135,7 @@ export class AppComponent {
         default: {
           menu: ['news', 'news', 'videos', 'articles', 'about'],
           tabs: ['home', 'news', 'videos', 'articles', 'more'],
-          more: ['user', 'setting', 'about', 'help'],
+          more: ['setting', 'about', 'help'],
         },
       });
     this.metaService

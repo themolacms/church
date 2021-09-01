@@ -1,18 +1,39 @@
 <ng-container *transloco="let t">
 <div class="host">
+
+  <a
+    class="me"
+    [usefulRouterLink]="!userService.currentUser ? ['login'] : ['member', userService.publicData?.id || '']"
+  >
+    <ng-container *ngIf="userService.publicData as profileData; else noAccount;">
+      <div class="left">
+        <img src="(profileData.thumbnails?.md || profileData.thumbnails?.default).src" [alt]="profileData.title">
+      </div>
+      <div class="right">
+        <h3>{{ profileData.title }}</h3>
+        <p>{{ profileData.description }}</p>
+      </div>
+    </ng-container>
+    <ng-template #noAccount>
+      <div class="left">
+        <img src="https://www.gravatar.com/avatar/none?d=mp" alt="User">
+      </div>
+      <div class="right">
+        <h3>Have an account!</h3>
+        <p>It is best to have an account for free :)</p>
+      </div>
+    </ng-template>
+  </a>
   
   <section class="links" *ngIf="personaService.more; let menuItems;">
     <div class="title">More</div>
     <ul class="body">
-      <li
-        *ngFor="let menuItem of menuItems"
-        [class]="menuItem.name"
-      >
+      <li *ngFor="let menuItem of menuItems" [class]="menuItem.name">
         <a
           [usefulRouterLink]="menuItem.routerLink"
           [usefulRouterBackwardable]="true"
         >
-          <i class="color-icon"></i>
+          <i class="color-icon" [style.background-image]="'url(/assets/color-icons/' + menuItem.icon  + '.svg)'"></i>
           <span class="truncate">
             {{ t(menuItem.shortText || menuItem.text || '') || (menuItem.shortText || menuItem.text) }}
           </span>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MetaService } from '@lamnhan/ngx-useful';
+import { MetaService, NetworkService } from '@lamnhan/ngx-useful';
 
 @Component({
   selector: 'app-home-page',
@@ -8,7 +8,10 @@ import { MetaService } from '@lamnhan/ngx-useful';
 })
 export class HomePage implements OnInit {
 
-  constructor(private metaService: MetaService) {}
+  constructor(
+    private metaService: MetaService,
+    public networkService: NetworkService
+  ) {}
 
   ngOnInit(): void {
   }
