@@ -5,6 +5,7 @@ import { MolaAppModule, AppComponent } from '@molacms/church';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
+import { AppDashboardModule } from './app-dashboard.module';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -16,6 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    AppDashboardModule,
+    AppRoutingModule,
     MolaAppModule.forRoot({
       name: environment.name,
       version: environment.version,
@@ -62,7 +65,6 @@ import { AppRoutingModule } from './app-routing.module';
         /* MOLA:META_TRANSLATIONS */
       }
     }),
-    AppRoutingModule,
   ],
 })
 export class AppModule {}

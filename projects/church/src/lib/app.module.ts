@@ -39,11 +39,11 @@ import {
   UserDataService,
   ProfileDataService,
 } from '@lamnhan/ngx-schemata';
+import { NguixDashboardHeaderComponentModule } from '@lamnhan/nguix-dashboard';
 
 import { AppConfig, APP_CONFIG } from './app.config';
 import { AppComponent } from './app.component';
 import { AppTranslationModule } from './app-translation.module';
-import { AppDashboardModule } from './app-dashboard.module';
 
 import { HeaderComponentModule } from './components/header/header.module';
 import { TabsComponentModule } from './components/tabs/tabs.module';
@@ -67,7 +67,7 @@ export class AppErrorHandler implements ErrorHandler {
     RouterModule,
     AngularFireAnalyticsModule,
     AppTranslationModule,
-    AppDashboardModule,
+    NguixDashboardHeaderComponentModule,
     HeaderComponentModule,
     TabsComponentModule,
     NguixNavIndicatorI18nComponentModule,

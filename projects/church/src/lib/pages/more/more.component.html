@@ -52,8 +52,8 @@
   <section class="misc">
     <div class="body">
       <ul class="links">
-        <li><a [usefulRouterLink]="['terms']">Terms</a></li>
-        <li><a [usefulRouterLink]="['privacy']">Privacy</a></li>
+        <li><a [usefulRouterLink]="['terms']" [usefulRouterBackwardable]="true">Terms</a></li>
+        <li><a [usefulRouterLink]="['privacy']" [usefulRouterBackwardable]="true">Privacy</a></li>
       </ul>
       <div class="version">Version {{ appVersion }}</div>
     </div>

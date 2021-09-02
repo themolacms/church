@@ -145,17 +145,9 @@ export class AppComponent {
       })
       .setMenuRegistry({
         home: { name: 'home', text: 'APP.HOME', routerLink: [''], icon: 'icon-home' },
-        news: { name: 'news', text: 'APP.NEWS', routerLink: ['news'], icon: 'icon-news' },
+        posts: { name: 'posts', text: 'APP.POSTS', routerLink: ['posts'], icon: 'icon-posts' },
         articles: { name: 'articles', text: 'APP.ARTICLES', routerLink: ['articles'], icon: 'icon-articles' },
         videos: { name: 'videos', text: 'APP.VIDEOS', routerLink: ['videos'], icon: 'icon-videos' },
-        user: {
-          name: 'user',
-          text: 'APP.USER',
-          icon: 'icon-user',
-          routerLink: this.userService.onUserChanged.pipe(
-            map(user => !user ? ['login'] : !user.username ? ['account'] : [user.username, 'account'])
-          ),
-        },
         setting: { name: 'setting', text: 'APP.SETTING', routerLink: ['setting'], icon: 'icon-setting' },
         about: { name: 'about', text: 'APP.ABOUT', routerLink: ['about'], icon: 'icon-about' },
         help: { name: 'help', text: 'APP.HELP', routerLink: ['help'], icon: 'icon-help' },
@@ -163,8 +155,8 @@ export class AppComponent {
       })
       .init({
         default: {
-          menu: ['news', 'news', 'videos', 'articles', 'about'],
-          tabs: ['home', 'news', 'videos', 'articles', 'more'],
+          menu: ['posts', 'videos', 'articles', 'about'],
+          tabs: ['home', 'posts', 'videos', 'articles', 'more'],
           more: ['setting', 'about', 'help'],
         },
       });

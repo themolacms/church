@@ -9,28 +9,10 @@ const routes: Routes = [
     loadChildren: () => import('@molacms/church').then(m => m.HomePageModule),
   },
   // terms & privacy
-  {
-    path: 'terms',
-    data: {
-      i18n: true,
-    },
-    loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixTermsPageModule),
-  },
-  {
-    path: 'privacy',
-    data: {
-      i18n: true,
-    },
-    loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixPrivacyPageModule),
-  },
+  { path: 'terms', loadChildren: () => import('@molacms/church').then(m => m.TermsPageModule) },
+  { path: 'privacy', loadChildren: () => import('@molacms/church').then(m => m.PrivacyPageModule) },
   // settings
-  {
-    path: 'setting',
-    data: {
-      i18n: true,
-    },
-    loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixSettingPageModule),
-  },
+  { path: 'setting', loadChildren: () => import('@molacms/church').then(m => m.SettingPageModule) },
   // auth
   {
     path: 'login',
@@ -64,6 +46,15 @@ const routes: Routes = [
     canActivate: [OnlineGuard],
     loadChildren: () => import('@molacms/church').then(m => m.MorePageModule),
   },
+  // pages
+  { path: 'about', loadChildren: () => import('@molacms/church').then(m => m.AboutPageModule) },
+  { path: 'help', loadChildren: () => import('@molacms/church').then(m => m.HelpPageModule) },
+  { path: 'posts', loadChildren: () => import('@molacms/church').then(m => m.PostsPageModule) },
+  { path: 'post', loadChildren: () => import('@molacms/church').then(m => m.PostPageModule) },
+  { path: 'articles', loadChildren: () => import('@molacms/church').then(m => m.ArticlesPageModule) },
+  { path: 'article', loadChildren: () => import('@molacms/church').then(m => m.ArticlePageModule) },
+  { path: 'videos', loadChildren: () => import('@molacms/church').then(m => m.VideosPageModule) },
+  { path: 'video', loadChildren: () => import('@molacms/church').then(m => m.VideoPageModule) },
   // 404
   { path: '**', loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixOopsPageModule) },
 ];
