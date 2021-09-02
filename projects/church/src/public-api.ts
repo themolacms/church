@@ -14,6 +14,8 @@ export * from './lib/pages/register/register.component';
 export * from './lib/pages/register/register.module';
 export * from './lib/pages/account/account.component';
 export * from './lib/pages/account/account.module';
+export * from './lib/pages/member/member.component';
+export * from './lib/pages/member/member.module';
 export * from './lib/pages/more/more.component';
 export * from './lib/pages/more/more.module';
 export * from './lib/pages/terms/terms.component';

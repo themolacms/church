@@ -110,7 +110,17 @@ export class AppComponent {
     this.appService
       .setOptions({ splashScreen: true })
       .setData(this.config as Record<string, any>)
-      .setDataLoader(this.optionDataService.record(undefined, {time: 10080 /* 1 week */}))
+      .setDataLoader(
+        this.optionDataService.record(
+          ref => ref
+            .where('status', '==', 'publish')
+            .where('type', '==', 'default'),
+          {
+            name: 'Activated app options',
+            time: 10080 /* 1 week */
+          }
+        )
+      )
       .init();
     this.authService.setOptions({driver: 'firestore'}).init(this.firebaseAuth);
     this.userService

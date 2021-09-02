@@ -39,6 +39,12 @@ const routes: Routes = [
     canActivate: [OnlineGuard, AuthGuard],
     loadChildren: () => import('@molacms/church').then(m => m.AccountPageModule),
   },
+  {
+    path: 'member/:username',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.MemberPageModule)
+  },
   // more
   {
     path: 'more',
@@ -47,14 +53,14 @@ const routes: Routes = [
     loadChildren: () => import('@molacms/church').then(m => m.MorePageModule),
   },
   // pages
-  { path: 'about', loadChildren: () => import('@molacms/church').then(m => m.AboutPageModule) },
-  { path: 'help', loadChildren: () => import('@molacms/church').then(m => m.HelpPageModule) },
   { path: 'posts', loadChildren: () => import('@molacms/church').then(m => m.PostsPageModule) },
   { path: 'post', loadChildren: () => import('@molacms/church').then(m => m.PostPageModule) },
   { path: 'articles', loadChildren: () => import('@molacms/church').then(m => m.ArticlesPageModule) },
   { path: 'article', loadChildren: () => import('@molacms/church').then(m => m.ArticlePageModule) },
   { path: 'videos', loadChildren: () => import('@molacms/church').then(m => m.VideosPageModule) },
   { path: 'video', loadChildren: () => import('@molacms/church').then(m => m.VideoPageModule) },
+  { path: 'about', loadChildren: () => import('@molacms/church').then(m => m.AboutPageModule) },
+  { path: 'help', loadChildren: () => import('@molacms/church').then(m => m.HelpPageModule) },
   // 404
   { path: '**', loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixOopsPageModule) },
 ];
