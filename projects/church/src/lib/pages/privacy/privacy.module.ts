@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NguixSpinnerComponentModule, NguixContentComponentModule } from '@lamnhan/nguix-starter';
 
 import { PrivacyRoutingModule } from './privacy-routing.module';
 import { PrivacyComponent } from './privacy.component';
@@ -11,6 +12,8 @@ import { PrivacyComponent } from './privacy.component';
   ],
   imports: [
     CommonModule,
+    NguixSpinnerComponentModule,
+    NguixContentComponentModule,
     PrivacyRoutingModule
   ]
 })

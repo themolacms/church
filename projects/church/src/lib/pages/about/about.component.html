@@ -1,1 +1,16 @@
-<p>about works!</p>
+<div class="host" *ngIf="page$ | async as page; else loading;">
+
+  <div class="main">
+    <h1 class="text-medium margin-bottom">{{ page.title }}</h1>
+    <div class="article">
+      <nguix-content [input]="page.content"></nguix-content>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <nguix-spinner></nguix-spinner>
+  </div>
+</ng-template>

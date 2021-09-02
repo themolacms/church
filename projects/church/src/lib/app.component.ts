@@ -9,6 +9,7 @@ import {
   NetworkService,
   LocalstorageService,
   CacheService,
+  FetchService,
   AppService,
   MetaService,
   NavService,
@@ -53,6 +54,7 @@ export class AppComponent {
     public networkService: NetworkService,
     public localstorageService: LocalstorageService,
     public cacheService: CacheService,
+    public fetchService: FetchService,
     public appService: AppService,
     public metaService: MetaService,
     public navService: NavService,
@@ -91,6 +93,10 @@ export class AppComponent {
     this.networkService.init();
     this.localstorageService.init();
     this.cacheService.init();
+    this.fetchService
+      .setIntegrations({ cacheService: this.cacheService })
+      .setOptions({ cacheTime: 1440 /* 24 hours */ })
+      .init();
     this.databaseService
       .setOptions({
         driver: 'firestore',
