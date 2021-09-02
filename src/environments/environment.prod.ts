@@ -1,5 +1,7 @@
 export const environment = {
   production: true,
+  name: 'Church Theme',
+  version: '0.0.0',
   firebase: {
     apiKey: "AIzaSyC189FtZen3RS79TePqiVsIF7AsagwJ5uA",
     authDomain: "lam-nhan-example-private.firebaseapp.com",

@@ -27,6 +27,18 @@ import {
   DatabaseService,
   StorageService,
 } from '@lamnhan/ngx-useful';
+import {
+  OptionDataService,
+  CategoryDataService,
+  TagDataService,
+  PageDataService,
+  PostDataService,
+  AudioDataService,
+  VideoDataService,
+  BundleDataService,
+  UserDataService,
+  ProfileDataService,
+} from '@lamnhan/ngx-schemata';
 
 import { AppConfig, APP_CONFIG } from './app.config';
 import { AppComponent } from './app.component';
@@ -116,6 +128,17 @@ export class MolaAppModule {
         UserService,
         DatabaseService,
         StorageService,
+        // ngx-schemata
+        OptionDataService,
+        CategoryDataService,
+        TagDataService,
+        PageDataService,
+        PostDataService,
+        AudioDataService,
+        VideoDataService,
+        BundleDataService,
+        UserDataService,
+        ProfileDataService,
       ],
     };
   }

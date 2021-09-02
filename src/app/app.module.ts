@@ -17,8 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     MolaAppModule.forRoot({
-      name: 'Church Theme',
-      version: '0.0.0',
+      name: environment.name,
+      version: environment.version,
       production: environment.production,
       // firebase
       firebase: environment.firebase,

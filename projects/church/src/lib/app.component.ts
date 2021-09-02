@@ -21,6 +21,14 @@ import {
   StorageService,
 } from '@lamnhan/ngx-useful';
 import {
+  OptionDataService,
+  CategoryDataService,
+  TagDataService,
+  PageDataService,
+  PostDataService,
+  AudioDataService,
+  VideoDataService,
+  BundleDataService,
   UserDataService,
   ProfileDataService,
 } from '@lamnhan/ngx-schemata';
@@ -56,8 +64,16 @@ export class AppComponent {
     public databaseService: DatabaseService,
     public storageService: StorageService,
     // data services
-    public userDataService: UserDataService,
-    public profileDataService: ProfileDataService,
+    private optionDataService: OptionDataService,
+    private categoryDataService: CategoryDataService,
+    private tagDataService: TagDataService,
+    private pageDataService: PageDataService,
+    private postDataService: PostDataService,
+    private audioDataService: AudioDataService,
+    private videoDataService: VideoDataService,
+    private bundleDataService: BundleDataService,
+    private userDataService: UserDataService,
+    private profileDataService: ProfileDataService,
   ) {
     this.initialize();
   }
@@ -87,11 +103,15 @@ export class AppComponent {
       .setIntegrations({ cacheService: this.cacheService })
       .setOptions({
         dateGrouping: true,
-        listingCacheTime: 1440,
+        listingCacheTime: 1440, // 24 hours
         listingIgnoreEmptyFolder: true,
       })
       .init(this.firebaseStorage);
-    this.appService.setOptions({ splashScreen: true }).init();
+    this.appService
+      .setOptions({ splashScreen: true })
+      .setData(this.config as Record<string, any>)
+      .setDataLoader(this.optionDataService.record(undefined, {time: 10080 /* 1 week */}))
+      .init();
     this.authService.setOptions({driver: 'firestore'}).init(this.firebaseAuth);
     this.userService
       .setOptions({ profilePublished: true })
@@ -154,6 +174,36 @@ export class AppComponent {
         this.config.metaService.defaultMetas,
         this.config.metaService.metaTranslations
       );
+    // data services
+    this.optionDataService
+      .setOptions({ advancedMode: true })
+      .init();
+    this.categoryDataService
+      .setOptions({
+        advancedMode: true,
+      })
+      .init();
+    this.tagDataService
+      .setOptions({ advancedMode: true })
+      .init();
+    this.pageDataService
+      .setOptions({ advancedMode: true })
+      .init();
+    this.postDataService
+      .setOptions({ advancedMode: true })
+      .init();
+    this.audioDataService
+      .setOptions({ advancedMode: true })
+      .init();
+    this.videoDataService
+      .setOptions({ advancedMode: true })
+      .init();
+    this.bundleDataService
+      .setOptions({ advancedMode: true })
+      .init();
+    this.profileDataService
+      .setOptions({ advancedMode: true })
+      .init();
   }
 
 }

@@ -25,7 +25,7 @@
     </ng-template>
   </a>
   
-  <section class="links" *ngIf="personaService.more; let menuItems;">
+  <section class="menu" *ngIf="personaService.more; let menuItems;">
     <div class="title">More</div>
     <ul class="body">
       <li *ngFor="let menuItem of menuItems" [class]="menuItem.name">
@@ -43,9 +43,19 @@
   </section>
 
   <section class="dashboard" *ngIf="isDashboardAvailable">
-    <div class="title">Manage</div>
+    <div class="title">Manager</div>
     <div class="body">
-      <button class="button-outline" (click)="goDashboard(); false;">Go Dashboard</button>
+      <a href="#" (click)="goDashboard(); false;">Go Dashboard</a>
+    </div>
+  </section>
+
+  <section class="misc">
+    <div class="body">
+      <ul class="links">
+        <li><a [usefulRouterLink]="['terms']">Terms</a></li>
+        <li><a [usefulRouterLink]="['privacy']">Privacy</a></li>
+      </ul>
+      <div class="version">Version {{ appVersion }}</div>
     </div>
   </section>
 
