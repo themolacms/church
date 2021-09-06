@@ -6,7 +6,7 @@ import { MetaService, SettingService } from '@lamnhan/ngx-useful';
 import { PageDataService } from '@lamnhan/ngx-schemata';
 
 @Component({
-  selector: 'app-terms',
+  selector: 'app-terms-page',
   templateUrl: './terms.component.html',
   styleUrls: ['./terms.component.scss']
 })

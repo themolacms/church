@@ -1,1 +1,202 @@
-<p>member works!</p>
+<div class="host" *ngIf="profile$ | async as profile; else loading">
+
+  <div class="main" *ngIf="profile.id; else notFound">
+
+    <section class="general">
+
+      <div class="profile" [class.compat]="mine">
+
+        <div class="cover">
+          <a href="#"
+            (click)="openCover(profile); false;"
+            [ngStyle]="{'background-image': 'url(' + ((profile.images?.default)?.src || '/assets/images/blank.png') + ')'}"
+          ></a>
+          <!-- edit button -->
+        </div>
+  
+        <div class="info">
+
+          <div class="avatar">
+            <a href="#" (click)="openAvatar(profile); false;">
+              <img [src]="(profile.thumbnails?.default)?.src || 'https://www.gravatar.com/avatar/none?d=mp'">
+            </a>
+            <!-- edit button -->
+          </div>
+
+          <div class="meta">
+            <h1>{{ profile.title }}</h1>
+            <p *ngIf="profile.description">{{ profile.description }}</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <ul class="menu" *ngIf="mine || profile.description">
+        <li [class.active]="route === 'home'">
+          <a class="muted" [usefulRouterLink]="[username, 'home']">{{ 'APP_MEMBER_PAGE.CONTENT' | transloco }}</a>
+        </li>
+        <li [class.active]="route === 'about'" *ngIf="profile.description">
+          <a class="muted" [usefulRouterLink]="[username, 'about']">{{ 'APP_MEMBER_PAGE.INFO' | transloco }}</a>
+        </li>
+        <li [class.active]="route === 'account'" *ngIf="mine">
+          <a class="muted" [usefulRouterLink]="[username, 'account']">{{ 'APP_MEMBER_PAGE.ACCOUNT' | transloco }}</a>
+        </li>
+      </ul>
+
+    </section>
+  
+    <section class="routes">
+
+      <div class="home" *ngIf="route === 'home' && homeRoute$">
+        <div *ngIf="homeRoute$ | async; let homeRoute">
+
+          <div class="card suggestions">
+
+            <div class="card-head">
+              <div class="left">
+                <a class="avatar" [usefulRouterLink]="['']">
+                  <img src="/assets/images/logo.svg">
+                </a>
+              </div>
+              <div class="middle">
+                <div class="major">{{ 'APP_MEMBER_PAGE.SUGGESTION' | transloco }}</div>
+                <div class="minor truncate">{{ 'APP_MEMBER_PAGE.SUGGEST_TEXT' | transloco }}</div>
+              </div>
+              <div class="right">
+                <button class="icon icon-more"></button>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <ul>
+                <li>
+                  <a class="muted" [usefulRouterLink]="['']">
+                    <i class="icon icon-home-color"></i>
+                    <span>{{ 'APP.HOME' | transloco }}</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="muted" [usefulRouterLink]="['store']">
+                    <i class="icon icon-store-color"></i>
+                    <span>{{ 'APP.STORE' | transloco }}</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="muted" [usefulRouterLink]="['works']">
+                    <i class="icon icon-works-color"></i>
+                    <span>{{ 'APP.WORKS' | transloco }}</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="muted" [usefulRouterLink]="['blog']">
+                    <i class="icon icon-blog-color"></i>
+                    <span>{{ 'APP.BLOG' | transloco }}</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="about" *ngIf="route === 'about' && aboutRoute$">
+        <div *ngIf="aboutRoute$ | async; let aboutRoute">
+          
+          <div class="card content">
+
+            <section class="intro" *ngIf="profile.description">
+              <div class="title">{{ 'APP_MEMBER_PAGE.INTRO' | transloco }}</div>
+              <div class="body">
+                <p>{{ profile.description }}</p>
+              </div>
+            </section>
+
+            <section class="email" *ngIf="profile.email">
+              <div class="title">{{ 'APP_MEMBER_PAGE.EMAIL' | transloco }}</div>
+              <div class="body">
+                <p><a [href]="'mailto:' + profile.email">{{ profile.email }}</a></p>
+              </div>
+            </section>
+
+            <section class="phone" *ngIf="profile.phoneNumber">
+              <div class="title">{{ 'APP_MEMBER_PAGE.PHONE' | transloco }}</div>
+              <div class="body">
+                <p><a [href]="'tel:' + profile.phoneNumber">{{ profile.phoneNumber }}</a></p>
+              </div>
+            </section>
+
+            <section class="detail" *ngIf="profile.content">
+              <div class="title">{{ 'APP_MEMBER_PAGE.DETAIL' | transloco }}</div>
+              <div class="body">
+                <div [innerHtml]="profile.content"></div>
+              </div>
+            </section>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="account" *ngIf="route === 'account' && accountRoute$ && mine">
+        <div *ngIf="accountRoute$ | async; let accountRoute">
+
+          <div class="card misc">
+            <div class="title">{{ 'COMMON.OTHER' | transloco }}</div>
+            <ul class="list">
+
+              <li class="item">
+                <a [usefulRouterLink]="['account']" [usefulRouterBackwardable]="true">
+                  <i class="icon icon-user"></i>
+                  <span>{{ 'APP_MEMBER_PAGE.MANAGE_ACCOUNT' | transloco }}</span>
+                  <i class="icon icon-right"></i>
+                </a>
+              </li>
+
+              <li class="item">
+                <a [usefulRouterLink]="['setting']" [usefulRouterBackwardable]="true">
+                  <i class="icon icon-setting"></i>
+                  <span>{{ 'APP_MEMBER_PAGE.CHANGE_SETTING' | transloco }}</span>
+                  <i class="icon icon-right"></i>
+                </a>
+              </li>
+
+              <li class="item">
+                <a [usefulRouterLink]="['help']" [usefulRouterBackwardable]="true">
+                  <i class="icon icon-help"></i>
+                  <span>{{ 'APP_MEMBER_PAGE.HELP_CENTER' | transloco }}</span>
+                  <i class="icon icon-right"></i>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+</div>
+
+<ng-template #notFound>
+  <div class="not-found">
+    <nguix-oops
+      [i18n]="true"
+      image="/assets/images/404.png"
+      [actionLink]="['/']"
+      [CONTENT]="'APP_MEMBER_PAGE.404' | transloco"
+      [ACTION_TEXT]="'APP.HOME' | transloco"
+    ></nguix-oops>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="loading">
+    <nguix-spinner></nguix-spinner>
+  </div>
+</ng-template>

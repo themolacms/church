@@ -1,0 +1,211 @@
+.host {
+  background: var(--app-color-background);
+
+  .main, .not-found {
+    max-width: 768px;
+    margin: auto;
+    min-height: calc(100vh - 64px - 64px); // 100 - header - tabs
+  }
+  
+  .main {
+    padding-bottom: 1rem;
+
+    .general {
+      background: var(--app-color-background-tint);
+      box-shadow: 0 0 1px var(--app-color-medium);
+
+      .profile {
+
+        .cover a {
+          display: block;
+          width: 100%;
+          height: calc(100vw * 9 / 16);
+          max-height: 20rem;
+          background-color: var(--app-color-medium);
+          background-size: cover;
+          background-position: center;
+        }
+
+        .info {
+          position: relative;
+
+          .avatar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: -5rem;
+            left: 0;
+
+            a {
+              display: block;
+              background-color: var(--app-color-medium);
+              overflow: hidden;
+              border-radius: 100%;
+              width: 7rem;
+              height: 7rem;
+              border: .25rem solid var(--app-color-light);
+              box-shadow: 0 0 1px var(--app-color-medium);
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+          }
+
+          .meta {
+            padding: 3rem 1rem 1rem;
+
+            h1, p {
+              text-align: center;
+              margin-bottom: 0;
+            }
+
+            h1 {
+              font-size: 1.5rem;
+            }
+
+            p {
+              color: var(--app-color-medium);
+            }
+          }
+        }
+      }
+
+      ul.menu {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: nowrap;
+        border-top: 1px solid var(--app-color-background-shade);
+
+        li {
+          flex: 1;
+
+          a {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: .5rem;
+          }
+        }
+
+        li.active {
+
+          a {
+            border-bottom: 3px solid var(--app-color-foreground);
+          }
+        }
+      }
+    }
+
+    .routes {
+
+      .card {
+        margin-top: 1rem;
+        background: var(--app-color-background-tint);
+      }
+
+      .home {
+
+        .suggestions {
+
+          .card-head {
+
+            .avatar {
+              padding: .5rem;
+            }
+          }
+
+          .card-body {
+            
+            ul {
+              padding: 0;
+              margin: 0;
+              list-style: none;
+              display: flex;
+              flex-wrap: wrap;
+              margin-left: -1rem;
+
+              li {
+                width: calc(50% - 1rem);
+                margin-left: 1rem;
+                margin-top: 1rem;
+
+                a {
+                  display: flex;
+                  flex-wrap: wrap;
+                  align-items: center;
+                  width: 100%;
+                  padding: 1rem .5rem;
+                  border: 1px solid var(--app-color-background-shade);
+                  border-radius: var(--app-size-radius);
+
+                  span {
+                    margin-left: .5rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .about {
+
+        section {
+          margin-bottom: 2rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+      
+          .title {
+            font-weight: 700;
+            margin-bottom: .5rem;
+          }
+        }
+      }
+      
+      .account {
+
+        .misc {
+          padding-left: 0;
+          padding-right: 0;
+
+          .title {
+            color: var(--app-color-medium);
+            padding: 0 1rem .5rem;
+          }
+        }
+      }
+    }
+
+  }
+
+  .not-found {
+    padding: 2rem;
+  }
+}
+
+.loading {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+
+@media screen and (min-width: 768px) {
+  
+  .host .avatar {
+    top: -7rem !important;
+
+    a {
+      width: 9rem !important;
+      height: 9rem !important;
+    }
+  }
+
+}

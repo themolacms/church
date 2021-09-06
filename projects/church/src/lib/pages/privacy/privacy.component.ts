@@ -6,7 +6,7 @@ import { MetaService, SettingService } from '@lamnhan/ngx-useful';
 import { PageDataService } from '@lamnhan/ngx-schemata';
 
 @Component({
-  selector: 'app-privacy',
+  selector: 'app-privacy-page',
   templateUrl: './privacy.component.html',
   styleUrls: ['./privacy.component.scss']
 })

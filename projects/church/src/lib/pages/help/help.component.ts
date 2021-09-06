@@ -6,7 +6,7 @@ import { MetaService, SettingService } from '@lamnhan/ngx-useful';
 import { PageDataService } from '@lamnhan/ngx-schemata';
 
 @Component({
-  selector: 'app-help',
+  selector: 'app-help-page',
   templateUrl: './help.component.html',
   styleUrls: ['./help.component.scss']
 })

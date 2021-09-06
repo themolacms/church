@@ -8,6 +8,11 @@
     padding: 1rem;
     border-radius: var(--app-size-radius);
     background: var(--app-color-background-tint);
+    
+    h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
   }
 }
 

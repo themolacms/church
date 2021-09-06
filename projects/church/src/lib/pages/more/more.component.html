@@ -4,6 +4,7 @@
   <a
     class="me"
     [usefulRouterLink]="!userService.currentUser ? ['login'] : ['member', userService.publicData?.id || '']"
+    [usefulRouterBackwardable]="true"
   >
     <ng-container *ngIf="userService.publicData as profileData; else noAccount;">
       <div class="left">

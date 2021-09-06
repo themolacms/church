@@ -6,7 +6,7 @@ import { MetaService, SettingService } from '@lamnhan/ngx-useful';
 import { PageDataService } from '@lamnhan/ngx-schemata';
 
 @Component({
-  selector: 'app-about',
+  selector: 'app-about-page',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })

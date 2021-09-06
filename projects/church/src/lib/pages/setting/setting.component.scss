@@ -1,0 +1,48 @@
+.host {
+  padding: 1rem;
+
+  .main {
+    width: 100%;
+    max-width: 992px;
+    margin: auto;
+    padding: 1rem;
+    border-radius: var(--app-size-radius);
+    background: var(--app-color-background-tint);
+  }
+
+  section.title {
+    margin-bottom: 1rem;
+  }
+
+  section {
+    margin-bottom: 2rem;
+
+    .title {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+  }
+
+  section.theme {
+
+    .body {
+      display: flex;
+      flex-wrap: nowrap;
+
+      .text {
+        flex: 1;
+      }
+    }
+  }
+
+  section.locale {
+    
+    .body {
+
+      button {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+}

@@ -1,1 +1,39 @@
-<p>setting works!</p>
+<ng-container *transloco="let t">
+<div class="host">
+
+  <div class="main">
+
+    <section class="title">
+      <h3 class="text-medium">{{ t('APP_SETTING_PAGE.TITLE') }}</h3>
+    </section>
+  
+    <section class="theme">
+      <div class="title">{{ t('APP_SETTING_PAGE.THEME_TITLE') }}</div>
+      <div class="body">
+        <label class="text" for="theming">{{ t('APP_SETTING_PAGE.THEME_DARK_MODE') }}</label>
+        <label class="form-switch">
+          <input type="checkbox"
+            id="theming"
+            [checked]="settingService.theme==='dark'"
+            (change)="toggleTheme($event)">
+          <span class="slider"></span>
+        </label>
+      </div>
+  
+    </section>
+  
+    <section class="locale">
+      <div class="title">{{ t('APP_SETTING_PAGE.LOCALE_TITLE') }}</div>
+      <div class="body">
+        <button
+          *ngFor="let localeItem of settingService.locales"
+          [class]="settingService.locale === localeItem.value ? 'button-primary' : 'button-outline-medium'"
+          (click)="settingService.changeLocale(localeItem.value)"
+        >{{ localeItem.text }}</button>
+      </div>
+    </section>
+
+  </div>
+
+</div>
+</ng-container>
