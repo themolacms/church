@@ -10,6 +10,7 @@ $icons: (
   'about': ('fluent', 'info_16_regular'),
   'help': ('fluent', 'question_circle_16_regular'),
   'more': ('fluent', 'more_horizontal_16_regular'),
+  'right': ('fluent', 'chevron_right_20_regular'),
 );
 
 @include register_icons($icons);

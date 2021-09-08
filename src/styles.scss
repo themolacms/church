@@ -24,8 +24,11 @@
 @use '@unistylus/bootstrap/form/form-label';
 @use '@unistylus/bootstrap/form/form-control';
 @use '@unistylus/bootstrap/form/form-switch';
+@use '@unistylus/bootstrap/components/icon-default';
+@use '@unistylus/bootstrap/components/icon-raw-default';
 @use '@unistylus/bootstrap/components/table-default';
-@use '@unistylus/bootstrap/components/icon';
+@use '@unistylus/bootstrap/components/card';
+@use '@unistylus/bootstrap/components/list';
 @use '@unistylus/bootstrap/components/modal-alert';
 @use '@unistylus/bootstrap/components/button-default';
 @use '@unistylus/bootstrap/components/button-clear';

@@ -1,1 +1,15 @@
-{}
+{
+  "CONTENT": "Content",
+  "INFO": "Info",
+  "ACCOUNT": "Account",
+  "SUGGESTION": "Suggestions",
+  "SUGGESTION_TEXT": "Here some thing more for you.",
+  "INTRO": "Intro",
+  "EMAIL": "Email",
+  "PHONE": "Phone",
+  "DETAIL": "Detail",
+  "OTHER": "Other",
+  "MANAGE_ACCOUNT": "Manage account",
+  "CHANGE_SETTING": "Change setting",
+  "HELP_CENTER": "Help center"
+}

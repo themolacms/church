@@ -40,6 +40,18 @@ const routes: Routes = [
     loadChildren: () => import('@molacms/church').then(m => m.AccountPageModule),
   },
   {
+    path: 'member/:username/:route/:itemId',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.MemberPageModule)
+  },
+  {
+    path: 'member/:username/:route',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.MemberPageModule)
+  },
+  {
     path: 'member/:username',
     canLoad: [OnlineGuard],
     canActivate: [OnlineGuard],
