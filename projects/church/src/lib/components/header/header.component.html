@@ -32,7 +32,7 @@
   <div class="user">
     <a
       class="avatar"
-      [usefulRouterLink]="userService.currentUser ? ['account'] : ['login']"
+      [usefulRouterLink]="userService.currentUser ? ['member', userService.username || ''] : ['login']"
       [usefulRouterBackwardable]="!userService.currentUser"
     >
       <img [src]="userService.data?.photoURL || 'https://www.gravatar.com/avatar/none?d=mp'"/>
