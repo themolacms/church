@@ -1,6 +1,7 @@
 import { NgModule, ModuleWithProviders, Injectable, ErrorHandler, LOCALE_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxsModule } from '@ngxs/store';
 import { TRANSLOCO_CONFIG } from '@ngneat/transloco';
 import {
   AngularFireAnalyticsModule,
@@ -39,6 +40,7 @@ import {
   BundleDataService,
   UserDataService,
   ProfileDataService,
+  VideoState,
 } from '@lamnhan/ngx-schemata';
 import { NguixDashboardHeaderComponentModule } from '@lamnhan/nguix-dashboard';
 
@@ -67,6 +69,9 @@ export class AppErrorHandler implements ErrorHandler {
     BrowserModule,
     RouterModule,
     AngularFireAnalyticsModule,
+    NgxsModule.forRoot([
+      VideoState,
+    ]),
     AppTranslationModule,
     NguixDashboardHeaderComponentModule,
     HeaderComponentModule,
