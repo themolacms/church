@@ -24,7 +24,8 @@ import { NguixDashboardModule, DASHBOARD_CONFIG, dashboardConfig } from '@lamnha
         plugins: [
           dashboardService => {
             dashboardService.categoryPart.contentTypes.push(
-              { text: 'Genre', value: 'genre', icon: `icon-dashboard-part-category` },
+              { text: 'Articles', value: 'article_category', icon: `icon-articles` },
+              { text: 'Videos', value: 'video_category', icon: `icon-videos` },
             );
           },
         ],

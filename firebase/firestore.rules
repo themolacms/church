@@ -201,7 +201,7 @@ service cloud.firestore {
         localizedMandatory() &&
         // only allow these types
         // NOTE: add your custom to the list
-        request.resource.data.type in ['default', /* ... */]
+        request.resource.data.type in ['default', 'article_category', 'video_category']
       );
       allow update: if (allowedLevel(5) && unchangableFields());
       allow delete: if allowedLevel(5);

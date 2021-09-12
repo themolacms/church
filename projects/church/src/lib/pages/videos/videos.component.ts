@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { QueryFn } from '@angular/fire/compat/firestore';
 import { VideoQuery } from '@lamnhan/ngx-schemata';
 
 @Component({
@@ -10,18 +9,24 @@ import { VideoQuery } from '@lamnhan/ngx-schemata';
 })
 export class VideosComponent implements OnInit {
 
-
   constructor(private store: Store) {}
 
   ngOnInit(): void {
+    this.getVideos();
+  }
+
+  getVideos() {
     this.store.dispatch(
       new VideoQuery(
         'Video list',
-        (
-          ref =>  ref
-        ) as QueryFn,
+        ref => ref
+          .where('type', '==', 'default')
+          .where('status', '==', 'publish')
+          .where('locale', '==', 'en-US')
+          .orderBy('createdAt', 'desc')
+          .limit(10),
       )
-    );
+    ).subscribe(console.log);
   }
 
 }
