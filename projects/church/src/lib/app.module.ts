@@ -69,9 +69,12 @@ export class AppErrorHandler implements ErrorHandler {
     BrowserModule,
     RouterModule,
     AngularFireAnalyticsModule,
-    NgxsModule.forRoot([
-      VideoState,
-    ]),
+    NgxsModule.forRoot(
+      [
+        VideoState,
+      ],
+      { developmentMode: false }
+    ),
     AppTranslationModule,
     NguixDashboardHeaderComponentModule,
     HeaderComponentModule,
