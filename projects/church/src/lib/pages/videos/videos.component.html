@@ -1,3 +1,6 @@
-<div class="host">
-  <!-- <nguix-videos [i18n]="true"></nguix-videos> -->
+<div class="host" *ngIf="videos$ | async as videos; else loadingHost;">
+  <nguix-videos [i18n]="true" layout="card" [videos]="videos"></nguix-videos>
 </div>
+<ng-template #loadingHost>
+  <div class="loading-host"><nguix-spinner></nguix-spinner></div>
+</ng-template>

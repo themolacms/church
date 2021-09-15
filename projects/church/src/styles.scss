@@ -1,5 +1,11 @@
 @import '@unistylus/core/scss/mixins';
 
+/**
+ * ====================================================
+ * Icons
+ * ====================================================
+ */
+
 $icons: (
   'home': ('fluent', 'home_16_regular'),
   'posts': ('fluent', 'news_16_regular'),
@@ -15,3 +21,135 @@ $icons: (
 
 @include register_icons($icons);
 
+/**
+ * ====================================================
+ * Other overrides
+ * ====================================================
+ */
+
+nguix-nav-indicator .host {
+
+  &.show {
+    bottom: calc(64px + 1rem) !important;
+  }
+  
+  .body {
+    background: var(--app-color-background-tint) !important;
+  }
+}
+
+nguix-pwa-reminder .host {
+  background: var(--app-color-background-tint) !important;
+
+  &.show {
+    bottom: 64px !important;
+  }
+}
+
+app-terms-page article,
+app-privacy-page article,
+app-about-page article,
+app-help-page article {
+
+  h1 {
+    display: none;
+  }
+  
+  h1 + p {
+
+    &, strong, a, code {
+      font-family: var(--app-font-body);
+      font-size: 1.2rem;
+      font-weight: normal;
+      color: var(--app-color-medium);
+      background: none;
+    }
+  }
+
+  h2 {
+    font-weight: 700;
+
+    &, strong, a, code, a:hover {
+      font-family: var(--app-font-head);
+      // font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--app-color-foreground);
+      background: none;
+      text-decoration: none;
+    }
+
+    p {
+      display: inline;
+    }
+  }
+  
+  h3 {
+    margin: 3rem 0 1rem;
+    font-weight: 700;
+
+    &, strong, a, code, a:hover {
+      font-size: 1.1rem;
+    }
+  
+    p {
+      display: inline;
+    }
+  }
+
+  h4 {
+    margin: 2rem 0 1rem;
+
+    &, strong, a, code, a:hover {
+      color: var(--app-color-primary);
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: none;
+    }
+
+    p {
+      display: inline;
+    }
+  }
+
+  h4 + p {
+
+    &, strong, a, code {
+      font-family: var(--app-font-body);
+      font-size: 1rem;
+      font-weight: normal;
+      color: var(--app-color-medium);
+      background: none;
+    }
+  }
+
+  code {
+
+    &, a {
+      display: inline-block;
+      padding: 0 .25rem;
+      background: var(--app-color-background-shade);
+      color: var(--app-color-foreground);
+      border-radius: 100rem;
+    }
+  }
+
+  table {
+
+    thead tr th {
+      font-weight: normal;
+      color: var(--app-color-medium);
+    }
+  }
+
+  table + p {
+    margin-top: 1rem;
+  }
+
+  table + h4 {
+    margin-top: 3rem;
+  }
+
+  hr {
+    color: var(--app-color-background-shade);
+  }
+}
