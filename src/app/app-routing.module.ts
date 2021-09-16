@@ -70,7 +70,7 @@ const routes: Routes = [
   { path: 'articles', loadChildren: () => import('@molacms/church').then(m => m.ArticlesPageModule) },
   { path: 'article', loadChildren: () => import('@molacms/church').then(m => m.ArticlePageModule) },
   { path: 'videos', loadChildren: () => import('../../projects/church/src/lib/pages/videos/videos.module').then(m => m.VideosPageModule) },
-  { path: 'video', loadChildren: () => import('../../projects/church/src/lib/pages/video/video.module').then(m => m.VideoPageModule) },
+  { path: 'video/:id', loadChildren: () => import('../../projects/church/src/lib/pages/video/video.module').then(m => m.VideoPageModule) },
   { path: 'about', loadChildren: () => import('@molacms/church').then(m => m.AboutPageModule) },
   { path: 'help', loadChildren: () => import('@molacms/church').then(m => m.HelpPageModule) },
   // 404

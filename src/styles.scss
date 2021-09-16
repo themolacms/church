@@ -24,6 +24,7 @@
 @use '@unistylus/bootstrap/form/form-switch';
 @use '@unistylus/bootstrap/components/icon-default';
 @use '@unistylus/bootstrap/components/icon-raw-default';
+@use '@unistylus/bootstrap/components/icon-light';
 @use '@unistylus/bootstrap/components/table-default';
 @use '@unistylus/bootstrap/components/card';
 @use '@unistylus/bootstrap/components/list';
@@ -36,6 +37,7 @@
 @use '@unistylus/bootstrap/components/button-secondary';
 @use '@unistylus/bootstrap/components/button-light-sm';
 @use '@unistylus/bootstrap/utilities/truncate';
+@use '@unistylus/bootstrap/utilities/embedded';
 
 :root,
 [data-theme=default],

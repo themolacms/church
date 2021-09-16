@@ -1,1 +1,21 @@
-<p>video works!</p>
+<div class="host" *ngIf="page$ | async; else loadingHost;">
+  <ng-container *ngIf="data$ | async as data; else itemSkeleton;">
+
+    <div class="main" *ngIf="data.video as video; else itemNotFound;">
+      <nguix-video [video]="video"></nguix-video>
+    </div>
+
+    <ng-template #itemNotFound>
+      <div class="not-found">Item not found!</div>
+    </ng-template>
+
+  </ng-container>
+</div>
+
+<ng-template #itemSkeleton>
+  nguix-skeleton-video ...
+</ng-template>
+
+<ng-template #loadingHost>
+  <div class="loading-host"><nguix-spinner></nguix-spinner></div>
+</ng-template>
