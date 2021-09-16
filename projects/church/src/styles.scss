@@ -23,6 +23,20 @@ $icons: (
 
 /**
  * ====================================================
+ * Unistylus overrides
+ * ====================================================
+ */
+
+.form-control {
+  background: var(--app-color-background-tint);
+}
+
+.button-outline {
+  background: var(--app-color-background-tint);
+}
+
+/**
+ * ====================================================
  * Other overrides
  * ====================================================
  */
@@ -43,6 +57,22 @@ nguix-pwa-reminder .host {
 
   &.show {
     bottom: 64px !important;
+  }
+}
+
+nguix-videos .host {
+
+  li {
+    background: var(--app-color-background-tint) !important;
+    transition: all .5s ease;
+
+    &:hover, &:focus, &:active, &.active {
+      box-shadow: 0 0 7px var(--app-color-background-shade);
+    }
+
+    .body {
+      padding: 0 1rem !important;
+    }
   }
 }
 

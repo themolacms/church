@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NguixDashboardModule, DASHBOARD_CONFIG, dashboardConfig, LinkingSchemaMeta } from '@lamnhan/nguix-dashboard';
+import { NguixDashboardModule, DASHBOARD_CONFIG, dashboardConfig } from '@lamnhan/nguix-dashboard';
 
 @NgModule({
   imports: [NguixDashboardModule],

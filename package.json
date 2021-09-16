@@ -48,6 +48,8 @@
     "@ngxs/store": "^3.7.2",
     "@unistylus/bootstrap": "0.0.7",
     "@unistylus/core": "0.0.5",
+    "ngx-infinite-scroll": "^10.0.1",
+    "ngx-pull-to-refresh": "^11.1.19",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
