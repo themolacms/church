@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: () => import('@molacms/church').then(m => m.HomePageModule),
+    loadChildren: () => import('../../projects/church/src/lib/pages/home/home.module').then(m => m.HomePageModule),
   },
   // terms & privacy
   { path: 'terms', loadChildren: () => import('@molacms/church').then(m => m.TermsPageModule) },

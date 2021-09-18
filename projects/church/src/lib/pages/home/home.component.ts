@@ -13,6 +13,5 @@ export class HomePage implements OnInit {
     public networkService: NetworkService
   ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit() {}
 }
