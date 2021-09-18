@@ -2,6 +2,7 @@
   padding: 1rem;
 
   .listing {
+    min-height: 100vh;
   }
 
   .infinite-loading {
@@ -10,6 +11,3 @@
   }
 }
 
-.loading-host {
-  padding: 1rem;
-}

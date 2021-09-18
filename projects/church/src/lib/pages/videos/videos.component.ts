@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { filter, map, tap } from 'rxjs/operators';
+import { map, tap, take } from 'rxjs/operators';
 import { Video } from '@lamnhan/schemata';
-import { VideoQueryAction, VideoStateModel } from '@lamnhan/ngx-schemata';
+import { VideoQueryAction } from '@lamnhan/ngx-schemata';
 import { SettingService } from '@lamnhan/ngx-useful';
 
 @Component({
@@ -11,40 +11,10 @@ import { SettingService } from '@lamnhan/ngx-useful';
   styleUrls: ['./videos.component.scss']
 })
 export class VideosComponent implements OnInit {
+  public page$ = this.settingService.onLocaleChanged.pipe(
+    tap(locale =>  (this.locale = locale) && this.fetchVideos()),
+  );
 
-  public page$ = this.settingService.onLocaleChanged
-    .pipe(
-      tap(locale => {
-        this.locale = locale;
-        return this.fetchVideos();
-      })
-    );
-
-  public readonly videos$ = this.store
-    .select<VideoStateModel>(state => state.schemata_video)
-    .pipe(
-      filter(videoState => !!Object.keys(videoState.queryList).length),
-      tap(videoState => {
-        const latestQueryResult = videoState.queryList[this.latestQueryId];
-        this.areThereMore = !!latestQueryResult.length;
-        this.latestItem = !this.areThereMore
-          ? this.latestItem
-          : latestQueryResult[latestQueryResult.length - 1];
-        // reset loading more status
-        this.isLoadingMore = false;
-      }),
-      map(videoState =>
-        Object.keys(videoState.queryList)
-        .filter(queryId => queryId.includes(`:${this.locale}:`)) // filter by locale
-        .reduce(
-          (result, queryId) => {
-            return result.concat(videoState.queryList[queryId]);
-          },
-          [] as Video[],
-        )
-      ),
-    );
-  
   private locale!: string;
 
   private latestQueryId!: string;
@@ -53,6 +23,7 @@ export class VideosComponent implements OnInit {
   private pageNo = 1;
   private areThereMore = true;
 
+  videos: Video[] = [];
   isLoadingMore = false;
 
   constructor(
@@ -63,9 +34,11 @@ export class VideosComponent implements OnInit {
   ngOnInit(): void {}
 
   fetchVideos() {
-    if (!this.areThereMore) return;
+    if (!this.areThereMore || this.isLoadingMore) return;
+    // show loading
     this.isLoadingMore = true;
     setTimeout(() => this.isLoadingMore = false, 3000);
+    // fetch data
     this.latestQueryId = `video:default:publish:${this.locale}:${this.pageNo++}`;
     this.store.dispatch(
       new VideoQueryAction(
@@ -79,10 +52,33 @@ export class VideosComponent implements OnInit {
           if (this.latestItem) {
             query = query.startAfter(this.latestItem.createdAt);
           }
-          return query.limit(3);
+          return query.limit(5);
         },
       )
-    );
+    )
+    .pipe(
+      take(1),
+      map(state => state.schemata_video)
+    )
+    .subscribe(videoState => {
+      const latestQueryResult = videoState.queryList[this.latestQueryId];
+      // save metas
+      this.areThereMore = !!latestQueryResult.length;
+      this.latestItem = !this.areThereMore
+        ? this.latestItem
+        : latestQueryResult[latestQueryResult.length - 1];
+      // save videos
+      this.videos = Object.keys(videoState.queryList)
+        .filter(queryId => queryId.includes(`:${this.locale}:`)) // filter by locale
+        .reduce(
+          (result, queryId) => {
+            return result.concat(videoState.queryList[queryId]);
+          },
+          [] as Video[],
+        );
+      // reset loading
+      this.isLoadingMore = false;
+    });
   }
 
 }
