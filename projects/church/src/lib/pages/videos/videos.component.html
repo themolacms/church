@@ -1,7 +1,7 @@
 <div class="host" *ngIf="page$ | async; else loadingHost;">
   <div
     class="listing"
-    *ngIf="videos$ | async as videos; else listingSkeleton;"
+    *ngIf="videos$ | async as videos"
     infiniteScroll
     [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="50"
@@ -14,10 +14,8 @@
   </div>
 </div>
 
-<ng-template #listingSkeleton>
-  <nguix-skeleton-videos></nguix-skeleton-videos>
-</ng-template>
-
 <ng-template #loadingHost>
-  <div class="loading-host"><nguix-spinner></nguix-spinner></div>
+  <div class="loading-host">
+    <nguix-skeleton-videos layout="card" [no]="5"></nguix-skeleton-videos>
+  </div>
 </ng-template>

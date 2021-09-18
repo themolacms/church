@@ -1,5 +1,5 @@
 <app-header
-  *ngIf="personaService.name!=='dashboard'; else dashBoardHeader"
+  *ngIf="personaService.name !== 'dashboard'; else dashBoardHeader;"
   [menuItems]="personaService.menu"
 ></app-header>
 <ng-template #dashBoardHeader>
@@ -15,5 +15,6 @@
   [menuItems]="personaService.tabs"
 ></app-tabs>
 
+<nguix-network-indicator [i18n]="true"></nguix-network-indicator>
 <nguix-nav-indicator [i18n]="true"></nguix-nav-indicator>
 <nguix-pwa-reminder [i18n]="true"></nguix-pwa-reminder>

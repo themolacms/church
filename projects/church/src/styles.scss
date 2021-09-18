@@ -41,14 +41,17 @@ $icons: (
  * ====================================================
  */
 
-nguix-nav-indicator .host {
+nguix-network-indicator .host {
 
   &.show {
     bottom: calc(64px + 1rem) !important;
   }
-  
-  .body {
-    background: var(--app-color-background-tint) !important;
+}
+
+nguix-nav-indicator .host {
+
+  &.show {
+    bottom: calc(64px + 1rem) !important;
   }
 }
 
@@ -60,7 +63,7 @@ nguix-pwa-reminder .host {
   }
 }
 
-nguix-videos .host {
+nguix-videos, nguix-skeleton-videos .host {
 
   li {
     background: var(--app-color-background-tint) !important;
@@ -70,13 +73,24 @@ nguix-videos .host {
       box-shadow: 0 0 7px var(--app-color-background-shade);
     }
 
+    .head {
+
+      .thumbnail {
+        border-radius: var(--app-size-radius) var(--app-size-radius) 0 0 !important;
+      }
+    }
+
     .body {
       padding: 0 1rem !important;
     }
   }
 }
 
-nguix-video .host {
+nguix-video, nguix-skeleton-video .host {
+
+  .player {
+    border-radius: var(--app-size-radius) var(--app-size-radius) 0 0 !important;
+  }
 
   .main {
     padding: 0 1rem 1rem;

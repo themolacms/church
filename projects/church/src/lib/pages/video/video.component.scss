@@ -1,6 +1,6 @@
 .host {
   padding: 1rem;
-
+  
   .main {
     overflow: hidden;
     border-radius: var(--app-size-radius);
@@ -9,7 +9,11 @@
 }
 
 .loading-host {
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
+  padding: 1rem;
+  
+  .main {
+    overflow: hidden;
+    border-radius: var(--app-size-radius);
+    background: var(--app-color-background-tint);
+  }
 }

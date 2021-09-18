@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NguixSpinnerComponentModule, NguixVideoComponentModule } from '@lamnhan/nguix-starter';
+import { NguixSpinnerComponentModule, NguixVideoComponentModule, NguixSkeletonVideoComponentModule } from '@lamnhan/nguix-starter';
 
 import { VideoRoutingModule } from './video-routing.module';
 import { VideoComponent } from './video.component';
@@ -14,6 +14,7 @@ import { VideoComponent } from './video.component';
     CommonModule,
     NguixSpinnerComponentModule,
     NguixVideoComponentModule,
+    NguixSkeletonVideoComponentModule,
     VideoRoutingModule
   ]
 })

@@ -38,6 +38,7 @@
 @use '@unistylus/bootstrap/components/button-light-sm';
 @use '@unistylus/bootstrap/utilities/truncate';
 @use '@unistylus/bootstrap/utilities/embedded';
+@use '@unistylus/bootstrap/utilities/skeleton';
 
 :root,
 [data-theme=default],
