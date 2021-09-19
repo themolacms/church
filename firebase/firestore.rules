@@ -121,7 +121,7 @@ service cloud.firestore {
     /* ==================== POST ALIKE FUNCTIONS ===================== */
     /* =============================================================== */
     
-    function postAlikeCreate(docId) {
+    function postAlikeCreate(docId, types) {
     	return (
       	// basic fields
       	creationMandatory(docId)
@@ -129,7 +129,7 @@ service cloud.firestore {
         && localizedMandatory()
         // only allow these type
         // NOTE: add your custom to the list
-        && request.resource.data.type in ['default', /* ... */]
+        && request.resource.data.type in types
       	// match user uid
       	&& isMine(request.resource.data.uid)
         // AND, author
@@ -236,35 +236,35 @@ service cloud.firestore {
     
     match /posts/{docId} {
       allow read: if true;
-      allow create: if postAlikeCreate(docId);
+      allow create: if postAlikeCreate(docId, ['default', 'article']);
       allow update: if postAlikeUpdate();
       allow delete: if postAlikeDelete();
     }
     
     match /audios/{docId} {
       allow read: if true;
-      allow create: if postAlikeCreate(docId);
+      allow create: if postAlikeCreate(docId, ['default', /* ... */]);
       allow update: if postAlikeUpdate();
       allow delete: if postAlikeDelete();
     }
     
     match /videos/{docId} {
       allow read: if true;
-      allow create: if postAlikeCreate(docId);
+      allow create: if postAlikeCreate(docId, ['default', /* ... */]);
       allow update: if postAlikeUpdate();
       allow delete: if postAlikeDelete();
     }
     
     match /bundles/{docId} {
       allow read: if true;
-      allow create: if postAlikeCreate(docId);
+      allow create: if postAlikeCreate(docId, ['default', /* ... */]);
       allow update: if postAlikeUpdate();
       allow delete: if postAlikeDelete();
     }
     
     match /products/{docId} {
       allow read: if true;
-      allow create: if postAlikeCreate(docId);
+      allow create: if postAlikeCreate(docId, ['default', /* ... */]);
       allow update: if postAlikeUpdate();
       allow delete: if postAlikeDelete();
     }
