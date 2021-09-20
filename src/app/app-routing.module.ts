@@ -43,19 +43,19 @@ const routes: Routes = [
     path: 'member/:username/:route/:itemId',
     canLoad: [OnlineGuard],
     canActivate: [OnlineGuard],
-    loadChildren: () => import('@molacms/church').then(m => m.MemberPageModule)
+    loadChildren: () => import('../../projects/church/src/lib/pages/member/member.module').then(m => m.MemberPageModule)
   },
   {
     path: 'member/:username/:route',
     canLoad: [OnlineGuard],
     canActivate: [OnlineGuard],
-    loadChildren: () => import('@molacms/church').then(m => m.MemberPageModule)
+    loadChildren: () => import('../../projects/church/src/lib/pages/member/member.module').then(m => m.MemberPageModule)
   },
   {
     path: 'member/:username',
     canLoad: [OnlineGuard],
     canActivate: [OnlineGuard],
-    loadChildren: () => import('@molacms/church').then(m => m.MemberPageModule)
+    loadChildren: () => import('../../projects/church/src/lib/pages/member/member.module').then(m => m.MemberPageModule)
   },
   // more
   {
@@ -65,10 +65,10 @@ const routes: Routes = [
     loadChildren: () => import('@molacms/church').then(m => m.MorePageModule),
   },
   // pages
-  { path: 'posts', loadChildren: () => import('@molacms/church').then(m => m.PostsPageModule) },
-  { path: 'post', loadChildren: () => import('@molacms/church').then(m => m.PostPageModule) },
-  { path: 'articles', loadChildren: () => import('@molacms/church').then(m => m.ArticlesPageModule) },
-  { path: 'article', loadChildren: () => import('@molacms/church').then(m => m.ArticlePageModule) },
+  { path: 'posts', loadChildren: () => import('../../projects/church/src/lib/pages/posts/posts.module').then(m => m.PostsPageModule) },
+  { path: 'post/:id', loadChildren: () => import('../../projects/church/src/lib/pages/post/post.module').then(m => m.PostPageModule) },
+  { path: 'articles', loadChildren: () => import('../../projects/church/src/lib/pages/articles/articles.module').then(m => m.ArticlesPageModule) },
+  { path: 'article/:id', loadChildren: () => import('../../projects/church/src/lib/pages/article/article.module').then(m => m.ArticlePageModule) },
   { path: 'videos', loadChildren: () => import('../../projects/church/src/lib/pages/videos/videos.module').then(m => m.VideosPageModule) },
   { path: 'video/:id', loadChildren: () => import('../../projects/church/src/lib/pages/video/video.module').then(m => m.VideoPageModule) },
   { path: 'about', loadChildren: () => import('@molacms/church').then(m => m.AboutPageModule) },

@@ -41,6 +41,7 @@ import {
   UserDataService,
   ProfileDataService,
   VideoState,
+  PostState,
 } from '@lamnhan/ngx-schemata';
 import { NguixDashboardHeaderComponentModule } from '@lamnhan/nguix-dashboard';
 
@@ -73,6 +74,7 @@ export class AppErrorHandler implements ErrorHandler {
     NgxsModule.forRoot(
       [
         VideoState,
+        PostState,
       ],
       { developmentMode: false }
     ),

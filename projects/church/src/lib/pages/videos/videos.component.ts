@@ -6,7 +6,7 @@ import { VideoQueryAction } from '@lamnhan/ngx-schemata';
 import { SettingService } from '@lamnhan/ngx-useful';
 
 @Component({
-  selector: 'app-videos',
+  selector: 'app-videos-page',
   templateUrl: './videos.component.html',
   styleUrls: ['./videos.component.scss']
 })
@@ -69,7 +69,7 @@ export class VideosComponent implements OnInit {
         : latestQueryResult[latestQueryResult.length - 1];
       // save videos
       this.videos = Object.keys(videoState.queryList)
-        .filter(queryId => queryId.includes(`:${this.locale}:`)) // filter by locale
+        .filter(queryId => queryId.includes(`:default:publish:${this.locale}:`)) // filter queries
         .reduce(
           (result, queryId) => {
             return result.concat(videoState.queryList[queryId]);

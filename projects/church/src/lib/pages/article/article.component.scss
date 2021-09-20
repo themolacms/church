@@ -1,0 +1,19 @@
+.host {
+  padding: 1rem;
+  
+  .main {
+    overflow: hidden;
+    border-radius: var(--app-size-radius);
+    background: var(--app-color-background-tint);
+  }
+}
+
+.loading-host {
+  padding: 1rem;
+  
+  .main {
+    overflow: hidden;
+    border-radius: var(--app-size-radius);
+    background: var(--app-color-background-tint);
+  }
+}

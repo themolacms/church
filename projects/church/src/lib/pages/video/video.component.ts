@@ -8,7 +8,7 @@ import { VideoItemAction, VideoStateModel, VideoDataService } from '@lamnhan/ngx
 import { NavService } from '@lamnhan/ngx-useful';
 
 @Component({
-  selector: 'app-video',
+  selector: 'app-video-page',
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.scss']
 })

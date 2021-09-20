@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, of, combineLatest } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Profile } from '@lamnhan/schemata';
-import { MetaService, SettingService, UserService } from '@lamnhan/ngx-useful';
+import { ModalService, MetaService, SettingService, UserService } from '@lamnhan/ngx-useful';
 import { ProfileDataService } from '@lamnhan/ngx-schemata';
 
 interface PageParams {
@@ -85,6 +85,7 @@ export class MemberComponent implements OnInit {
   constructor(
     private location: Location,
     private activatedRoute: ActivatedRoute,
+    private modalService: ModalService,
     private metaService: MetaService,
     private settingService: SettingService,
     private profileDataService: ProfileDataService,
@@ -94,11 +95,17 @@ export class MemberComponent implements OnInit {
   ngOnInit(): void {}
 
   openCover(profile: Profile) {
-    console.log('Open ...');
+    const src = (profile.images?.xl || profile.images?.default)?.src;
+    if (src) {
+      this.modalService.image(src).show();
+    }
   }
 
   openAvatar(profile: Profile) {
-    console.log('Open ...');
+    const src = (profile.thumbnails?.lg || profile.thumbnails?.default)?.src;
+    if (src) {
+      this.modalService.image(src).show();
+    }
   }
 
   private toggleRoute(profile: Profile) {

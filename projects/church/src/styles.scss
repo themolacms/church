@@ -97,110 +97,26 @@ nguix-video, nguix-skeleton-video .host {
   }
 }
 
-app-terms-page article,
-app-privacy-page article,
-app-about-page article,
-app-help-page article {
+nguix-posts, nguix-skeleton-posts .host {
 
-  h1 {
-    display: none;
-  }
-  
-  h1 + p {
+  li {
+    background: var(--app-color-background-tint) !important;
+    box-shadow: none !important;
+    transition: all .5s ease;
 
-    &, strong, a, code {
-      font-family: var(--app-font-body);
-      font-size: 1.2rem;
-      font-weight: normal;
-      color: var(--app-color-medium);
-      background: none;
+    &:hover, &:focus, &:active, &.active {
+      box-shadow: 0 0 7px var(--app-color-background-shade) !important;
     }
   }
+}
 
-  h2 {
-    font-weight: 700;
+nguix-post, nguix-skeleton-post .host {
 
-    &, strong, a, code, a:hover {
-      font-family: var(--app-font-head);
-      // font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--app-color-foreground);
-      background: none;
-      text-decoration: none;
-    }
-
-    p {
-      display: inline;
-    }
-  }
-  
-  h3 {
-    margin: 3rem 0 1rem;
-    font-weight: 700;
-
-    &, strong, a, code, a:hover {
-      font-size: 1.1rem;
-    }
-  
-    p {
-      display: inline;
-    }
+  .image {
+    border-radius: var(--app-size-radius) var(--app-size-radius) 0 0 !important;
   }
 
-  h4 {
-    margin: 2rem 0 1rem;
-
-    &, strong, a, code, a:hover {
-      color: var(--app-color-primary);
-      font-size: 1.1rem;
-      font-weight: 700;
-      background: none;
-    }
-
-    p {
-      display: inline;
-    }
-  }
-
-  h4 + p {
-
-    &, strong, a, code {
-      font-family: var(--app-font-body);
-      font-size: 1rem;
-      font-weight: normal;
-      color: var(--app-color-medium);
-      background: none;
-    }
-  }
-
-  code {
-
-    &, a {
-      display: inline-block;
-      padding: 0 .25rem;
-      background: var(--app-color-background-shade);
-      color: var(--app-color-foreground);
-      border-radius: 100rem;
-    }
-  }
-
-  table {
-
-    thead tr th {
-      font-weight: normal;
-      color: var(--app-color-medium);
-    }
-  }
-
-  table + p {
-    margin-top: 1rem;
-  }
-
-  table + h4 {
-    margin-top: 3rem;
-  }
-
-  hr {
-    color: var(--app-color-background-shade);
+  .main {
+    padding: 0 1rem 1rem;
   }
 }

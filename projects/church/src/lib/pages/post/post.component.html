@@ -1,1 +1,21 @@
-<p>post works!</p>
+<div class="host" *ngIf="page$ | async; else loadingHost;">
+  <ng-container *ngIf="data$ | async as data">
+
+    <div class="main" *ngIf="data.post as post; else itemNotFound;">
+      <nguix-post [post]="post" (contentReady)="contentAddon($event)" authorUrlSegment="member"></nguix-post>
+    </div>
+
+    <ng-template #itemNotFound>
+      <div class="not-found">Item not found!</div>
+    </ng-template>
+
+  </ng-container>
+</div>
+
+<ng-template #loadingHost>
+  <div class="loading-host">
+    <div class="main">
+      <nguix-skeleton-post></nguix-skeleton-post>
+    </div>
+  </div>
+</ng-template>
