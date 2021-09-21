@@ -1,0 +1,28 @@
+.host {
+  text-align: center;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 65px - 112px);
+
+  .image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--app-size-radius);
+  }
+
+  h3 {
+    margin-top: 1.7rem;
+  }
+
+  p {
+    color: var(--app-color-medium);
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .host {
+    min-height: calc(100vh - 65px - 72px);
+  }
+
+}

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire/compat';
+
 import { MolaAppModule } from '../../projects/church/src/lib/app.module';
 import { AppComponent } from '../../projects/church/src/lib/app.component';
 
@@ -8,8 +9,11 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppDashboardModule } from './app-dashboard.module';
 
+import { OfflineComponent } from '../../projects/church/src/lib/pages/offline/offline.component';
+
 @NgModule({
   bootstrap: [AppComponent],
+  declarations: [OfflineComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('ngsw-worker.js', {

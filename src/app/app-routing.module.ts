@@ -2,21 +2,33 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, OnlineGuard } from '@lamnhan/ngx-useful';
 
+import { OfflineComponent } from '../../projects/church/src/lib/pages/offline/offline.component';
+
 const routes: Routes = [
+  {
+    path: 'offline',
+    component: OfflineComponent,
+  },
+  // home
   {
     path: '',
     pathMatch: 'full',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
     loadChildren: () => import('../../projects/church/src/lib/pages/home/home.module').then(m => m.HomePageModule),
   },
-  // offline
-  { path: 'offline', loadChildren: () => import('../../projects/church/src/lib/pages/offline/offline.module').then(m => m.OfflinePageModule) },
   // search
-  { path: 'search', loadChildren: () => import('../../projects/church/src/lib/pages/search/search.module').then(m => m.SearchPageModule) },
+  {
+    path: 'search',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('../../projects/church/src/lib/pages/search/search.module').then(m => m.SearchPageModule),
+  },
   // settings
-  { path: 'setting', loadChildren: () => import('@molacms/church').then(m => m.SettingPageModule) },
-  // terms & privacy
-  { path: 'terms', loadChildren: () => import('@molacms/church').then(m => m.TermsPageModule) },
-  { path: 'privacy', loadChildren: () => import('@molacms/church').then(m => m.PrivacyPageModule) },
+  {
+    path: 'setting',
+    loadChildren: () => import('@molacms/church').then(m => m.SettingPageModule),
+  },
   // auth
   {
     path: 'login',
@@ -69,16 +81,71 @@ const routes: Routes = [
     loadChildren: () => import('@molacms/church').then(m => m.MorePageModule),
   },
   // pages
-  { path: 'posts', loadChildren: () => import('../../projects/church/src/lib/pages/posts/posts.module').then(m => m.PostsPageModule) },
-  { path: 'post/:id', loadChildren: () => import('../../projects/church/src/lib/pages/post/post.module').then(m => m.PostPageModule) },
-  { path: 'articles', loadChildren: () => import('../../projects/church/src/lib/pages/articles/articles.module').then(m => m.ArticlesPageModule) },
-  { path: 'article/:id', loadChildren: () => import('../../projects/church/src/lib/pages/article/article.module').then(m => m.ArticlePageModule) },
-  { path: 'videos', loadChildren: () => import('../../projects/church/src/lib/pages/videos/videos.module').then(m => m.VideosPageModule) },
-  { path: 'video/:id', loadChildren: () => import('../../projects/church/src/lib/pages/video/video.module').then(m => m.VideoPageModule) },
-  { path: 'about', loadChildren: () => import('@molacms/church').then(m => m.AboutPageModule) },
-  { path: 'help', loadChildren: () => import('@molacms/church').then(m => m.HelpPageModule) },
+  {
+    path: 'posts',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('../../projects/church/src/lib/pages/posts/posts.module').then(m => m.PostsPageModule),
+  },
+  {
+    path: 'post/:id',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('../../projects/church/src/lib/pages/post/post.module').then(m => m.PostPageModule),
+  },
+  {
+    path: 'articles',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('../../projects/church/src/lib/pages/articles/articles.module').then(m => m.ArticlesPageModule),
+  },
+  {
+    path: 'article/:id',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('../../projects/church/src/lib/pages/article/article.module').then(m => m.ArticlePageModule),
+  },
+  {
+    path: 'videos',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('../../projects/church/src/lib/pages/videos/videos.module').then(m => m.VideosPageModule),
+  },
+  {
+    path: 'video/:id',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('../../projects/church/src/lib/pages/video/video.module').then(m => m.VideoPageModule),
+  },
+  {
+    path: 'about',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.AboutPageModule),
+  },
+  {
+    path: 'help',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.HelpPageModule),
+  },
+  {
+    path: 'terms',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.TermsPageModule),
+  },
+  {
+    path: 'privacy',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('@molacms/church').then(m => m.PrivacyPageModule),
+  },
   // 404
-  { path: '**', loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixOopsPageModule) },
+  {
+    path: '**',
+    loadChildren: () => import('@lamnhan/nguix-starter').then(m => m.NguixOopsPageModule),
+  },
 ];
 
 @NgModule({
