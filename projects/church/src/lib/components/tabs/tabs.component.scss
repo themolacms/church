@@ -28,15 +28,15 @@
       justify-content: center;
       border-top: 3px solid rgba(0, 0, 0, 0);
   
-      &:hover, &:focus, &:active, &.active {
+      &:hover, &:focus  {
         background: var(--app-color-background-shade);
         text-decoration: none;
       }
-  
+
       &.active {
         border-top-color: var(--app-color-foreground);
       }
-  
+    
       .icon {
         width: 1.5rem;
         height: 1.5rem;
@@ -54,45 +54,86 @@
 
   li.home a {
 
-    &:hover, &:focus, &:active, &.active {
-      background: rgba(var(--app-color-primary-rgb), .2);
+    &:hover, &:focus, &.active {
+      background: rgba(var(--app-color-primary-rgb), .1);
     }
 
     &.active {
       border-top-color: var(--app-color-primary);
+
+      .icon {
+        filter: none;
+        background: url('/assets/color-icons/icon-home.svg');
+        background-size: cover;
+      }
     }
   }
 
   li.posts a {
 
-    &:hover, &:focus, &:active, &.active {
-      background: rgba(var(--app-color-secondary-rgb), .2);
+    &:hover, &:focus, &.active {
+      background: rgba(var(--app-color-secondary-rgb), .1);
     }
 
     &.active {
       border-top-color: var(--app-color-secondary);
+
+      .icon {
+        filter: none;
+        background: url('/assets/color-icons/icon-posts.svg');
+        background-size: cover;
+      }
     }
   }
 
   li.videos a {
 
-    &:hover, &:focus, &:active, &.active {
-      background: rgba(var(--app-color-danger-rgb), .2);
+    &:hover, &:focus, &.active {
+      background: rgba(var(--app-color-danger-rgb), .1);
     }
 
     &.active {
       border-top-color: var(--app-color-danger);
+
+      .icon {
+        filter: none;
+        background: url('/assets/color-icons/icon-videos.svg');
+        background-size: cover;
+      }
     }
   }
 
   li.articles a {
 
-    &:hover, &:focus, &:active, &.active {
-      background: rgba(var(--app-color-tertiary-rgb), .2);
+    &:hover, &:focus, &.active {
+      background: rgba(var(--app-color-tertiary-rgb), .1);
     }
 
     &.active {
       border-top-color: var(--app-color-tertiary);
+
+      .icon {
+        filter: none;
+        background: url('/assets/color-icons/icon-articles.svg');
+        background-size: cover;
+      }
+    }
+  }
+
+  li.more a {
+
+    &:hover, &:focus, &.active {
+      background: rgba(var(--app-color-foreground-rgb), .1);
+    }
+
+    &.active {
+      border-top-color: var(--app-color-medium);
+
+      .icon {
+        filter: none;
+        background: url('/assets/color-icons/icon-more.svg');
+        background-size: cover;
+      }
     }
   }
 
