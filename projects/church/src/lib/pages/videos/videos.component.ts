@@ -39,7 +39,8 @@ export class VideosComponent implements OnInit {
     this.isLoadingMore = true;
     setTimeout(() => this.isLoadingMore = false, 3000);
     // fetch data
-    this.latestQueryId = `video:default:publish:${this.locale}:${this.pageNo++}`;
+    const queryPrefix = `video:default:publish:${this.locale}`;
+    this.latestQueryId = `${queryPrefix}:${this.pageNo++}`;
     this.store.dispatch(
       new VideoQueryAction(
         this.latestQueryId,
@@ -52,7 +53,7 @@ export class VideosComponent implements OnInit {
           if (this.latestItem) {
             query = query.startAfter(this.latestItem.createdAt);
           }
-          return query.limit(5);
+          return query.limit(12);
         },
       )
     )
@@ -69,7 +70,7 @@ export class VideosComponent implements OnInit {
         : latestQueryResult[latestQueryResult.length - 1];
       // save videos
       this.videos = Object.keys(videoState.queryList)
-        .filter(queryId => queryId.includes(`:default:publish:${this.locale}:`)) // filter queries
+        .filter(queryId => queryId.includes(queryPrefix)) // filter queries
         .reduce(
           (result, queryId) => {
             return result.concat(videoState.queryList[queryId]);

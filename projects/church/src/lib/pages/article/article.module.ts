@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NguixSpinnerComponentModule, NguixPostComponentModule, NguixSkeletonPostComponentModule } from '@lamnhan/nguix-starter';
+import { NguixPostComponentModule, NguixSkeletonPostComponentModule } from '@lamnhan/nguix-starter';
 
 import { ArticleRoutingModule } from './article-routing.module';
 import { ArticleComponent } from './article.component';
@@ -12,7 +12,6 @@ import { ArticleComponent } from './article.component';
   ],
   imports: [
     CommonModule,
-    NguixSpinnerComponentModule,
     NguixPostComponentModule,
     NguixSkeletonPostComponentModule,
     ArticleRoutingModule

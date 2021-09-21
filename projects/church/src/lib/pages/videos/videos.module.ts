@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import {
   NguixSpinnerComponentModule,
   NguixVideosI18nComponentModule,
@@ -18,7 +17,6 @@ import { VideosComponent } from './videos.component';
   imports: [
     CommonModule,
     InfiniteScrollModule,
-    VirtualScrollerModule,
     NguixSpinnerComponentModule,
     NguixVideosI18nComponentModule,
     NguixSkeletonVideosComponentModule,

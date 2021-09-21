@@ -63,7 +63,7 @@
     }
   }
 
-  li.news a {
+  li.posts a {
 
     &:hover, &:focus, &:active, &.active {
       background: rgba(var(--app-color-secondary-rgb), .2);

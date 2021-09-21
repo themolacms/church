@@ -1,11 +1,14 @@
 .host {
-  padding: 1rem;
+  padding: 1rem 1rem 0;
+  max-width: 992px;
+  margin: auto;
 
   .listing {
     min-height: 100vh;
   }
 
   .infinite-loading {
+    padding-bottom: 1rem;
     display: flex;
     justify-content: center;
   }

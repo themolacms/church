@@ -40,7 +40,8 @@ export class PostsComponent implements OnInit {
     this.isLoadingMore = true;
     setTimeout(() => this.isLoadingMore = false, 3000);
     // fetch data
-    this.latestQueryId = `post:default:publish:${this.locale}:${this.pageNo++}`;
+    const queryPrefix = `post:default:publish:${this.locale}`;
+    this.latestQueryId = `${queryPrefix}:${this.pageNo++}`;
     this.store.dispatch(
       new PostQueryAction(
         this.latestQueryId,
@@ -53,7 +54,7 @@ export class PostsComponent implements OnInit {
           if (this.latestItem) {
             query = query.startAfter(this.latestItem.createdAt);
           }
-          return query.limit(2);
+          return query.limit(12);
         },
       )
     )
@@ -70,7 +71,7 @@ export class PostsComponent implements OnInit {
         : latestQueryResult[latestQueryResult.length - 1];
       // save posts
       this.posts = Object.keys(postState.queryList)
-        .filter(queryId => queryId.includes(`:default:publish:${this.locale}:`)) // filter queries
+        .filter(queryId => queryId.includes(queryPrefix)) // filter queries
         .reduce(
           (result, queryId) => {
             return result.concat(postState.queryList[queryId]);

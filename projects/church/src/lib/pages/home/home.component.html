@@ -1,15 +1,72 @@
 <ng-container *transloco="let t">
+<div class="host" *ngIf="page$ | async">
 
-  <div class="main" *ngIf="networkService.isOnline; else offlineView;">
-    <section style="padding:3rem;">
-      <h1><nguix-icon name="emoji-smile"></nguix-icon></h1>
-      <h2>{{ t('APP.HOME') }}, {{ t('APP.ABOUT') }}!</h2>
-      <p>This is your app home page.</p>
-    </section>
+  <div class="slideshow">
+
   </div>
 
-  <ng-template #offlineView>
-    <p>No network!</p>
-  </ng-template>
+  <div class="major">
 
+    <main>
+
+      <section class="posts">
+        <div class="title">News</div>
+        <div class="body">
+          <div *ngIf="posts.length; else listLoading;">
+            <nguix-posts [i18n]="true" layout="card" [posts]="posts" authorUrlSegment="member"></nguix-posts>
+          </div>
+          <ng-template #listLoading>
+            <div class="list-loading">
+              <nguix-skeleton-posts layout="card" [no]="5"></nguix-skeleton-posts>
+            </div>
+          </ng-template>
+        </div>
+        <div class="foot">
+          <a class="button-outline-medium" [usefulRouterLink]="['posts']">View all news</a>
+        </div>
+      </section>
+
+      <section class="videos">
+        <div class="title">Videos</div>
+        <div class="body">
+          <div *ngIf="videos.length; else listLoading;">
+            <nguix-videos [i18n]="true" layout="card" [videos]="videos"></nguix-videos>
+          </div>
+          <ng-template #listLoading>
+            <div class="list-loading">
+              <nguix-skeleton-videos layout="card" [no]="5"></nguix-skeleton-videos>
+            </div>
+          </ng-template>
+        </div>
+        <div class="foot">
+          <a class="button-outline-medium" [usefulRouterLink]="['videos']">View all videos</a>
+        </div>
+      </section>
+
+      <section class="articles">
+        <div class="title">Articles</div>
+        <div class="body">
+          <div *ngIf="articles.length; else listLoading;">
+            <nguix-posts [i18n]="true" layout="card" [posts]="articles" authorUrlSegment="member"></nguix-posts>
+          </div>
+          <ng-template #listLoading>
+            <div class="list-loading">
+              <nguix-skeleton-posts layout="card" [no]="5"></nguix-skeleton-posts>
+            </div>
+          </ng-template>
+        </div>
+        <div class="foot">
+          <a class="button-outline-medium" [usefulRouterLink]="['articles']">View all articles</a>
+        </div>
+      </section>
+    
+    </main>
+
+    <!-- <aside>
+
+    </aside> -->
+
+  </div>
+
+</div>
 </ng-container>
