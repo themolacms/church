@@ -8,11 +8,15 @@ const routes: Routes = [
     pathMatch: 'full',
     loadChildren: () => import('../../projects/church/src/lib/pages/home/home.module').then(m => m.HomePageModule),
   },
+  // offline
+  { path: 'offline', loadChildren: () => import('../../projects/church/src/lib/pages/offline/offline.module').then(m => m.OfflinePageModule) },
+  // search
+  { path: 'search', loadChildren: () => import('../../projects/church/src/lib/pages/search/search.module').then(m => m.SearchPageModule) },
+  // settings
+  { path: 'setting', loadChildren: () => import('@molacms/church').then(m => m.SettingPageModule) },
   // terms & privacy
   { path: 'terms', loadChildren: () => import('@molacms/church').then(m => m.TermsPageModule) },
   { path: 'privacy', loadChildren: () => import('@molacms/church').then(m => m.PrivacyPageModule) },
-  // settings
-  { path: 'setting', loadChildren: () => import('@molacms/church').then(m => m.SettingPageModule) },
   // auth
   {
     path: 'login',

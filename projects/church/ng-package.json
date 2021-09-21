@@ -9,7 +9,8 @@
       "@lamnhan/ngx-schemata": "ng.lamnhan.schemata",
       "@lamnhan/nguix-starter": "ng.lamnhan.nguixStarter",
       "@lamnhan/nguix-dashboard": "ng.lamnhan.nguixDashboard",
-      "@ngxs/store": "ngxsStore"
+      "@ngxs/store": "ngxsStore",
+      "ngx-infinite-scroll": "ngxInfiniteScroll"
     }
   }
 }

@@ -8,6 +8,10 @@ export * from './lib/app.component';
 
 export * from './lib/pages/home/home.component';
 export * from './lib/pages/home/home.module';
+export * from './lib/pages/offline/offline.component';
+export * from './lib/pages/offline/offline.module';
+export * from './lib/pages/search/search.component';
+export * from './lib/pages/search/search.module';
 export * from './lib/pages/login/login.component';
 export * from './lib/pages/login/login.module';
 export * from './lib/pages/register/register.component';
