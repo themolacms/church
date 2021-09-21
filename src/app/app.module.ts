@@ -9,7 +9,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppDashboardModule } from './app-dashboard.module';
 
-import { OfflineComponent } from '../../projects/church/src/lib/pages/offline/offline.component';
+import { OfflineComponent } from './offline/offline.component';
 
 @NgModule({
   bootstrap: [AppComponent],

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, OnlineGuard } from '@lamnhan/ngx-useful';
 
-import { OfflineComponent } from '../../projects/church/src/lib/pages/offline/offline.component';
+import { OfflineComponent } from './offline/offline.component';
 
 const routes: Routes = [
   {
