@@ -2,7 +2,13 @@
 <div class="host" *ngIf="page$ | async">
 
   <div class="slideshow">
-
+    <div class="text">
+      <h1>Church Theme</h1>
+      <p>Welcome to the Mola Church Theme</p>
+    </div>
+    <div class="actions">
+      <a class="button-danger" [usefulRouterLink]="['about']" [usefulRouterBackwardable]="true">About us</a>
+    </div>
   </div>
 
   <div class="major">

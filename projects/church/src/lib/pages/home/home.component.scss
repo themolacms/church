@@ -1,7 +1,51 @@
 .host {
 
   .slideshow {
-    
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    max-width: 100%;
+    height: calc(100vh - 65px - 65px); // height - header - tabs
+    background: url('/assets/images/cover.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s ease;
+
+    .text {
+      display: flex;
+      flex-flow: row;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      h1, p {
+        text-align: center;
+        color: var(--app-color-dark);
+      }
+
+      h1 {
+        width: 100%;
+        font-size: 3rem;
+        font-weight: 700;
+      }
+
+      p {
+        font-size: 1.35rem;
+        margin-top: .5rem;
+      }
+    }
+
+    .actions {
+      margin-top: 1rem;
+
+      a {
+        text-align: center;
+        margin-right: 1rem;
+        width: 7rem;
+      }
+    }
   }
 
   .major {
@@ -64,4 +108,61 @@
     }
   }
 
+}
+
+@media only screen and (min-width: 480px) {
+
+  .host {
+
+    .slideshow .text {
+
+      h1 {
+        font-size: 3.5rem;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 576px) {}
+
+@media only screen and (min-width: 768px) {
+
+  .host {
+
+    .slideshow {
+      height: calc(100vw * 9 / 16);
+      background-size: cover;
+      
+      .text {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+
+  .host {
+
+    .slideshow {
+      height: calc((100vw - 250px) * 9 / 16);
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+
+  .host {
+
+    .slideshow .text {
+
+      h1 {
+        font-size: 4.7rem;
+      }
+
+      p {
+        font-size: 1.7rem;
+      }
+    }
+  }
 }
