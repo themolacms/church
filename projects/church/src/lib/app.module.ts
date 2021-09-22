@@ -30,6 +30,7 @@ import {
   StorageService,
 } from '@lamnhan/ngx-useful';
 import {
+  // data services
   OptionDataService,
   CategoryDataService,
   TagDataService,
@@ -38,10 +39,14 @@ import {
   AudioDataService,
   VideoDataService,
   BundleDataService,
-  UserDataService,
   ProfileDataService,
-  VideoState,
+  UserDataService,
+  // state
+  CategoryState,
+  TagState,
+  PageState,
   PostState,
+  VideoState,
 } from '@lamnhan/ngx-schemata';
 import { NguixDashboardHeaderComponentModule } from '@lamnhan/nguix-dashboard';
 
@@ -73,8 +78,11 @@ export class AppErrorHandler implements ErrorHandler {
     AngularFireAnalyticsModule,
     NgxsModule.forRoot(
       [
-        VideoState,
+        CategoryState,
+        TagState,
+        PageState,
         PostState,
+        VideoState,
       ],
       { developmentMode: false }
     ),
@@ -151,8 +159,8 @@ export class MolaAppModule {
         AudioDataService,
         VideoDataService,
         BundleDataService,
-        UserDataService,
         ProfileDataService,
+        UserDataService,
       ],
     };
   }

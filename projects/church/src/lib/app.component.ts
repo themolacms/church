@@ -3,7 +3,6 @@ import { TranslocoService } from '@ngneat/transloco';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { map } from 'rxjs/operators';
 import {
   ErrorService,
   NetworkService,
@@ -30,8 +29,8 @@ import {
   AudioDataService,
   VideoDataService,
   BundleDataService,
-  UserDataService,
   ProfileDataService,
+  UserDataService,
 } from '@lamnhan/ngx-schemata';
 
 import { APP_CONFIG, AppConfig } from './app.config';
@@ -74,8 +73,8 @@ export class AppComponent {
     private audioDataService: AudioDataService,
     private videoDataService: VideoDataService,
     private bundleDataService: BundleDataService,
-    private userDataService: UserDataService,
     private profileDataService: ProfileDataService,
+    private userDataService: UserDataService,
   ) {
     this.initialize();
   }

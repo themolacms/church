@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TagDataService, PostDataService, VideoDataService } from '@lamnhan/ngx-schemata';
 
 @Component({
   selector: 'app-search-page',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private tagDataService: TagDataService,
+    private postDataService: PostDataService,
+    private videoDataService: VideoDataService,
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }
