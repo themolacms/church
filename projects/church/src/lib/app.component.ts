@@ -186,9 +186,7 @@ export class AppComponent {
       .setOptions({ advancedMode: true })
       .init();
     this.categoryDataService
-      .setOptions({
-        advancedMode: true,
-      })
+      .setOptions({ advancedMode: true })
       .init();
     this.tagDataService
       .setOptions({ advancedMode: true })

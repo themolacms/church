@@ -210,11 +210,10 @@ service cloud.firestore {
     match /tags/{docId} {
       allow read: if true;
       allow create: if (
-      	allowedLevel(5) &&
         creationMandatory(docId) &&
         // only allow these types
         // NOTE: add your custom to the list
-        request.resource.data.type in ['default', /* ... */]
+        request.resource.data.type in ['default', 'search', /* ... */]
       );
       allow update: if (allowedLevel(5) && unchangableFields()); 
       allow delete: if allowedLevel(5);

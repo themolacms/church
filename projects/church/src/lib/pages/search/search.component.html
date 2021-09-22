@@ -1,33 +1,68 @@
-<div class="host">
+<div class="host" *ngIf="page$ | async; else loading;">
 
   <div class="form">
     <div class="input">
-      <input class="form-control" type="search" placeholder="Search for news, articles, videos, ...">
+      <input
+        class="form-control"
+        type="search"
+        [(ngModel)]="query"
+        placeholder="Search for news, articles, videos, ..."
+      >
+      <button class="button-primary" (click)="search()">
+        <i class="icon-light icon-search"></i>
+      </button>
     </div>
-    <div class="top-queries">
-      <a href="#">keyword 1</a>
-      <a href="#">kw 2</a>
-      <a href="#">lorem</a>
-      <a href="#">ipsum</a>
-    </div>
+    <ul class="top-queries" *ngIf="topQueries.length">
+      <li *ngFor="let queryItem of topQueries"><a href="#">{{ queryItem.title }}</a></li>
+    </ul>
   </div>
 
   <div class="result">
 
-    <section class="posts">
-      <div class="title">News & articles</div>
+    <section class="posts" *ngIf="postResult">
+      <div class="title">
+        <div class="text">News & articles</div>
+        <div class="count"><span class="badge-secondary">{{ postCount }}</span></div>
+      </div>
       <div class="body">
-
+        <div *ngIf="posts.length; else noPosts;">
+          <ul>
+            <li *ngFor="let item of posts">{{ item.title }}</li>
+          </ul>
+          <div class="more" *ngIf="postResult && postPage < postTotalPages">
+            <button class="button-outline-medium">See more</button>
+          </div>
+        </div>
+        <ng-template #noPosts>
+          <p>No news or articles found.</p>
+        </ng-template>
       </div>
     </section>
 
-    <section class="videos">
-      <div class="title">Videos</div>
+    <section class="videos" *ngIf="videoResult">
+      <div class="title">
+        <div class="text">Videos</div>
+        <div class="count"><span class="badge-danger">{{ videoCount }}</span></div>
+      </div>
       <div class="body">
-        
+        <div *ngIf="videos.length; else noVideos;">
+          <ul>
+            <li *ngFor="let item of videos">{{ item.title }}</li>
+          </ul>
+          <div class="more" *ngIf="videoResult && videoPage < videoTotalPages">
+            <button class="button-outline-medium">See more</button>
+          </div>
+        </div>
+        <ng-template #noVideos>
+          <p>No videos found.</p>
+        </ng-template>
       </div>
     </section>
 
   </div>
 
 </div>
+
+<ng-template #loading>
+  <div class="loading"><nguix-spinner></nguix-spinner></div>
+</ng-template>
