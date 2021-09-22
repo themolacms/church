@@ -215,7 +215,13 @@ service cloud.firestore {
         // NOTE: add your custom to the list
         request.resource.data.type in ['default', 'search', /* ... */]
       );
-      allow update: if (allowedLevel(5) && unchangableFields()); 
+      allow update: if (
+        unchangableFields() &&
+        (
+          allowedLevel(5) ||
+          isRequestContainsOnly(['count'])
+        )
+      ); 
       allow delete: if allowedLevel(5);
     }
 
@@ -387,8 +393,20 @@ service cloud.firestore {
             &&
             (
               (resource.data.group == 'public_meta') ||
-              (resource.data.group == 'collection_meta' && allowedLevel(5)) ||
-              (resource.data.group == 'search_index' && allowedLevel(5)) ||
+              (
+                resource.data.group == 'collection_meta' &&
+                (
+                  allowedLevel(5) ||
+                  resource.data.master == 'tags'
+                )
+              ) ||
+              (
+                resource.data.group == 'search_index' &&
+                (
+                  allowedLevel(5) ||
+                  resource.data.master == 'tags'
+                )
+              ) ||
               (resource.data.group == 'user_search_index' && isMine(resource.data.uid))
             )
           )

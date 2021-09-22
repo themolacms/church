@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest } from 'rxjs';
+import { combineLatest, of } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 import { Post, Video, Tag } from '@lamnhan/schemata';
 import { TagDataService, PostDataService, VideoDataService } from '@lamnhan/ngx-schemata';
@@ -20,24 +20,31 @@ export class SearchComponent implements OnInit {
     this.videoDataService.setupSearching(),
   ])
   .pipe(
-    tap(([queryParams]) => (this.query = queryParams.q || '')),
+    tap(([queryParams]) => {
+      if (!queryParams.q) return;
+      this.selectQuery(queryParams.q);
+    }),
   );
 
   private readonly viewSize = 12;
   topQueries: Tag[] = [];
   query = '';
 
+  isPostLoading = false;
+  isPostLoadingMore = false;
   postResult?: DatabaseDataSearchResult<Post>;
   posts: Post[] = [];
   postCount = 0;
-  postPage = 1;
   postTotalPages = 0;
+  postPage = 1;
   
+  isVideoLoading = false;
+  isVideoLoadingMore = false;
   videoResult?: DatabaseDataSearchResult<Video>;
   videos: Video[] = [];
   videoCount = 0;
-  videoPage = 1;
   videoTotalPages = 0;
+  videoPage = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,7 +59,8 @@ export class SearchComponent implements OnInit {
     this.tagDataService.list(
       ref => ref
         .where('status', '==', 'publish')
-        .where('type', '==', 'default') // TODO: replace with 'search'
+        .where('type', '==', 'search')
+        .orderBy('createdAt', 'desc')
         .orderBy('count', 'desc')
         .limit(5),
       { name: 'tag:default:publish:top-5' }
@@ -63,16 +71,24 @@ export class SearchComponent implements OnInit {
   search() {
     if (!this.query) return;
     // fetch posts
+    this.isPostLoading = true;
     this.postResult = this.postDataService.search(this.query, this.viewSize);
     if (this.postResult) {
-      this.postResult.list().subscribe(posts => this.posts = posts);
+      this.postResult.list().subscribe(posts => {
+        this.posts = posts;
+        this.isPostLoading = false;
+      });
       this.postCount = this.postResult.count();
       this.postTotalPages = Math.ceil(this.postCount / this.viewSize);
     }
     // fetch videos
+    this.isVideoLoading = true;
     this.videoResult = this.videoDataService.search(this.query, this.viewSize);
     if (this.videoResult) {
-      this.videoResult.list().subscribe(videos => this.videos = videos);
+      this.videoResult.list().subscribe(videos => {
+        this.videos = videos;
+        this.isVideoLoading = false;
+      });
       this.videoCount = this.videoResult.count();
       this.videoTotalPages = Math.ceil(this.videoCount / this.viewSize);
     }
@@ -82,12 +98,25 @@ export class SearchComponent implements OnInit {
 
   loadMorePosts() {
     if (!this.postResult)  return;
-    this.postResult.list(++this.postPage).subscribe(posts => this.posts = this.posts.concat(posts));
+    this.isPostLoadingMore = true;
+    this.postResult.list(++this.postPage).subscribe(posts => {
+      this.posts = this.posts.concat(posts);
+      this.isPostLoadingMore = false;
+    });
   }
 
   loadMoreVideos() {
     if (!this.videoResult)  return;
-    this.videoResult.list(++this.videoPage).subscribe(videos => this.videos = this.videos.concat(videos));
+    this.isVideoLoadingMore = true;
+    this.videoResult.list(++this.videoPage).subscribe(videos => {
+      this.videos = this.videos.concat(videos);
+      this.isVideoLoadingMore = false;
+    });
+  }
+
+  selectQuery(query: string) {
+    this.query = query;
+    this.search();
   }
 
   private saveQuery(query: string) {
@@ -105,11 +134,13 @@ export class SearchComponent implements OnInit {
       updatedAt: createdAt,
       count: 1,
     };
-    this.tagDataService.exists(id).pipe(
-      switchMap(isExists =>
-        isExists
-          ? this.tagDataService.increment(id, { count: 1 })
-          : this.tagDataService.create(id, newTag)
+    this.tagDataService.get(id).pipe(
+      switchMap(item =>
+        !item
+          ? this.tagDataService.create(id, newTag)
+          : item.type === 'search'
+            ? this.tagDataService.increment(id, { count: 1 })
+            : of(false)
       )
     )
     .subscribe();

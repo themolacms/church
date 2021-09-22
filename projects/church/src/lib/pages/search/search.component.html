@@ -5,15 +5,16 @@
       <input
         class="form-control"
         type="search"
-        [(ngModel)]="query"
         placeholder="Search for news, articles, videos, ..."
+        [(ngModel)]="query"
+        (keyup.enter)="search()"
       >
       <button class="button-primary" (click)="search()">
         <i class="icon-light icon-search"></i>
       </button>
     </div>
     <ul class="top-queries" *ngIf="topQueries.length">
-      <li *ngFor="let queryItem of topQueries"><a href="#">{{ queryItem.title }}</a></li>
+      <li *ngFor="let queryItem of topQueries"><a href="#" (click)="selectQuery(queryItem.title);false;">{{ queryItem.title }}</a></li>
     </ul>
   </div>
 
@@ -25,16 +26,24 @@
         <div class="count"><span class="badge-secondary">{{ postCount }}</span></div>
       </div>
       <div class="body">
-        <div *ngIf="posts.length; else noPosts;">
-          <ul>
-            <li *ngFor="let item of posts">{{ item.title }}</li>
-          </ul>
-          <div class="more" *ngIf="postResult && postPage < postTotalPages">
-            <button class="button-outline-medium">See more</button>
+        <ng-container *ngIf="!isPostLoading; else postLoading;">
+          <div *ngIf="posts.length; else noPosts;">
+            <div class="items">
+              <nguix-posts [i18n]="true" layout="card" [posts]="posts" authorUrlSegment="member"></nguix-posts>
+            </div>
+            <div class="loading-more" *ngIf="isPostLoadingMore">
+              <nguix-spinner></nguix-spinner>
+            </div>
+            <div class="more" *ngIf="postResult && postPage < postTotalPages">
+              <button class="button-outline-medium">See more</button>
+            </div>
           </div>
-        </div>
-        <ng-template #noPosts>
-          <p>No news or articles found.</p>
+          <ng-template #noPosts>
+            <div class="no-items">No news or articles found.</div>
+          </ng-template>
+        </ng-container>
+        <ng-template #postLoading>
+          <nguix-skeleton-posts layout="card" [no]="3"></nguix-skeleton-posts>
         </ng-template>
       </div>
     </section>
@@ -45,16 +54,24 @@
         <div class="count"><span class="badge-danger">{{ videoCount }}</span></div>
       </div>
       <div class="body">
-        <div *ngIf="videos.length; else noVideos;">
-          <ul>
-            <li *ngFor="let item of videos">{{ item.title }}</li>
-          </ul>
-          <div class="more" *ngIf="videoResult && videoPage < videoTotalPages">
-            <button class="button-outline-medium">See more</button>
+        <ng-container *ngIf="!isVideoLoading; else videoLoading;">
+          <div *ngIf="videos.length; else noVideos;">
+            <div class="items">
+              <nguix-videos [i18n]="true" layout="card" [videos]="videos"></nguix-videos>
+            </div>
+            <div class="loading-more" *ngIf="isPostLoadingMore">
+              <nguix-spinner></nguix-spinner>
+            </div>
+            <div class="more" *ngIf="videoResult && videoPage < videoTotalPages">
+              <button class="button-outline-medium">See more</button>
+            </div>
           </div>
-        </div>
-        <ng-template #noVideos>
-          <p>No videos found.</p>
+          <ng-template #noVideos>
+            <div class="no-items">No videos found.</div>
+          </ng-template>
+        </ng-container>
+        <ng-template #videoLoading>
+          <nguix-skeleton-videos layout="card" [no]="3"></nguix-skeleton-videos>
         </ng-template>
       </div>
     </section>

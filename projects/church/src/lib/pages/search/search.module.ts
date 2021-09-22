@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NguixSpinnerComponentModule } from '@lamnhan/nguix-starter';
+import {
+  NguixSpinnerComponentModule,
+  NguixPostsI18nComponentModule,
+  NguixSkeletonPostsComponentModule,
+  NguixVideosI18nComponentModule,
+  NguixSkeletonVideosComponentModule,
+} from '@lamnhan/nguix-starter';
 
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
@@ -15,6 +21,10 @@ import { SearchComponent } from './search.component';
     CommonModule,
     FormsModule,
     NguixSpinnerComponentModule,
+    NguixPostsI18nComponentModule,
+    NguixSkeletonPostsComponentModule,
+    NguixVideosI18nComponentModule,
+    NguixSkeletonVideosComponentModule,
     SearchRoutingModule
   ]
 })

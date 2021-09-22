@@ -93,6 +93,10 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        },
+        {
           "fieldPath": "count",
           "order": "DESCENDING"
         }
