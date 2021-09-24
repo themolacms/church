@@ -98,7 +98,6 @@
             
             &:hover, &:focus, &:active, &.active {
               text-decoration: none;
-              background: var(--app-color-background-shade);
               color: var(--app-color-foreground-shade);
               opacity: 1;
             }
@@ -193,7 +192,7 @@
         ul.menu {
         display: flex;
 
-          .about {
+          .posts {
             display: inline-block;
           }
         }
@@ -202,21 +201,11 @@
   }
 }
 
-@media only screen and (min-width: 512px) {
-
-  .app-header .nav .primary ul.menu {
-  
-    .works {
-      display: inline-block;
-    }
-  }
-}
-
 @media only screen and (min-width: 576px) {
 
   .app-header .nav .primary ul.menu {
 
-    .blog {
+    .videos {
       display: inline-block;
     }
   }
@@ -236,7 +225,7 @@
         font-size: 1rem;
         margin-right: 1rem;
 
-        .donate {
+        .articles {
           display: inline-block;
         }
       }
@@ -250,13 +239,9 @@
 
     .primary ul.menu {
   
-      .store {
+      .about {
         display: inline-block;
       }
     }
   }
 }
-
-@media only screen and (min-width: 1200px) {}
-
-@media only screen and (min-width: 1400px) {}
