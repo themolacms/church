@@ -19,11 +19,11 @@
         <div class="title">News</div>
         <div class="body">
           <div *ngIf="posts.length; else listLoading;">
-            <nguix-posts [i18n]="true" layout="card" [posts]="posts" authorUrlSegment="member"></nguix-posts>
+            <nguix-posts [i18n]="true" layout="hybrid" [posts]="posts" authorUrlSegment="member"></nguix-posts>
           </div>
           <ng-template #listLoading>
             <div class="list-loading">
-              <nguix-skeleton-posts layout="card" [no]="5"></nguix-skeleton-posts>
+              <nguix-skeleton-posts layout="hybrid" [no]="5"></nguix-skeleton-posts>
             </div>
           </ng-template>
         </div>
@@ -36,11 +36,11 @@
         <div class="title">Videos</div>
         <div class="body">
           <div *ngIf="videos.length; else listLoading;">
-            <nguix-videos [i18n]="true" layout="card" [videos]="videos"></nguix-videos>
+            <nguix-videos [i18n]="true" layout="hybrid" [videos]="videos"></nguix-videos>
           </div>
           <ng-template #listLoading>
             <div class="list-loading">
-              <nguix-skeleton-videos layout="card" [no]="5"></nguix-skeleton-videos>
+              <nguix-skeleton-videos layout="hybrid" [no]="5"></nguix-skeleton-videos>
             </div>
           </ng-template>
         </div>
@@ -53,11 +53,11 @@
         <div class="title">Articles</div>
         <div class="body">
           <div *ngIf="articles.length; else listLoading;">
-            <nguix-posts [i18n]="true" layout="card" [posts]="articles" authorUrlSegment="member"></nguix-posts>
+            <nguix-posts [i18n]="true" layout="hybrid" [posts]="articles" authorUrlSegment="member"></nguix-posts>
           </div>
           <ng-template #listLoading>
             <div class="list-loading">
-              <nguix-skeleton-posts layout="card" [no]="5"></nguix-skeleton-posts>
+              <nguix-skeleton-posts layout="hybrid" [no]="5"></nguix-skeleton-posts>
             </div>
           </ng-template>
         </div>
