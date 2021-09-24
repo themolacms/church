@@ -15,7 +15,13 @@ import {
   VideoSearchMoreAction,
   VideoStateSearchListItem,
 } from '@lamnhan/ngx-schemata';
-import { HelperService, UserService, DatabaseDataSearchResult } from '@lamnhan/ngx-useful';
+import {
+  HelperService,
+  SettingService,
+  UserService,
+  DatabaseDataSearchResult,
+  DatabaseDataSearchingIndexData
+} from '@lamnhan/ngx-useful';
 
 @Component({
   selector: 'app-search-page',
@@ -32,27 +38,44 @@ export class SearchComponent implements OnInit {
   ])
   .pipe(
     tap(([queryParams]) => {
+      // set up article search context
+      this.articleSearchContext = this.postDataService.createSearchIndex(item =>
+        !!item &&
+          item.type === 'article' &&
+          item.status === 'publish' &&
+          item.locale === this.settingService.locale
+      );
       // run a new search
       if (queryParams.q) {
         // do searching
         this.selectQuery(queryParams.q);
         // TODO: remove query from url
+      } else {
+        // check if there are post result
+        this.store
+          .select(state => state.schemata_post.searchList?.[this.postSearchId] as PostStateSearchListItem)
+          .pipe(
+            filter(data => !!data),
+            take(1),
+          )
+          .subscribe(data => this.handlePostSearch(data));
+        // check if there are article result
+        this.store
+          .select(state => state.schemata_post.searchList?.[this.articleSearchId] as PostStateSearchListItem)
+          .pipe(
+            filter(data => !!data),
+            take(1),
+          )
+          .subscribe(data => this.handleArticleSearch(data));
+        // check if there are video result
+        this.store
+          .select(state => state.schemata_video.searchList?.[this.videoSearchId] as VideoStateSearchListItem)
+          .pipe(
+            filter(data => !!data),
+            take(1),
+          )
+          .subscribe(data => this.handleVideoSearch(data));
       }
-      // check if there are result
-      this.store
-        .select(state => state.schemata_post.searchList?.[this.postSearchId] as PostStateSearchListItem)
-        .pipe(
-          filter(data => !!data),
-          take(1),
-        )
-        .subscribe(data => this.handlePostSearch(data));
-      this.store
-        .select(state => state.schemata_video.searchList?.[this.videoSearchId] as VideoStateSearchListItem)
-        .pipe(
-          filter(data => !!data),
-          take(1),
-        )
-        .subscribe(data => this.handleVideoSearch(data));
     }),
   );
 
@@ -69,6 +92,16 @@ export class SearchComponent implements OnInit {
   postTotalPages = 0;
   postPage = 1;
 
+  private readonly articleSearchId = 'article';
+  isArticleLoading = false;
+  isArticleLoadingMore = false;
+  articleResult?: DatabaseDataSearchResult<Post>;
+  articles: Post[] = [];
+  articleCount = 0;
+  articleTotalPages = 0;
+  articlePage = 1;
+  articleSearchContext!: DatabaseDataSearchingIndexData;
+
   private readonly videoSearchId = 'video';
   isVideoLoading = false;
   isVideoLoadingMore = false;
@@ -82,6 +115,7 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store,
     private helperService: HelperService,
+    private settingService: SettingService,
     private userService: UserService,
     private tagDataService: TagDataService,
     private postDataService: PostDataService,
@@ -107,6 +141,16 @@ export class SearchComponent implements OnInit {
         map(state => state.schemata_post.searchList?.[this.postSearchId] as PostStateSearchListItem),
       )
       .subscribe(data => this.handlePostSearch(data));
+    // fetch articles
+    this.isArticleLoading = true;
+    this.store.dispatch(
+        new PostSearchAction(this.articleSearchId, this.query, this.viewSize, this.articleSearchContext)
+      )
+      .pipe(
+        take(1),
+        map(state => state.schemata_post.searchList?.[this.articleSearchId] as PostStateSearchListItem),
+      )
+      .subscribe(data => this.handleArticleSearch(data));
     // fetch videos
     this.isVideoLoading = true;
     this.store.dispatch(new VideoSearchAction(this.videoSearchId, this.query, this.viewSize))
@@ -133,6 +177,20 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  loadMoreArticles() {
+    if (!this.postResult) return;
+    this.isArticleLoadingMore = true;
+    this.store.dispatch(new PostSearchMoreAction(this.articleSearchId, ++this.articlePage))
+    .pipe(
+      take(1),
+      map(state => state.schemata_post.searchList?.[this.articleSearchId] as PostStateSearchListItem),
+    )
+    .subscribe(item => {
+      this.articles = item.items;
+      this.isArticleLoadingMore = false;
+    });
+  }
+
   loadMoreVideos() {
     if (!this.videoResult) return;
     this.isVideoLoadingMore = true;
@@ -148,20 +206,38 @@ export class SearchComponent implements OnInit {
   }
 
   private handlePostSearch(data: PostStateSearchListItem) {
-    this.query = data.query;
     this.postResult = data.result;
     this.posts = data.items;
     this.postCount = this.postResult.count();
     this.postTotalPages = Math.ceil(this.postCount / this.viewSize);
+    // misc
+    if (!this.query) {
+      this.query = data.query;
+    }
     this.isPostLoading = false;
   }
 
+  private handleArticleSearch(data: PostStateSearchListItem) {
+    this.articleResult = data.result;
+    this.articles = data.items;
+    this.articleCount = this.articleResult.count();
+    this.articleTotalPages = Math.ceil(this.articleCount / this.viewSize);
+    // misc
+    if (!this.query) {
+      this.query = data.query;
+    }
+    this.isArticleLoading = false;
+  }
+
   private handleVideoSearch(data: VideoStateSearchListItem) {
-    this.query = data.query;
     this.videoResult = data.result;
     this.videos = data.items;
     this.videoCount = this.videoResult.count();
     this.videoTotalPages = Math.ceil(this.videoCount / this.viewSize);
+    // misc
+    if (!this.query) {
+      this.query = data.query;
+    }
     this.isVideoLoading = false;
   }
 
@@ -171,11 +247,13 @@ export class SearchComponent implements OnInit {
         .where('status', '==', 'publish')
         .where('type', '==', 'search')
         .orderBy('createdAt', 'desc')
-        .orderBy('count', 'desc')
-        .limit(5),
-      { name: 'tag:default:publish:top-5' }
+        .limit(30),
+      { name: 'tag:search:publish:latest-top-queries' }
     )
-    .subscribe(tags => this.topQueries = tags);
+    .pipe(
+      map(tags => tags.sort((a, b) => (a.count || 0) > (b.count || 0) ? -1 : 1)),
+    )
+    .subscribe(tags => this.topQueries = tags.slice(0, 5));
   }
 
   private saveQuery(query: string) {

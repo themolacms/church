@@ -22,14 +22,14 @@
 
     <section class="posts" *ngIf="postResult">
       <div class="title">
-        <div class="text">News & articles</div>
+        <div class="text">News</div>
         <div class="count"><span class="badge-secondary">{{ postCount }}</span></div>
       </div>
       <div class="body">
         <ng-container *ngIf="!isPostLoading; else postLoading;">
           <div *ngIf="posts.length; else noPosts;">
             <div class="items">
-              <nguix-posts [i18n]="true" layout="card" [posts]="posts" authorUrlSegment="member"></nguix-posts>
+              <nguix-posts [i18n]="true" layout="thumbnail" [posts]="posts" authorUrlSegment="member"></nguix-posts>
             </div>
             <div class="loading-more" *ngIf="isPostLoadingMore">
               <nguix-spinner></nguix-spinner>
@@ -39,11 +39,11 @@
             </div>
           </div>
           <ng-template #noPosts>
-            <div class="no-items">No news or articles found.</div>
+            <div class="no-items">No news found.</div>
           </ng-template>
         </ng-container>
         <ng-template #postLoading>
-          <nguix-skeleton-posts layout="card" [no]="3"></nguix-skeleton-posts>
+          <nguix-skeleton-posts layout="thumbnail" [no]="3"></nguix-skeleton-posts>
         </ng-template>
       </div>
     </section>
@@ -57,7 +57,7 @@
         <ng-container *ngIf="!isVideoLoading; else videoLoading;">
           <div *ngIf="videos.length; else noVideos;">
             <div class="items">
-              <nguix-videos [i18n]="true" layout="card" [videos]="videos"></nguix-videos>
+              <nguix-videos [i18n]="true" layout="thumbnail" [videos]="videos"></nguix-videos>
             </div>
             <div class="loading-more" *ngIf="isPostLoadingMore">
               <nguix-spinner></nguix-spinner>
@@ -71,7 +71,35 @@
           </ng-template>
         </ng-container>
         <ng-template #videoLoading>
-          <nguix-skeleton-videos layout="card" [no]="3"></nguix-skeleton-videos>
+          <nguix-skeleton-videos layout="thumbnail" [no]="3"></nguix-skeleton-videos>
+        </ng-template>
+      </div>
+    </section>
+
+    <section class="articles" *ngIf="articleResult">
+      <div class="title">
+        <div class="text">Articles</div>
+        <div class="count"><span class="badge-tertiary">{{ articleCount }}</span></div>
+      </div>
+      <div class="body">
+        <ng-container *ngIf="!isArticleLoading; else articleLoading;">
+          <div *ngIf="articles.length; else noArticles;">
+            <div class="items">
+              <nguix-posts [i18n]="true" layout="thumbnail" [posts]="articles" authorUrlSegment="member"></nguix-posts>
+            </div>
+            <div class="loading-more" *ngIf="isArticleLoadingMore">
+              <nguix-spinner></nguix-spinner>
+            </div>
+            <div class="more" *ngIf="articleResult && articlePage < articleTotalPages">
+              <button class="button-outline-medium">See more</button>
+            </div>
+          </div>
+          <ng-template #noArticles>
+            <div class="no-items">No articles found.</div>
+          </ng-template>
+        </ng-container>
+        <ng-template #articleLoading>
+          <nguix-skeleton-posts layout="thumbnail" [no]="3"></nguix-skeleton-posts>
         </ng-template>
       </div>
     </section>
