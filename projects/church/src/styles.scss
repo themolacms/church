@@ -89,6 +89,10 @@ nguix-videos, nguix-skeleton-videos {
       padding: 0 1rem !important;
     }
   }
+
+  .list-hybrid li {
+    background: var(--app-color-background-tint) !important;
+  }
 }
 
 nguix-video, nguix-skeleton-video {
@@ -116,6 +120,10 @@ nguix-posts, nguix-skeleton-posts {
     &:hover, &:focus, &:active, &.active {
       box-shadow: 0 0 7px var(--app-color-background-shade) !important;
     }
+  }
+
+  .list-hybrid li {
+    background: var(--app-color-background-tint) !important;
   }
 }
 
