@@ -42,31 +42,35 @@ $icons: (
  * ====================================================
  */
 
-nguix-network-indicator .host {
+nguix-network-indicator {
 
-  &.show {
+  .show {
     bottom: calc(64px + 1rem) !important;
   }
 }
 
-nguix-nav-indicator .host {
+nguix-nav-indicator {
 
-  &.show {
+  .show {
     bottom: calc(64px + 1rem) !important;
   }
 }
 
-nguix-pwa-reminder .host {
+nguix-pwa-reminder {
   background: var(--app-color-background-tint) !important;
 
-  &.show {
+  .show {
     bottom: 64px !important;
   }
 }
 
-nguix-videos, nguix-skeleton-videos .host {
+nguix-videos, nguix-skeleton-videos {
 
-  li {
+  .list-thumbnail li {
+    background: var(--app-color-background-tint) !important;
+  }
+
+  .list-card li {
     background: var(--app-color-background-tint) !important;
     transition: all .5s ease;
 
@@ -87,7 +91,7 @@ nguix-videos, nguix-skeleton-videos .host {
   }
 }
 
-nguix-video, nguix-skeleton-video .host {
+nguix-video, nguix-skeleton-video {
 
   .player {
     border-radius: var(--app-size-radius) var(--app-size-radius) 0 0 !important;
@@ -98,9 +102,13 @@ nguix-video, nguix-skeleton-video .host {
   }
 }
 
-nguix-posts, nguix-skeleton-posts .host {
+nguix-posts, nguix-skeleton-posts {
 
-  li {
+  .list-thumbnail li {
+    background: var(--app-color-background-tint) !important;
+  }
+
+  .list-card li {
     background: var(--app-color-background-tint) !important;
     box-shadow: none !important;
     transition: all .5s ease;
@@ -111,7 +119,7 @@ nguix-posts, nguix-skeleton-posts .host {
   }
 }
 
-nguix-post, nguix-skeleton-post .host {
+nguix-post, nguix-skeleton-post {
 
   .image {
     border-radius: var(--app-size-radius) var(--app-size-radius) 0 0 !important;
@@ -122,7 +130,7 @@ nguix-post, nguix-skeleton-post .host {
   }
 }
 
-nguix-oops-page nguix-oops .host {
+nguix-oops-page nguix-oops {
   margin-top: 1rem !important;
 
   .image img {
