@@ -28,6 +28,10 @@ import { NguixDashboardModule, DASHBOARD_CONFIG, dashboardConfig } from '@lamnha
               { text: 'Articles', value: 'article_category', icon: `icon-articles` },
               { text: 'Videos', value: 'video_category', icon: `icon-videos` },
             );
+            // register tag type
+            dashboardService.tagPart.contentTypes.push(
+              { text: 'Searches', value: 'search', icon: `icon-search` },
+            );
             // register article type
             dashboardService.postPart.contentTypes.push(
               { text: 'Articles', value: 'article', icon: `icon-articles` },

@@ -39,22 +39,20 @@ export class SearchComponent implements OnInit {
         // TODO: remove query from url
       }
       // check if there are result
-      else {
-        this.store
-          .select(state => state.schemata_post.searchList?.[this.postSearchId] as PostStateSearchListItem)
-          .pipe(
-            filter(data => !!data),
-            take(1),
-          )
-          .subscribe(data => this.handlePostSearch(data));
-        this.store
-          .select(state => state.schemata_video.searchList?.[this.videoSearchId] as VideoStateSearchListItem)
-          .pipe(
-            filter(data => !!data),
-            take(1),
-          )
-          .subscribe(data => this.handleVideoSearch(data));
-      }
+      this.store
+        .select(state => state.schemata_post.searchList?.[this.postSearchId] as PostStateSearchListItem)
+        .pipe(
+          filter(data => !!data),
+          take(1),
+        )
+        .subscribe(data => this.handlePostSearch(data));
+      this.store
+        .select(state => state.schemata_video.searchList?.[this.videoSearchId] as VideoStateSearchListItem)
+        .pipe(
+          filter(data => !!data),
+          take(1),
+        )
+        .subscribe(data => this.handleVideoSearch(data));
     }),
   );
 
