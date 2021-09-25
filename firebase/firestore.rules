@@ -211,6 +211,11 @@ service cloud.firestore {
       allow read: if true;
       allow create: if (
         creationMandatory(docId) &&
+        // draft for anyone, publish for admin
+        (
+          allowedLevel(5) ||
+          request.resource.data.status === 'draft'
+        )
         // only allow these types
         // NOTE: add your custom to the list
         request.resource.data.type in ['default', 'search', /* ... */]
