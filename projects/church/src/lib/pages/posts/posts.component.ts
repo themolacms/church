@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
+import { combineLatest } from 'rxjs';
 import { map, tap, take } from 'rxjs/operators';
-import { Post } from '@lamnhan/schemata';
-import { PostQueryAction } from '@lamnhan/ngx-schemata';
+import { Category, Post } from '@lamnhan/schemata';
+import { CategoryStateModel, CategoryQueryAction, PostStateModel, PostQueryAction } from '@lamnhan/ngx-schemata';
 import { SettingService } from '@lamnhan/ngx-useful';
+
+interface GroupingTrackerItem {
+  latestQueryId: string;
+  latestItem?: Post;
+  pageNo: number;
+  areThereMore: boolean;
+}
 
 @Component({
   selector: 'app-posts-page',
@@ -12,22 +21,43 @@ import { SettingService } from '@lamnhan/ngx-useful';
 })
 export class PostsComponent implements OnInit {
 
-  public page$ = this.settingService.onLocaleChanged.pipe(
-    tap(locale =>  (this.locale = locale) && this.fetchPosts()),
+  public page$ = combineLatest([
+    this.route.params,
+    this.settingService.onLocaleChanged
+  ])
+  .pipe(
+    tap(([params, locale]) => {
+      this.locale = locale;
+      // fetch categories
+      if (!this.categories.length) {
+        this.fetchCategories();
+      }
+      // fetch posts
+      this.activeGroupName = !params.categoryId ? 'all' : params.categoryId;
+      if (!this.groupingTracker[this.activeGroupName]) {
+        this.groupingTracker[this.activeGroupName] = {
+          latestQueryId: '',
+          latestItem: undefined,
+          pageNo: 1,
+          areThereMore: true,
+        };
+      }
+      this.fetchPosts();
+    }),
   );
 
   private locale!: string;
 
-  private latestQueryId!: string;
-  private latestItem?: Post;
+  private groupingTracker: Record<string, GroupingTrackerItem> = {};
+  activeGroupName = 'all';
 
-  private pageNo = 1;
-  private areThereMore = true;
+  categories: Category[] = [];
 
   posts: Post[] = [];
   isLoadingMore = false;
 
   constructor(
+    private route: ActivatedRoute,
     private store: Store,
     private settingService: SettingService,
   ) {}
@@ -35,39 +65,46 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {}
 
   fetchPosts() {
-    if (!this.areThereMore || this.isLoadingMore) return;
+    const activeGroup = this.groupingTracker[this.activeGroupName];
+    // nothing else
+    if (!activeGroup.areThereMore || this.isLoadingMore) return;
     // show loading
     this.isLoadingMore = true;
     setTimeout(() => this.isLoadingMore = false, 3000);
     // fetch data
-    const queryPrefix = `post:default:publish:${this.locale}`;
-    this.latestQueryId = `${queryPrefix}:${this.pageNo++}`;
-    this.store.dispatch(
+    const queryPrefix = `post:default:publish:${this.locale}:${this.activeGroupName}`;
+    activeGroup.latestQueryId = `${queryPrefix}:${activeGroup.pageNo++}`;
+    return this.store.dispatch(
       new PostQueryAction(
-        this.latestQueryId,
+        activeGroup.latestQueryId,
         ref => {
           let query = ref
             .where('type', '==', 'default')
             .where('status', '==', 'publish')
             .where('locale', '==', this.locale)
-            .orderBy('createdAt', 'desc');
-          if (this.latestItem) {
-            query = query.startAfter(this.latestItem.createdAt);
+            .orderBy('createdAt', 'desc')
+          if (this.activeGroupName !== 'all') {
+            const categoryId = this.activeGroupName;
+            query = query.where(`categories.${categoryId}.id`, '==', categoryId);
           }
-          return query.limit(12);
+          if (activeGroup.latestItem) {
+            query = query.startAfter(activeGroup.latestItem.createdAt);
+          }
+          return query.limit(3);
         },
       )
     )
     .pipe(
       take(1),
-      map(state => state.schemata_post)
+      map(state => state.schemata_post as PostStateModel)
     )
     .subscribe(postState => {
-      const latestQueryResult = postState.queryList[this.latestQueryId];
+      const activeGroup = this.groupingTracker[this.activeGroupName];
+      const latestQueryResult = postState.queryList[activeGroup.latestQueryId];
       // save metas
-      this.areThereMore = !!latestQueryResult.length;
-      this.latestItem = !this.areThereMore
-        ? this.latestItem
+      activeGroup.areThereMore = !!latestQueryResult.length;
+      activeGroup.latestItem = !activeGroup.areThereMore
+        ? activeGroup.latestItem
         : latestQueryResult[latestQueryResult.length - 1];
       // save posts
       this.posts = Object.keys(postState.queryList)
@@ -81,6 +118,25 @@ export class PostsComponent implements OnInit {
       // reset loading
       this.isLoadingMore = false;
     });
+  }
+
+  private fetchCategories() {
+    const queryId = `category:default:publish:${this.locale}`;
+    return this.store.dispatch(
+      new CategoryQueryAction(
+        queryId,
+        ref => ref
+          .where('type', '==', 'default')
+          .where('status', '==', 'publish')
+          .where('locale', '==', this.locale)
+          .orderBy('count', 'desc')
+      )
+    )
+    .pipe(
+      take(1),
+      map(state => state.schemata_category as CategoryStateModel)
+    )
+    .subscribe(categoryState => this.categories = categoryState.queryList[queryId]);
   }
 
 }

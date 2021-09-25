@@ -88,6 +88,12 @@ const routes: Routes = [
     loadChildren: () => import('../../projects/church/src/lib/pages/posts/posts.module').then(m => m.PostsPageModule),
   },
   {
+    path: 'posts/category/:categoryId',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('../../projects/church/src/lib/pages/posts/posts.module').then(m => m.PostsPageModule),
+  },
+  {
     path: 'post/:id',
     canLoad: [OnlineGuard],
     canActivate: [OnlineGuard],
@@ -95,6 +101,12 @@ const routes: Routes = [
   },
   {
     path: 'articles',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('../../projects/church/src/lib/pages/articles/articles.module').then(m => m.ArticlesPageModule),
+  },
+  {
+    path: 'articles/category/:categoryId',
     canLoad: [OnlineGuard],
     canActivate: [OnlineGuard],
     loadChildren: () => import('../../projects/church/src/lib/pages/articles/articles.module').then(m => m.ArticlesPageModule),

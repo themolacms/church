@@ -1,15 +1,77 @@
 .host {
-  padding: 1rem 1rem 0;
-  max-width: 992px;
-  margin: auto;
 
-  .listing {
-    min-height: 100vh;
+  .toolbar {
+    width: 100%;
+    height: 49px;
+    position: fixed;
+    top: 65px;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: var(--app-color-background-tint);
+    border-bottom: 1px solid var(--app-color-background);
+    padding: .5rem 1rem;
+
+    ul {
+      flex: 1;
+      width: 100%;
+      margin: 0 0 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      // hide scrollbar
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      li {
+        margin-left: 1rem;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        a {
+          display: block;
+          text-decoration: none;
+          color: var(--app-color-medium);
+
+          &:hover, &:focus, &.active {
+            color: var(--app-color-foreground);
+          }
+
+          &.active {
+            line-height: 0;
+            padding: 1rem .75rem;
+            font-size: .9rem;
+            background: var(--app-color-background-shade);
+            border-radius: var(--app-size-radius);
+          }
+        }
+      }
+    }
   }
 
-  .infinite-loading {
-    padding-bottom: 1rem;
-    display: flex;
-    justify-content: center;
+  .body {
+    padding: 65px 1rem 0;
+    max-width: 992px;
+    margin: auto;
+  
+    .listing {
+      min-height: 100vh;
+    }
+  
+    .infinite-loading {
+      padding-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+    }
   }
+
 }

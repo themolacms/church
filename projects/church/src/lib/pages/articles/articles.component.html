@@ -1,22 +1,44 @@
 <div class="host" *ngIf="page$ | async">
-  <div
-    class="listing"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="50"
-    (scrolled)="fetchPosts()"
-  >
-    <div class="main" *ngIf="posts.length || !isLoadingMore; else listLoading;">
-      <nguix-posts [i18n]="true" layout="card" [posts]="posts" authorUrlSegment="member"></nguix-posts>
-    </div>
-    <ng-template #listLoading>
-      <div class="list-loading">
-        <nguix-skeleton-posts layout="card" [no]="5"></nguix-skeleton-posts>
+
+  <div class="toolbar">
+    <ul>
+      <li>
+        <a
+          [usefulRouterLink]="['articles']"
+          [usefulRouterLinkActiveOptions]="{exact: true}"
+          usefulRouterLinkActive="active"
+        >Home</a>
+      </li>
+      <li *ngFor="let categoryItem of categories">
+        <a
+          [usefulRouterLink]="['articles', 'category', categoryItem.id]"
+          usefulRouterLinkActive="active"
+        >{{ categoryItem.title }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="body">
+    <div
+      class="listing"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="fetchPosts()"
+    >
+      <div class="main" *ngIf="posts.length || !isLoadingMore; else listLoading;">
+        <nguix-posts [i18n]="true" layout="card" [posts]="posts" authorUrlSegment="member"></nguix-posts>
       </div>
-    </ng-template>
+      <ng-template #listLoading>
+        <div class="list-loading">
+          <nguix-skeleton-posts layout="card" [no]="5"></nguix-skeleton-posts>
+        </div>
+      </ng-template>
+    </div>
+    <div class="infinite-loading" *ngIf="isLoadingMore">
+      <nguix-spinner></nguix-spinner>
+    </div>
   </div>
-  <div class="infinite-loading" *ngIf="isLoadingMore">
-    <nguix-spinner></nguix-spinner>
-  </div>
+
 </div>
 

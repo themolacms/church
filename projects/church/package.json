@@ -4,9 +4,9 @@
   "peerDependencies": {
     "@angular/common": "^12.2.5",
     "@angular/core": "^12.2.5",
-    "@lamnhan/nguix-starter": "0.0.13",
-    "@lamnhan/ngx-schemata": "0.0.13",
-    "@lamnhan/ngx-useful": "0.0.31",
+    "@lamnhan/nguix-starter": "0.0.15",
+    "@lamnhan/ngx-schemata": "0.0.15",
+    "@lamnhan/ngx-useful": "0.0.33",
     "@lamnhan/schemata": "0.0.24",
     "@ngxs/store": "^3.7.2"
   },

@@ -84,8 +84,7 @@ export class VideosComponent implements OnInit {
             .orderBy('createdAt', 'desc')
           if (this.activeGroupName !== 'all') {
             const categoryId = this.activeGroupName;
-            query = query
-              .where(`categories.${categoryId}.id`, '==', categoryId);
+            query = query.where(`categories.${categoryId}.id`, '==', categoryId);
           }
           if (activeGroup.latestItem) {
             query = query.startAfter(activeGroup.latestItem.createdAt);
