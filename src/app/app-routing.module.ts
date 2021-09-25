@@ -112,6 +112,12 @@ const routes: Routes = [
     loadChildren: () => import('../../projects/church/src/lib/pages/videos/videos.module').then(m => m.VideosPageModule),
   },
   {
+    path: 'videos/category/:categoryId',
+    canLoad: [OnlineGuard],
+    canActivate: [OnlineGuard],
+    loadChildren: () => import('../../projects/church/src/lib/pages/videos/videos.module').then(m => m.VideosPageModule),
+  },
+  {
     path: 'video/:id',
     canLoad: [OnlineGuard],
     canActivate: [OnlineGuard],

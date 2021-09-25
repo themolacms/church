@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { RouterLinkDirectiveModule } from '@lamnhan/ngx-useful';
 import {
   NguixSpinnerComponentModule,
   NguixVideosI18nComponentModule,
@@ -17,6 +18,7 @@ import { VideosComponent } from './videos.component';
   imports: [
     CommonModule,
     InfiniteScrollModule,
+    RouterLinkDirectiveModule,
     NguixSpinnerComponentModule,
     NguixVideosI18nComponentModule,
     NguixSkeletonVideosComponentModule,
