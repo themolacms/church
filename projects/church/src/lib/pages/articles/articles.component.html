@@ -27,7 +27,13 @@
       (scrolled)="fetchPosts()"
     >
       <div class="main" *ngIf="posts.length || !isLoadingMore; else listLoading;">
-        <nguix-posts [i18n]="true" layout="card" [posts]="posts" authorUrlSegment="member"></nguix-posts>
+        <nguix-posts
+          [i18n]="true"
+          layout="card"
+          [posts]="posts"
+          authorUrlSegment="member"
+          categoryUrlSegment="articles/category"
+        ></nguix-posts>
       </div>
       <ng-template #listLoading>
         <div class="list-loading">

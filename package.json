@@ -41,7 +41,7 @@
     "@angular/router": "~12.2.5",
     "@angular/service-worker": "~12.2.5",
     "@lamnhan/nguix-dashboard": "0.0.7",
-    "@lamnhan/nguix-starter": "0.0.15",
+    "@lamnhan/nguix-starter": "file:../../lamnhan/nguix-starter/dist/starter/lamnhan-nguix-starter-0.0.16.tgz",
     "@lamnhan/ngx-schemata": "0.0.15",
     "@lamnhan/ngx-useful": "0.0.33",
     "@lamnhan/schemata": "0.0.24",

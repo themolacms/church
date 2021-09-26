@@ -2,7 +2,12 @@
   <ng-container *ngIf="data$ | async as data">
 
     <div class="main" *ngIf="data.post as post; else itemNotFound;">
-      <nguix-post [post]="post" (contentReady)="contentAddon($event)" authorUrlSegment="member"></nguix-post>
+      <nguix-post
+        [post]="post"
+        (contentReady)="contentAddon($event)"
+        authorUrlSegment="member"
+        categoryUrlSegment="posts/category"
+      ></nguix-post>
     </div>
 
     <ng-template #itemNotFound>

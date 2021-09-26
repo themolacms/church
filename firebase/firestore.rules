@@ -108,13 +108,25 @@ service cloud.firestore {
     }
     
     function changableStatistics() {
-      return isRequestContainsOnly([
-      	'viewCount',
-        'likeCount',
-        'commentCount',
-        'rateCount',
-        'shareCount',
-      ]);
+      return isRequestContainsOnly(['viewCount', 'likeCount', 'commentCount', 'shareCount'])
+        && (
+          !('viewCount' in request.resource.data) ||
+          request.resource.data.viewCount == resource.data.viewCount + 1
+        )
+        && (
+          !('likeCount' in request.resource.data) ||
+          request.resource.data.likeCount == resource.data.likeCount + 1 ||
+          request.resource.data.likeCount == resource.data.likeCount - 1
+        )
+        && (
+          !('commentCount' in request.resource.data) ||
+          request.resource.data.commentCount == resource.data.commentCount + 1 ||
+          request.resource.data.commentCount == resource.data.commentCount - 1
+        )
+        && (
+          !('shareCount' in request.resource.data) ||
+          request.resource.data.shareCount == resource.data.shareCount + 1
+        );
     }
     
     /* =============================================================== */
@@ -212,10 +224,7 @@ service cloud.firestore {
       allow create: if (
         creationMandatory(docId) &&
         // draft for anyone, publish for admin
-        (
-          allowedLevel(5) ||
-          request.resource.data.status === 'draft'
-        )
+        (allowedLevel(5) || request.resource.data.status == 'draft') &&
         // only allow these types
         // NOTE: add your custom to the list
         request.resource.data.type in ['default', 'search', /* ... */]
@@ -374,17 +383,23 @@ service cloud.firestore {
         // NOTE: add your custom to the list
         && request.resource.data.type in ['default', 'system', /* ... */]
         && (
-          // 1. default
+          // I. default
           (
             request.resource.data.type == 'default'
             &&
             (
+              // I.1. public meta
               (request.resource.data.group == 'public_meta') ||
+              // II.2. collection meta
+              (request.resource.data.group == 'collection_meta' && allowedLevel(5)) ||
+              // II.3. search index
+              (request.resource.data.group == 'search_index' && allowedLevel(5)) ||
+              // II.4. user search index
               (request.resource.data.group == 'user_search_index' && isMine(request.resource.data.uid))
             )
           )
           ||
-          // 2. system
+          // II. system
           (request.resource.data.type == 'system' && allowedLevel(5))
         )
       );
@@ -392,31 +407,23 @@ service cloud.firestore {
       	unchangableFields()
         &&
         (
-          // 1. default
+          // I. default
           (
             resource.data.type == 'default'
             &&
             (
+              // II.1. public meta
               (resource.data.group == 'public_meta') ||
-              (
-                resource.data.group == 'collection_meta' &&
-                (
-                  allowedLevel(5) ||
-                  resource.data.master == 'tags'
-                )
-              ) ||
-              (
-                resource.data.group == 'search_index' &&
-                (
-                  allowedLevel(5) ||
-                  resource.data.master == 'tags'
-                )
-              ) ||
+              // II.2. collection meta
+              (resource.data.group == 'collection_meta' && allowedLevel(5)) ||
+              // II.3. search index
+              (resource.data.group == 'search_index' && allowedLevel(5)) ||
+              // II.4. user search index
               (resource.data.group == 'user_search_index' && isMine(resource.data.uid))
             )
           )
           ||
-          // 2. system
+          // II. system
           (resource.data.type == 'system' && allowedLevel(5))
         )
       );

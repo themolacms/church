@@ -19,7 +19,13 @@
         <div class="title">News</div>
         <div class="body">
           <div *ngIf="posts.length; else listLoading;">
-            <nguix-posts [i18n]="true" layout="hybrid" [posts]="posts" authorUrlSegment="member"></nguix-posts>
+            <nguix-posts
+              [i18n]="true"
+              layout="hybrid"
+              [posts]="posts"
+              authorUrlSegment="member"
+              categoryUrlSegment="posts/category"
+            ></nguix-posts>
           </div>
           <ng-template #listLoading>
             <div class="list-loading">
@@ -53,7 +59,13 @@
         <div class="title">Articles</div>
         <div class="body">
           <div *ngIf="articles.length; else listLoading;">
-            <nguix-posts [i18n]="true" layout="hybrid" [posts]="articles" authorUrlSegment="member"></nguix-posts>
+            <nguix-posts
+              [i18n]="true"
+              layout="hybrid"
+              [posts]="articles"
+              authorUrlSegment="member"
+              categoryUrlSegment="articles/category"
+            ></nguix-posts>
           </div>
           <ng-template #listLoading>
             <div class="list-loading">
