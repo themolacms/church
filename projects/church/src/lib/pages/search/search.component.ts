@@ -17,6 +17,7 @@ import {
 } from '@lamnhan/ngx-schemata';
 import {
   HelperService,
+  NavService,
   SettingService,
   UserService,
   DatabaseDataSearchResult,
@@ -115,6 +116,7 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store,
     private helperService: HelperService,
+    private navService: NavService,
     private settingService: SettingService,
     private userService: UserService,
     private tagDataService: TagDataService,
@@ -133,6 +135,7 @@ export class SearchComponent implements OnInit {
 
   search() {
     if (!this.query) return;
+    this.navService.updateQueryParams({ q: this.query });
     // fetch posts
     this.isPostLoading = true;
     this.store.dispatch(new PostSearchAction(this.postSearchId, this.query, this.viewSize))

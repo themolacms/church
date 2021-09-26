@@ -2,7 +2,7 @@
   <ng-container *ngIf="data$ | async as data">
 
     <div class="main" *ngIf="data.video as video; else itemNotFound;">
-      <nguix-video [video]="video"></nguix-video>
+      <nguix-video [video]="video" categoryPath="videos/category"></nguix-video>
     </div>
 
     <ng-template #itemNotFound>

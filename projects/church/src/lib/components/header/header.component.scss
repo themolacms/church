@@ -45,14 +45,11 @@
   .brand {
     display: flex;
     align-items: center;
-    cursor: pointer;
+    text-decoration: none;
 
-    em {
-
-      img {
-        width: 2.5rem;
-        height: 2.5rem;
-      }
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
     }
 
     strong {
