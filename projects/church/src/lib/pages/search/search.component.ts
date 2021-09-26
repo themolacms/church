@@ -274,7 +274,7 @@ export class SearchComponent implements OnInit {
     this.tagDataService.get(id).pipe(
       switchMap(item =>
         !item
-          ? this.tagDataService.create(id, newTag)
+          ? this.tagDataService.create(id, newTag, true)
           : item.type === 'search'
             ? this.tagDataService.increment(id, { count: 1 })
             : of(false)

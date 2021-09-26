@@ -29,7 +29,12 @@
         <ng-container *ngIf="!isPostLoading; else postLoading;">
           <div *ngIf="posts.length; else noPosts;">
             <div class="items">
-              <nguix-posts [i18n]="true" layout="thumbnail" [posts]="posts" authorUrlSegment="member"></nguix-posts>
+              <nguix-posts
+                [i18n]="true"
+                layout="thumbnail"
+                [posts]="posts"
+                authorPath="member"
+              ></nguix-posts>
             </div>
             <div class="loading-more" *ngIf="isPostLoadingMore">
               <nguix-spinner></nguix-spinner>
@@ -57,7 +62,11 @@
         <ng-container *ngIf="!isVideoLoading; else videoLoading;">
           <div *ngIf="videos.length; else noVideos;">
             <div class="items">
-              <nguix-videos [i18n]="true" layout="thumbnail" [videos]="videos"></nguix-videos>
+              <nguix-videos
+                [i18n]="true"
+                layout="thumbnail"
+                [videos]="videos"
+              ></nguix-videos>
             </div>
             <div class="loading-more" *ngIf="isPostLoadingMore">
               <nguix-spinner></nguix-spinner>
@@ -85,7 +94,13 @@
         <ng-container *ngIf="!isArticleLoading; else articleLoading;">
           <div *ngIf="articles.length; else noArticles;">
             <div class="items">
-              <nguix-posts [i18n]="true" layout="thumbnail" [posts]="articles" authorUrlSegment="member"></nguix-posts>
+              <nguix-posts
+                [i18n]="true"
+                layout="thumbnail"
+                [posts]="articles"
+                postPath="article"
+                authorPath="member"
+              ></nguix-posts>
             </div>
             <div class="loading-more" *ngIf="isArticleLoadingMore">
               <nguix-spinner></nguix-spinner>

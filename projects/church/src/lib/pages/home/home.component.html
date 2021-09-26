@@ -23,8 +23,8 @@
               [i18n]="true"
               layout="hybrid"
               [posts]="posts"
-              authorUrlSegment="member"
-              categoryUrlSegment="posts/category"
+              authorPath="member"
+              categoryPath="posts/category"
             ></nguix-posts>
           </div>
           <ng-template #listLoading>
@@ -63,8 +63,9 @@
               [i18n]="true"
               layout="hybrid"
               [posts]="articles"
-              authorUrlSegment="member"
-              categoryUrlSegment="articles/category"
+              postPath="article"
+              authorPath="member"
+              categoryPath="articles/category"
             ></nguix-posts>
           </div>
           <ng-template #listLoading>
