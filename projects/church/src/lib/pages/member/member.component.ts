@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, combineLatest } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Profile } from '@lamnhan/schemata';
-import { ModalService, MetaService, SettingService, UserService } from '@lamnhan/ngx-useful';
+import { ModalService, MetaService, NavService, SettingService, UserService } from '@lamnhan/ngx-useful';
 import { ProfileDataService } from '@lamnhan/ngx-schemata';
 
 interface PageParams {
@@ -18,15 +18,10 @@ interface PageParams {
   templateUrl: './member.component.html',
   styleUrls: ['./member.component.scss']
 })
-export class MemberComponent implements OnInit {
-
-  username = 'lamnhan';
-  mine = false;
-  route = 'home';
-  itemId?: string;
+export class MemberComponent implements OnInit, AfterContentInit {
 
   public readonly profile$ = combineLatest([
-    this.user.onUserChanged,
+    this.userService.onUserChanged,
     this.settingService.onLocaleChanged
   ]).pipe(
     // get params
@@ -35,7 +30,11 @@ export class MemberComponent implements OnInit {
     switchMap(params => {
       const {username, route, itemId} = params as PageParams;
       this.username = username || 'lamnhan';
-      this.mine = !!(this.user.currentUser && this.user.username && this.user.username === this.username);
+      this.mine = !!(
+        this.userService.currentUser &&
+        this.userService.username &&
+        this.userService.username === this.username
+      );
       this.route = route || 'home';
       this.itemId = itemId;
       return of(this.username);
@@ -78,21 +77,38 @@ export class MemberComponent implements OnInit {
     }),
   );
 
+  username = 'lamnhan';
+  mine = false;
+  route = 'home';
+  itemId?: string;
+
   homeRoute$?: Observable<boolean>;
   aboutRoute$?: Observable<boolean>;
   accountRoute$?: Observable<boolean>;
+
+  isDashboardAvailable = false;
 
   constructor(
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private modalService: ModalService,
     private metaService: MetaService,
+    private navService: NavService,
     private settingService: SettingService,
     private profileDataService: ProfileDataService,
-    public readonly user: UserService,
+    public readonly userService: UserService,
   ) {}
 
   ngOnInit(): void {}
+
+  ngAfterContentInit(): void {
+    this.isDashboardAvailable = this.userService.allowedLevel(5);
+  }
+
+  goDashboard() {
+    this.settingService.changePersona('dashboard');
+    this.navService.navigate(['app-dashboard']);
+  }
 
   openCover(profile: Profile) {
     const src = (profile.images?.xl || profile.images?.default)?.src;

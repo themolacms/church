@@ -39,10 +39,10 @@
               "src/robots.txt"
             ],
             "styles": [
+              "node_modules/@lamnhan/nguix-starter/splashscreens/heartbeat/index.scss",
               "src/styles.scss",
               "dist/church/styles.scss",
-              "node_modules/@lamnhan/nguix-dashboard/styles.scss",
-              "node_modules/@lamnhan/nguix-starter/splashscreens/heartbeat/index.scss"
+              "node_modules/@lamnhan/nguix-dashboard/styles.scss"
             ],
             "scripts": [
               "node_modules/@lamnhan/nguix-starter/splashscreens/heartbeat/index.js"

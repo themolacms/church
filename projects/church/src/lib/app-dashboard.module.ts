@@ -66,4 +66,4 @@ import { NguixDashboardModule, DASHBOARD_CONFIG, dashboardConfig } from '@lamnha
     }
   ]
 })
-export class AppDashboardModule {}
+export class MolaAppDashboardModule {}

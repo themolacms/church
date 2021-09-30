@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire/compat';
+import { MolaAppDashboardModule } from '../../projects/church/src/lib/app-dashboard.module';
 
 import { MolaAppModule } from '../../projects/church/src/lib/app.module';
 import { AppComponent } from '../../projects/church/src/lib/app.component';
+import { OfflineComponent } from './offline/offline.component';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { AppDashboardModule } from './app-dashboard.module';
-
-import { OfflineComponent } from './offline/offline.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -22,8 +21,6 @@ import { OfflineComponent } from './offline/offline.component';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    AppDashboardModule,
-    AppRoutingModule,
     MolaAppModule.forRoot({
       name: environment.name,
       version: environment.version,
@@ -70,6 +67,8 @@ import { OfflineComponent } from './offline/offline.component';
         /* MOLA:META_TRANSLATIONS */
       }
     }),
+    MolaAppDashboardModule,
+    AppRoutingModule,
   ],
 })
 export class AppModule {}
