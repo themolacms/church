@@ -21,7 +21,10 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ]
+    ],
+    "i18n": {
+      "root": "/"
+    }
   },
   "storage": {
     "rules": "storage.rules"
