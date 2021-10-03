@@ -9,5 +9,18 @@
   "skins": [
     "light"
   ],
-  "soul": "bootstrap"
+  "soul": "bootstrap",
+  "database": {
+    "collections": [
+      "options",
+      "categories",
+      "tags",
+      "pages",
+      "posts",
+      "audios",
+      "videos",
+      "bundles",
+      "profiles"
+    ]
+  }
 }
