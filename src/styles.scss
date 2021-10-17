@@ -1,52 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-/**
- * ====================================================
- * 3rd parties
- * ====================================================
- */
-
-// ...
-
-/**
- * ====================================================
- * Unistylus
- * ====================================================
- */
-
-@use '@unistylus/core/scss/skins/light-default';
-
-@use '@unistylus/bootstrap/reset';
-@use '@unistylus/bootstrap/core';
-@use '@unistylus/bootstrap/content/typography';
-@use '@unistylus/bootstrap/content/figure';
-@use '@unistylus/bootstrap/content/article';
-@use '@unistylus/bootstrap/form/form-label';
-@use '@unistylus/bootstrap/form/form-control';
-@use '@unistylus/bootstrap/form/form-switch';
-@use '@unistylus/bootstrap/components/badge-secondary';
-@use '@unistylus/bootstrap/components/badge-tertiary';
-@use '@unistylus/bootstrap/components/badge-danger';
-@use '@unistylus/bootstrap/components/alert-danger';
-@use '@unistylus/bootstrap/components/icon-default';
-@use '@unistylus/bootstrap/components/icon-raw-default';
-@use '@unistylus/bootstrap/components/icon-light';
-@use '@unistylus/bootstrap/components/table-default';
-@use '@unistylus/bootstrap/components/card';
-@use '@unistylus/bootstrap/components/list';
-@use '@unistylus/bootstrap/components/modal-alert';
-@use '@unistylus/bootstrap/components/button-default';
-@use '@unistylus/bootstrap/components/button-clear';
-@use '@unistylus/bootstrap/components/button-outline';
-@use '@unistylus/bootstrap/components/button-primary';
-@use '@unistylus/bootstrap/components/button-primary-sm';
-@use '@unistylus/bootstrap/components/button-secondary';
-@use '@unistylus/bootstrap/components/button-danger';
-@use '@unistylus/bootstrap/components/button-light-sm';
-@use '@unistylus/bootstrap/utilities/truncate';
-@use '@unistylus/bootstrap/utilities/embedded';
-@use '@unistylus/bootstrap/utilities/skeleton';
-
 :root,
 [data-theme=default],
 [data-theme=light]
@@ -55,11 +8,3 @@
   --app-font-body: 'Open Sans', sans-serif;
   --app-size-radius: 1rem;
 }
-
-/**
- * ====================================================
- * App styles 
- * ====================================================
- */
-
-// ...

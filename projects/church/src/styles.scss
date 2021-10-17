@@ -1,4 +1,4 @@
-@import '@unistylus/core/scss/mixins';
+@import '@unistylus/core';
 
 /**
  * ====================================================
@@ -7,17 +7,17 @@
  */
 
 $icons: (
-  'home': ('fluent', 'home_16_regular'),
-  'posts': ('fluent', 'news_16_regular'),
-  'articles': ('fluent', 'document_one_page_20_regular'),
-  'videos': ('fluent', 'video_clip_16_regular'),
-  'user': ('fluent', 'person_16_regular'),
-  'setting': ('fluent', 'settings_16_regular'),
-  'about': ('fluent', 'info_16_regular'),
-  'help': ('fluent', 'question_circle_16_regular'),
-  'more': ('fluent', 'more_horizontal_16_regular'),
-  'right': ('fluent', 'chevron_right_20_regular'),
-  'search': ('fluent', 'search_20_regular'),
+  'home': ('fluent', 'home_16_regular', 'latest'),
+  'posts': ('fluent', 'news_16_regular', 'latest'),
+  'articles': ('fluent', 'document_one_page_20_regular', 'latest'),
+  'videos': ('fluent', 'video_clip_16_regular', 'latest'),
+  'user': ('fluent', 'person_16_regular', 'latest'),
+  'setting': ('fluent', 'settings_16_regular', 'latest'),
+  'about': ('fluent', 'info_16_regular', 'latest'),
+  'help': ('fluent', 'question_circle_16_regular', 'latest'),
+  'more': ('fluent', 'more_horizontal_16_regular', 'latest'),
+  'right': ('fluent', 'chevron_right_20_regular', 'latest'),
+  'search': ('fluent', 'search_20_regular', 'latest'),
 );
 
 @include register_icons($icons);
